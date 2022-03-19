@@ -57,8 +57,6 @@ public class WeaponSwayAndBob : MonoBehaviour
 
                 xPos = bob.bobX.Evaluate(currentTimeX) * bob.intensityX;
                 yPos = bob.bobY.Evaluate(currentTimeY) * bob.intensityY;
-
-                Debug.Log(bobMultiplier);
             }
         }
 

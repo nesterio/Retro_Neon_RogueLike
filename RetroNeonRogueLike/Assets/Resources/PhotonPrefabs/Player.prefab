@@ -1751,6 +1751,7 @@ MonoBehaviour:
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
   relaxedGunPos: {x: 0.2, y: -0.05, z: -0.08}
   aimedGunPos: {x: 0, y: 0, z: -0.16}
+  anim: {fileID: 9021040550527662437}
   GS: {fileID: 1524549590170886913}
   CR: {fileID: 6633486697282168615}
   WSAB: {fileID: 8501298492239343400}
@@ -1847,7 +1848,7 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Reload
   - Type: 9
     SynchronizeType: 0
@@ -1993,6 +1994,7 @@ MonoBehaviour:
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
   relaxedGunPos: {x: 0.15, y: -0.02, z: 0.05}
   aimedGunPos: {x: 0, y: 0, z: 0}
+  anim: {fileID: 527575939982790555}
   GS: {fileID: 5877916496321575181}
   CR: {fileID: 6633486697282168615}
   WSAB: {fileID: 8501298492239343400}
@@ -2095,7 +2097,7 @@ MonoBehaviour:
     SynchronizeType: 0
     Name: StopReload
   m_SynchronizeLayers:
-  - SynchronizeType: 1
+  - SynchronizeType: 2
     LayerIndex: 0
 --- !u!1 &4201037244450009112
 GameObject:
@@ -3748,6 +3750,7 @@ MonoBehaviour:
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
   relaxedGunPos: {x: 0.2, y: -0.08, z: 0.1}
   aimedGunPos: {x: 0, y: 0, z: 0}
+  anim: {fileID: 6649475654965966086}
   GS: {fileID: 2325467211770705010}
   CR: {fileID: 6633486697282168615}
   WSAB: {fileID: 8501298492239343400}
@@ -3844,7 +3847,7 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: Reload
   - Type: 9
     SynchronizeType: 0
@@ -4065,8 +4068,8 @@ GameObject:
   - component: {fileID: 6049009413897762817}
   - component: {fileID: 8937362321070618970}
   - component: {fileID: 8937362321070618971}
-  - component: {fileID: 2324572446862501739}
   - component: {fileID: 2058627240267990102}
+  - component: {fileID: 2324572446862501739}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4251,6 +4254,22 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2058627240267990102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937362321070618972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!114 &2324572446862501739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4275,22 +4294,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2058627240267990102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937362321070618972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
 --- !u!1 &8937362321551972313
 GameObject:
   m_ObjectHideFlags: 0

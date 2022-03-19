@@ -7,7 +7,7 @@ using DG.Tweening;
 public class Semi_Automatic_Gun : Gun
 {
     PhotonView PV;
-    Animator anim;
+    [SerializeField] Animator anim;
 
     [SerializeField] GunShutter GS;
     GunRecoil GR;
@@ -23,7 +23,6 @@ public class Semi_Automatic_Gun : Gun
     public int bulletsInMag;
 
     bool isRealoading { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Reload");} }
-    bool isShooting { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Shot"); } }
 
     [Space]
 
@@ -32,7 +31,6 @@ public class Semi_Automatic_Gun : Gun
     void Awake() 
     {
         PV = GetComponent<PhotonView>();
-        anim = GetComponent<Animator>();
 
         GR = GetComponent<GunRecoil>();
         GA = GetComponent<GunAiming>();
@@ -66,11 +64,18 @@ public class Semi_Automatic_Gun : Gun
         }
             
     }
+
     public override void Reload() 
     {
-        if (!isRealoading && !isShooting)
-            anim.SetTrigger("Reload");
+        if (!isRealoading)
+            anim.SetBool("Reload", true);
     }
+    public override void StopReload() 
+    {
+        if (isRealoading)
+            anim.SetBool("Reload", false);
+    }
+
     public override void Aim(bool shouldAim) 
     {
         if (shouldAim && !isAiming && !isRealoading) 
@@ -92,11 +97,11 @@ public class Semi_Automatic_Gun : Gun
     public void FinishReload() 
     {
         bulletsInMag = magCapacity;
+        anim.SetBool("Reload", false);
     }
 
     void Shoot() 
     {
-        anim.SetTrigger("Shoot");
 
         if(isAiming)
             CR.RecoilFire(((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ);

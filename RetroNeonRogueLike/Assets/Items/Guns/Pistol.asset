@@ -27,5 +27,5 @@ MonoBehaviour:
   rotationRecoilSpeed: 10
   recoilRotation: {x: 25, y: 5, z: 20}
   recoilForce: {x: 0.02, y: 0.01, z: 0.05}
-  recoilRotationAimed: {x: 10, y: 2, z: 1}
-  recoilForceAimed: {x: 0.02, y: 0.02, z: 0.03}
+  recoilRotationAimed: {x: 5, y: 2, z: 1}
+  recoilForceAimed: {x: 0.01, y: 0.01, z: 0.03}

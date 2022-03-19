@@ -15,16 +15,7 @@ public class ItemManager : MonoBehaviourPunCallbacks
 
     int itemIndex = 1;
 
-    int previousItemIndex 
-    {
-        get 
-        {
-            if (itemIndex == 0)
-                return items.Length - 1;
-            else
-                return itemIndex - 1;      
-        } 
-    }
+    int previousItemIndex = 0;
 
     void Awake()
     {
@@ -72,10 +63,16 @@ public class ItemManager : MonoBehaviourPunCallbacks
         if (_index >= items.Length)
             _index = 0;
 
+        previousItemIndex = itemIndex;
         itemIndex = _index;
+
+        if (items[previousItemIndex] is Gun)
+            ((Gun)items[previousItemIndex]).StopReload();
 
         items[previousItemIndex].itemGameObject.SetActive(false);
         items[itemIndex].itemGameObject.SetActive(true);
+
+        
 
         if (PV.IsMine) 
         {
