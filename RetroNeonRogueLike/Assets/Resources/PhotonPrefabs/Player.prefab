@@ -1419,7 +1419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7767647531836631532}
   m_Layer: 0
-  m_Name: Bone.002
+  m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1749,8 +1749,8 @@ MonoBehaviour:
   shootingParticles: {fileID: 0}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
-  relaxedGunPos: {x: 0.2, y: -0.05, z: 0}
-  aimedGunPos: {x: 0, y: 0, z: -0.1}
+  relaxedGunPos: {x: 0.2, y: -0.05, z: -0.08}
+  aimedGunPos: {x: 0, y: 0, z: -0.16}
   GS: {fileID: 1524549590170886913}
   CR: {fileID: 6633486697282168615}
   WSAB: {fileID: 8501298492239343400}
@@ -1847,11 +1847,11 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 2
-    Name: Shoot
-  - Type: 9
     SynchronizeType: 1
     Name: Reload
+  - Type: 9
+    SynchronizeType: 0
+    Name: StopReload
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -2090,10 +2090,10 @@ MonoBehaviour:
   m_SynchronizeParameters:
   - Type: 9
     SynchronizeType: 0
-    Name: Shoot
+    Name: Reload
   - Type: 9
     SynchronizeType: 0
-    Name: Reload
+    Name: StopReload
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -2373,7 +2373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4197919789811016378}
   m_Layer: 0
-  m_Name: Bone.004
+  m_Name: Shutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2564,8 +2564,8 @@ MonoBehaviour:
   swayIntensityY: 0.05
   maxSway: 0.1
   minSway: -0.1
-  aimedSwayMultiplier: 0.3
-  aimedBobMultiplier: 0.3
+  aimedSwayMultiplier: 0.4
+  aimedBobMultiplier: 0
   bobOverrides:
   - minSpeed: 0
     maxSpeed: 0
@@ -2579,6 +2579,15 @@ MonoBehaviour:
         value: -0.24335743
         inSlope: 0
         outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -2614,6 +2623,15 @@ MonoBehaviour:
         value: -0.24335743
         inSlope: 0
         outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -3136,7 +3154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5629110637539068643}
   m_Layer: 0
-  m_Name: Bone.003
+  m_Name: Shutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3728,7 +3746,7 @@ MonoBehaviour:
   shootingParticles: {fileID: 0}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
-  relaxedGunPos: {x: 0.2, y: -0.08, z: 0}
+  relaxedGunPos: {x: 0.2, y: -0.08, z: 0.1}
   aimedGunPos: {x: 0, y: 0, z: 0}
   GS: {fileID: 2325467211770705010}
   CR: {fileID: 6633486697282168615}
@@ -3826,11 +3844,11 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 2
-    Name: Shoot
-  - Type: 9
     SynchronizeType: 1
     Name: Reload
+  - Type: 9
+    SynchronizeType: 0
+    Name: StopReload
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
