@@ -10,6 +10,8 @@ public class PhotonPlayerManager : MonoBehaviour
 
     GameObject playerObj;
 
+    [SerializeField] Vector3[] SpawnPoints;
+
     void Awake() 
     {
         PV = GetComponent<PhotonView>();
@@ -23,7 +25,12 @@ public class PhotonPlayerManager : MonoBehaviour
 
     void CreateController() 
     {
-        playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), new Vector3(0, 2f, 0f), Quaternion.identity, 0, new object[] { PV.ViewID } );
+
+        int temp = Random.Range(0, SpawnPoints.Length);
+
+
+        playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), SpawnPoints[temp], Quaternion.identity, 0, new object[] { PV.ViewID } );
+
     }
 
     public void DestroyPlayer() 

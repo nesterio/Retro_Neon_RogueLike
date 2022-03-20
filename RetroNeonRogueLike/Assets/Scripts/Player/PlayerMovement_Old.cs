@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement_Old : MonoBehaviour
 {
     [Header("Object references")]
     [SerializeField] Rigidbody rb;
@@ -24,19 +24,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpCooldown;
     private bool readyToJump = true;
 
-    [SerializeField] float extraGravity;
-
-    float speed;
-
-    Vector3 moveDirection;
-
     [Space]
 
     [Header("Slopes")]
-    [SerializeField] float maxSlopeAngle = 35f;
+    public float maxSlopeAngle = 35f;
+    private float slopeThreshold = 0.1f;
+    [SerializeField] private float distanceToSlope;
+    [SerializeField] private float slopeRayHeight = 0f;
 
-    RaycastHit slopeHit;
-    bool exitingSlope;
+    [SerializeField] private bool onSlope;
 
     [Space]
 
@@ -54,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Space]
 
-    [SerializeField] float floorDetectionRange;
     [SerializeField] private LayerMask whatIsGround;
 
 
@@ -72,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!PV.IsMine)
             return;
-        
+
         Move();
     }
 
-    void Update() 
+    void Update()
     {
         if (!PV.IsMine)
             return;
@@ -87,23 +82,12 @@ public class PlayerMovement : MonoBehaviour
             StopCrouch();
 
         WSAB.currentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
-
-        ExtraGravity();
-
-        Debug.Log(OnSlope());
-    }
-
-    void ExtraGravity() 
-    {
-        rb.AddForce(Vector3.down * extraGravity);
     }
 
     void Move()
     {
-        moveDirection = orientation.forward * IM.y + orientation.right * IM.x;
-
-        grounded = Physics.Raycast(orientation.position, Vector3.down, floorDetectionRange, whatIsGround);
-        
+        //Extra gravity
+        rb.AddForce(Vector3.down * Time.deltaTime * 10);
 
         //Find actual velocity relative to where player is looking
         Vector2 mag = FindVelRelativeToLook();
@@ -113,16 +97,20 @@ public class PlayerMovement : MonoBehaviour
         CounterMovement(IM.x, IM.y, mag);
 
         //If holding jump && ready to jump, then jump
-        if (readyToJump && IM.jumping)
-            Jump();
+        if (readyToJump && IM.jumping) Jump();
 
         //If sliding down a ramp, add force down so player stays grounded and also builds speed
-        if (IM.crouching && grounded && OnSlope())
+        if (IM.crouching && grounded && readyToJump)
         {
             rb.AddForce(Vector3.down * Time.deltaTime * 3000);
             return;
         }
 
+        //If speed is larger than maxspeed, cancel out the input so you don't go over max speed
+        if (IM.x > 0 && xMag > PStats.maxSpeed) IM.x = 0;
+        if (IM.x < 0 && xMag < -PStats.maxSpeed) IM.x = 0;
+        if (IM.y > 0 && yMag > PStats.maxSpeed) IM.y = 0;
+        if (IM.y < 0 && yMag < -PStats.maxSpeed) IM.y = 0;
 
         //Some multipliers
         float multiplier = 1f, multiplierV = 1f, diagonalMultiplier = 1f;
@@ -140,21 +128,20 @@ public class PlayerMovement : MonoBehaviour
         if (IM.x != 0 && IM.y != 0)
             diagonalMultiplier = 0.707f;
 
+
+        //Apply forces to move player
         if (IM.sprinting == true && PlayerStats.currentStamina > PStats.GetStaminaPrice("Sprint"))
         {
-            speed = PStats.moveSpeed * PStats.sprintSpeedMultiplier;
+            rb.AddForce(orientation.forward * IM.y * PStats.moveSpeed * PStats.sprintSpeedMultiplier * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier);
+            rb.AddForce(orientation.right * IM.x * PStats.moveSpeed * PStats.sprintSpeedMultiplier * Time.deltaTime * multiplier * diagonalMultiplier);
             PStats.Sprint(true);
         }
-        else 
+        else
         {
-            speed = PStats.moveSpeed;
+            rb.AddForce(orientation.forward * IM.y * PStats.moveSpeed * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier);
+            rb.AddForce(orientation.right * IM.x * PStats.moveSpeed * Time.deltaTime * multiplier * diagonalMultiplier);
             PStats.Sprint(false);
         }
-
-        if (OnSlope() && !exitingSlope)
-            rb.AddForce(GetSlopeMoveDirection() * speed * Time.deltaTime *  multiplier * multiplierV * diagonalMultiplier);
-        else
-            rb.AddForce(moveDirection.normalized * speed * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier);
 
     }
 
@@ -165,12 +152,12 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
 
             //Add jump forces
-            if (IM.crouching) 
+            if (IM.crouching)
             {
                 rb.AddForce(Vector2.up * PStats.jumpForce * PStats.crouchJumpForceMultiplier * 1.5f);
                 rb.AddForce(normalVector * PStats.jumpForce * PStats.crouchJumpForceMultiplier * 0.5f);
             }
-            else 
+            else
             {
                 rb.AddForce(Vector2.up * PStats.jumpForce * 1.5f);
                 rb.AddForce(normalVector * PStats.jumpForce * 0.5f);
@@ -186,28 +173,24 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
 
             PStats.DrainStamina("Jump");
-
-            exitingSlope = true;
         }
     }
 
     private void ResetJump()
     {
         readyToJump = true;
-
-        exitingSlope = false;
     }
 
-    
+
     private void StartCrouch()
     {
         Debug.Log("start crouch");
         GetComponent<CapsuleCollider>().height = 1f;
         PlayerModel.transform.localScale = crouchScale;
-        
-        if (rb.velocity.magnitude > 0.5f&& grounded)
+
+        if (rb.velocity.magnitude > 0.5f && grounded)
             rb.AddForce(orientation.forward * slideForce);
-        
+
         WSAB.isCrouching = true;
     }
 
@@ -220,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
         WSAB.isCrouching = false;
 
     }
-    
+
     private void CounterMovement(float x, float y, Vector2 mag)
     {
         if (!grounded || IM.jumping) return;
@@ -251,6 +234,13 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(n.x, fallspeed, n.z);
         }
 
+        if (onSlope)
+        {
+            if (!grounded)
+                onSlope = false;
+
+        }
+
     }
 
     public Vector2 FindVelRelativeToLook()
@@ -268,29 +258,63 @@ public class PlayerMovement : MonoBehaviour
         return new Vector2(xMag, yMag);
     }
 
-    bool OnSlope() 
+    private bool IsFloor(Vector3 v)
     {
-        if (Physics.Raycast(orientation.position, Vector3.down, out slopeHit, floorDetectionRange)) 
+        float angle = Vector3.Angle(Vector3.up, v);
+        return angle < maxSlopeAngle;
+    }
+
+    private bool cancellingGrounded;
+
+    private void OnCollisionStay(Collision other)
+    {
+        //Make sure we are only checking for walkable layers
+        int layer = other.gameObject.layer;
+        if (whatIsGround != (whatIsGround | (1 << layer))) return;
+
+        //Iterate through every collision in a physics update
+        for (int i = 0; i < other.contactCount; i++)
         {
-            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
-            return angle < maxSlopeAngle && angle > 0;
+            Vector3 normal = other.contacts[i].normal;
+            //FLOOR
+            if (IsFloor(normal))
+            {
+                grounded = true;
+                cancellingGrounded = false;
+                normalVector = normal;
+                CancelInvoke(nameof(StopGrounded));
+            }
+
+            if (Vector3.Angle(normal, Vector3.up) > 0 && Vector3.Angle(normal, Vector3.up) < maxSlopeAngle && grounded)
+                onSlope = true;
+            else
+                onSlope = false;
+
+            //Debug.Log(Vector3.Angle(normal, Vector3.up));
         }
-        return false;
+
+        //Invoke ground/wall cancel, since we can't check normals with CollisionExit
+        float delay = 3f;
+        if (!cancellingGrounded)
+        {
+            cancellingGrounded = true;
+            Invoke(nameof(StopGrounded), Time.deltaTime * delay);
+        }
     }
 
-    Vector3 GetSlopeMoveDirection() 
+    private void StopGrounded()
     {
-        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
+        grounded = false;
     }
 
-    private bool AllowWeaponSway() 
+    private bool AllowWeaponSway()
     {
         if (IM.x != 0 || IM.y != 0)
         {
             if (grounded)
                 return true;
         }
-        
+
         return false;
     }
 

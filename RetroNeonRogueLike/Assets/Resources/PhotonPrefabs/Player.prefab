@@ -4025,7 +4025,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8937362320670234744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39d64654daa372f41809ee812ef6924b, type: 3}
   m_Name: 
@@ -4116,9 +4116,9 @@ MonoBehaviour:
     staminaCost: 30
   - name: Sprint
     staminaCost: 0.6
-  defaultMoveSpeed: 600
+  defaultMoveSpeed: 400
   moveSpeed: 0
-  sprintSpeedMultiplier: 1.6
+  sprintSpeedMultiplier: 1.7
   defaultJumpForce: 250
   jumpForce: 0
   crouchJumpForceMultiplier: 0.8
@@ -4196,14 +4196,13 @@ MonoBehaviour:
   PStats: {fileID: 8937362321070618948}
   IM: {fileID: 8937362321070618950}
   WSAB: {fileID: 8501298492239343400}
-  counterMovement: 0.5
+  counterMovement: 0.8
   jumpCooldown: 0.25
-  maxSlopeAngle: 35
-  distanceToSlope: 0.3
-  slopeRayHeight: 0
-  onSlope: 0
-  slideForce: 200
-  slideCounterMovement: 0.5
+  extraGravity: 0
+  maxSlopeAngle: 40
+  slideForce: 150
+  slideCounterMovement: 0.8
+  floorDetectionRange: 1.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -4253,7 +4252,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &2058627240267990102
 MonoBehaviour:
   m_ObjectHideFlags: 0

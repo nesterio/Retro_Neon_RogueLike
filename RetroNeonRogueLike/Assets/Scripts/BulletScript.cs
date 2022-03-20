@@ -13,6 +13,7 @@ public class BulletScript : MonoBehaviour
 
     public int speed;
 
+    [HideInInspector]
     public int damage;
 
     void Awake() 
@@ -27,11 +28,6 @@ public class BulletScript : MonoBehaviour
         damage = _damage;
 
         rb.AddForce((hitPoint - this.transform.position).normalized * speed);
-    }
-
-    public void StartMovement() 
-    {
-        
     }
 
     void OnCollisionEnter(Collision col) 

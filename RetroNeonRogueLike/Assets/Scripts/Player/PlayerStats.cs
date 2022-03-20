@@ -116,7 +116,7 @@ public class PlayerStats : MonoBehaviour
             return;
 
         currentHealth -= amount;
-        Debug.Log(gameObject + " just took " + amount + " damage");
+        //Debug.Log(gameObject + " just took " + amount + " damage");
 
         if (currentHealth <= 0)
             deathEvent();

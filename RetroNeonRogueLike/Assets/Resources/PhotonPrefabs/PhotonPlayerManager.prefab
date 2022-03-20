@@ -66,3 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76c9d2a9819644458a4da3f518b727a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnPoints:
+  - {x: -11, y: 1, z: 14}
+  - {x: 17, y: 1, z: 14}
+  - {x: 17, y: 1, z: -14}
+  - {x: -11, y: 1, z: -14}
+  - {x: 0, y: 1, z: 0}
