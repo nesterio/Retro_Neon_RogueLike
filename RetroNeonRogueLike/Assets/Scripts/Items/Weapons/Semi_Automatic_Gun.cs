@@ -11,9 +11,6 @@ public class Semi_Automatic_Gun : Gun
 
     [SerializeField] GunShutter GS;
     GunRecoil GR;
-    
-    [SerializeField] WeaponSwayAndBob WSAB;
-
 
     float shotSpeed { get { return ((GunInfo)itemInfo).shotSpeed; } }
     float timeToShoot;

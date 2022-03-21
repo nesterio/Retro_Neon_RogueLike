@@ -7,6 +7,7 @@ public abstract class Gun : Item
 
     public Transform camTrans;
     public CameraRecoil CR;
+    public WeaponSwayAndBob WSAB;
     [SerializeField] internal Transform shootPoint;
     [SerializeField] internal Transform containerTrans;
     [Space(5)]

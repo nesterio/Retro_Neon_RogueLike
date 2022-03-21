@@ -24,11 +24,11 @@ public class ItemManager : MonoBehaviourPunCallbacks
     [SerializeField] float itemPickupRange = 3f;
     [Space(10)]
     [SerializeField] Item[] startItems;
-    List<Item> items = new List<Item>();
+    public List<Item> items = new List<Item>();
 
     float dropTimer;
 
-    int itemIndex = 1;
+    int itemIndex = 0;
 
     bool droppingItem;
     bool pickingUp;
@@ -39,7 +39,7 @@ public class ItemManager : MonoBehaviourPunCallbacks
     {
         PV = GetComponent<PhotonView>();
 
-        if(PV.IsMine)
+        if(PV.IsMine && startItems != null)
             foreach (Item item in startItems) 
             {
                 items.Add(item);
@@ -55,10 +55,6 @@ public class ItemManager : MonoBehaviourPunCallbacks
     {
         if (!PV.IsMine)
             return;
-
-        Debug.Log(items.Count);
-        Debug.Log(itemIndex);
-
 
         ItemDetection();
 
@@ -101,7 +97,7 @@ public class ItemManager : MonoBehaviourPunCallbacks
             droppingItem = false;
 
         if (!droppingItem && IM.droppingItem)
-            DropItem(items[itemIndex].gameObject);
+            DropItem(items[itemIndex].gameObject, itemDroppingForceUpward, itemDroppingForceForward, 0);
 
     }
 
@@ -154,10 +150,36 @@ public class ItemManager : MonoBehaviourPunCallbacks
             items[itemIndex].itemGameObject.SetActive(false);
     }
 
-    void DropItem(GameObject item) 
+    public void DropItem(GameObject item, float dropForceY, float dropForceZ, float dropForceX) 
     {
         dropTimer = itemDropSpd;
         droppingItem = true;
+
+        PV.RPC("RPC_DropItem", RpcTarget.AllBufferedViaServer, item.GetComponent<PhotonView>().ViewID, dropForceY, dropForceZ, dropForceX);
+
+        
+        if (items.Count > 1)
+            EquipItem(itemIndex -1);
+        else if (items.Count == 1)
+            EquipItem(0);
+
+        items.Remove(item.GetComponent<Item>());
+        item.GetComponent<Item>().itemGameObject.SetActive(true);
+
+
+        if (items.Count == 0)
+            itemIndex = 0;
+        else if (itemIndex > 0)
+            itemIndex--;
+        else
+            itemIndex = items.Count - 1;
+
+    }
+
+    [PunRPC]
+    void RPC_DropItem(int VID, float dropForceY, float dropForceZ, float dropForceX) 
+    {
+        GameObject item = PhotonView.Find(VID).gameObject;
 
         Item itemScrpt = item.GetComponent<Item>();
 
@@ -168,26 +190,9 @@ public class ItemManager : MonoBehaviourPunCallbacks
 
         item.transform.parent = null;
 
-        item.GetComponent<Rigidbody>().AddForce(CameraParentTrans.up * itemDroppingForceUpward + CameraParentTrans.forward * itemDroppingForceForward, ForceMode.Impulse);
-
         itemScrpt.pickable = true;
 
-        if (items.Count > 1)
-            EquipItem(itemIndex -1);
-        else if (items.Count == 1)
-            EquipItem(0);
-
-        items.Remove(itemScrpt);
-        itemScrpt.itemGameObject.SetActive(true);
-
-
-        if (items.Count == 0)
-            itemIndex = 0;
-        else if (itemIndex > 0)
-            itemIndex--;
-        else
-            itemIndex = items.Count - 1;
-
+        item.GetComponent<Rigidbody>().AddForce(CameraParentTrans.up * dropForceY + CameraParentTrans.forward * dropForceZ + CameraParentTrans.right * dropForceX, ForceMode.Impulse);
     }
 
     void ItemDetection() 
@@ -209,10 +214,20 @@ public class ItemManager : MonoBehaviourPunCallbacks
     }
 
     void PickUpItem(GameObject item) 
-    {
+    { 
         pickingUp = true;
 
         UnequipHeldItem();
+
+        PV.RPC("RPC_PickUpItem", RpcTarget.AllBufferedViaServer, item.GetComponent<PhotonView>().ViewID);
+    }
+
+    [PunRPC]
+    void RPC_PickUpItem(int VID)
+    {
+        GameObject item = PhotonView.Find(VID).gameObject;
+
+        item.GetComponent<PhotonView>().TransferOwnership(PV.Owner);
 
         Item itemScrpt = item.GetComponent<Item>();
 
@@ -221,10 +236,12 @@ public class ItemManager : MonoBehaviourPunCallbacks
         item.GetComponent<Rigidbody>().isKinematic = true;
         item.GetComponent<Collider>().enabled = false;
 
-        if (itemScrpt is Gun) 
+        if (itemScrpt is Gun)
         {
             item.GetComponent<Gun>().camTrans = CameraParentTrans;
             item.GetComponent<Gun>().CR = CR;
+            item.GetComponent<Gun>().WSAB = itemHolder.GetComponent<WeaponSwayAndBob>();
+            item.GetComponent<Gun>().WSAB = itemHolder.GetComponent<WeaponSwayAndBob>();
         }
 
         item.transform.SetParent(itemHolder);
@@ -233,10 +250,10 @@ public class ItemManager : MonoBehaviourPunCallbacks
         actions = () => itemScrpt.pickedUp = true;
         actions += () => pickingUp = false;
         actions += () => items.Add(itemScrpt);
-        actions += () => EquipItem(items.Count -1);
+        actions += () => EquipItem(items.Count - 1);
 
         item.transform.DOLocalRotate(Vector3.zero, itemPickupSpd);
-        item.transform.DOLocalMove(Vector3.zero, itemPickupSpd, false).OnComplete( () => actions());
+        item.transform.DOLocalMove(Vector3.zero, itemPickupSpd, false).OnComplete(() => actions());
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps) 

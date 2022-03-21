@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform PlayerOrientation;
 
     [SerializeField] PlayerStats PS;
+    ItemManager IM;
 
     [SerializeField] GameObject UIObject;
 
@@ -22,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         PV = GetComponent<PhotonView>();
+        IM = GetComponent<ItemManager>();
     }
 
     void OnEnable() => PS.deathEvent += playerDeath;
@@ -56,6 +58,10 @@ public class PlayerManager : MonoBehaviour
 
     void playerDeath() 
     {
+        while(IM.items.Count != 0)
+        {
+            IM.DropItem(IM.items[0].gameObject, Random.Range(-6, 6), Random.Range(1, 6), Random.Range(-6, 6));
+        }
         photonPM.DestroyPlayer();
     }
 }

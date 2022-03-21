@@ -41,6 +41,8 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_DrainHealth
   - RPC_Shoot
+  - RPC_DropItem
+  - RPC_PickUpItem
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
