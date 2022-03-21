@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478615269953039622}
-  m_Layer: 0
+  - component: {fileID: 7519481257814916967}
+  m_Layer: 7
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 7738195810090707653}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7519481257814916967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22654496756138220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &2082268302300721452
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +57,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6962737445438019108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3981418065083075768}
   - component: {fileID: 6185363617695477162}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: holder_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 109577301650306861}
   - component: {fileID: 9039158836627842778}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 7.62x39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1444658079765347004}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AKModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6554383700593641821}
   - component: {fileID: 4767486534338139186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: holder_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7252475497416917581}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1374512001554884736}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: reload
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2797323010253354778}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7675411242748351867}
   - component: {fileID: 2116716055537916259}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ak47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +558,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4174883121970807562}
-  m_Layer: 0
+  - component: {fileID: 7740307487017888363}
+  m_Layer: 7
   m_Name: RotationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,6 +582,22 @@ Transform:
   m_Father: {fileID: 7505557126626366088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7740307487017888363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7140871162481346577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &7254308482686984627
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5978285485989024672}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ak47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +639,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7505557126626366088}
-  m_Layer: 0
+  - component: {fileID: 7448504559469568610}
+  m_Layer: 7
   m_Name: WeaponPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,6 +662,22 @@ Transform:
   m_Father: {fileID: 1478615269953039622}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7448504559469568610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852627883117170275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &8371510453364281450
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +696,7 @@ GameObject:
   - component: {fileID: 5048712023849406147}
   - component: {fileID: 3920013671024712209}
   - component: {fileID: 4243303939466292822}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AK
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -814,6 +865,9 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3313274291172145926}
   - {fileID: 4243303939466292822}
+  - {fileID: 7519481257814916967}
+  - {fileID: 7448504559469568610}
+  - {fileID: 7740307487017888363}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -833,10 +887,10 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: Reload
   m_SynchronizeLayers:
-  - SynchronizeType: 1
+  - SynchronizeType: 2
     LayerIndex: 0
 --- !u!1 &8805716183067677724
 GameObject:
@@ -847,7 +901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6444403093935678255}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ak47_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,6 +930,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1444658079765347004}
     m_Modifications:
+    - target: {fileID: 892229438848645927, guid: ddb93efe74bade049bccef0ed5f14890, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764640969955945021, guid: ddb93efe74bade049bccef0ed5f14890, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6369998434251613987, guid: ddb93efe74bade049bccef0ed5f14890, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9169391396803990789, guid: ddb93efe74bade049bccef0ed5f14890, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -923,6 +989,10 @@ PrefabInstance:
     - target: {fileID: 9169391396803990790, guid: ddb93efe74bade049bccef0ed5f14890, type: 3}
       propertyPath: m_Name
       value: Scope
+      objectReference: {fileID: 0}
+    - target: {fileID: 9169391396803990790, guid: ddb93efe74bade049bccef0ed5f14890, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9169391396803990790, guid: ddb93efe74bade049bccef0ed5f14890, type: 3}
       propertyPath: m_IsActive

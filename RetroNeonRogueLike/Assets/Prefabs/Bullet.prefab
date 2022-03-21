@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2236645192409118851}
   - component: {fileID: 3529841012021163575}
   m_Layer: 0
-  m_Name: Trail
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -194,5 +194,5 @@ MonoBehaviour:
   hitPoint: {x: 0, y: 0, z: 0}
   hitNormal: {x: 0, y: 0, z: 0}
   impactObj: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
-  speed: 10
+  speed: 15
   damage: 0

@@ -16,8 +16,7 @@ public class PlayerStats : MonoBehaviour
     public event maxHealthChange maxHpChangeEvent;
 
     [SerializeField] private float healthRegen;
-
-    [Space]
+    [Space(10)]
 
     [Header("Stamina")]
     private float maxStamina;
@@ -34,7 +33,7 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private StaminaDrain[] staminaDrains;
     private Dictionary<string, StaminaDrain> drainsDictionary = new Dictionary<string, StaminaDrain>();
-    [Space]
+    [Space(10)]
 
     [Header("Movement")]
     public float defaultMoveSpeed;
@@ -53,8 +52,7 @@ public class PlayerStats : MonoBehaviour
 
     [Space]
     public float sprintSpeedMultiplier;
-
-    [Space]
+    [Space(10)]
 
     [Header("Jumping")]
     public float defaultJumpForce;
@@ -62,6 +60,10 @@ public class PlayerStats : MonoBehaviour
     public float crouchJumpForceMultiplier;
     [Space]
     public int numberOfJumps = 1;
+    [Space(10)]
+
+    [Header("Weaponry")]
+    public int maxItems = 2;
 
 
     public delegate void death();

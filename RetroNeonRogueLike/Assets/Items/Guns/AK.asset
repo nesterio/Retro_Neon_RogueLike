@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AK
   m_EditorClassIdentifier: 
   itemName: AK
-  damage: 20
+  damage: 35
   shotSpeed: 0.12
   magCapacity: 30
   aimingSpeed: 0.4

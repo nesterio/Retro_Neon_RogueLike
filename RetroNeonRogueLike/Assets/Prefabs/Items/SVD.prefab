@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 807663924484468628}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SVDModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4329107791107301306}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 150825547680592672}
-  m_Layer: 0
+  - component: {fileID: 2514258778281106510}
+  m_Layer: 7
   m_Name: RotationPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +96,22 @@ Transform:
   m_Father: {fileID: 1089737297738190088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2514258778281106510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035172008968434144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &2151678797839033123
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2151678797839033122}
   - component: {fileID: 2151678797839033132}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +195,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6924469112236639473}
-  m_Layer: 0
+  - component: {fileID: 6664733291051793686}
+  m_Layer: 7
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,6 +218,22 @@ Transform:
   m_Father: {fileID: 2289023624652566670}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6664733291051793686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2459231769103600996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &2517242951989603416
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7284237579053360418}
   - component: {fileID: 2642580922575291925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +332,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1089737297738190088}
-  m_Layer: 0
+  - component: {fileID: 6275268846231620009}
+  m_Layer: 7
   m_Name: WeaponPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,6 +355,22 @@ Transform:
   m_Father: {fileID: 6924469112236639473}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6275268846231620009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2575771124496890563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &2997074864025780006
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8367588687317333600}
   - component: {fileID: 2636465912059333718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3359145368469236603}
   - component: {fileID: 4726559429436856008}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2464488746998220865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6511991495079613940}
   - component: {fileID: 5837267488436805624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 7,62x54
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +680,7 @@ GameObject:
   - component: {fileID: 1232910615232461767}
   - component: {fileID: 596947045745896790}
   - component: {fileID: 4584888856997238328}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SVD
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -686,6 +737,7 @@ MonoBehaviour:
   pickedUp: 0
   camTrans: {fileID: 0}
   CR: {fileID: 0}
+  WSAB: {fileID: 0}
   shootPoint: {fileID: 5779941909446213897}
   containerTrans: {fileID: 6924469112236639473}
   shootingParticles: {fileID: 0}
@@ -694,7 +746,6 @@ MonoBehaviour:
   aimedGunPos: {x: 0, y: 0, z: -0.16}
   anim: {fileID: 1232910615232461767}
   GS: {fileID: 8720456515921584547}
-  WSAB: {fileID: 0}
   bulletsInMag: 0
   hasCustomShutter: 1
 --- !u!114 &3249718977323241334
@@ -831,7 +882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5779941909446213897}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8487179778529375432}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4936046801577255158}
   - component: {fileID: 252506910579339036}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: dot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +1030,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 567800446042417998}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1061,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614276418527336022}
   - component: {fileID: 4964697986919831732}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cam
   m_TagString: Untagged
   m_Icon: {fileID: 0}

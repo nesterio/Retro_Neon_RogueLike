@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SVD
   m_EditorClassIdentifier: 
   itemName: SVD
-  damage: 50
+  damage: 80
   shotSpeed: 0.5
   magCapacity: 8
   aimingSpeed: 0.5

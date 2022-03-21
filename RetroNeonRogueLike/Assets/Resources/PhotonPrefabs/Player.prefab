@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8937362320670234744}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39d64654daa372f41809ee812ef6924b, type: 3}
   m_Name: 
@@ -1562,6 +1562,7 @@ MonoBehaviour:
   jumpForce: 0
   crouchJumpForceMultiplier: 0.8
   numberOfJumps: 1
+  maxItems: 2
 --- !u!114 &8937362321070618951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1661,6 +1662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IM: {fileID: 8937362321070618950}
   CR: {fileID: 6633486697282168615}
+  PS: {fileID: 8937362321070618948}
   CameraParentTrans: {fileID: 8937362320280412649}
   itemHolder: {fileID: 6559482490752147078}
   itemDroppingForceUpward: 5

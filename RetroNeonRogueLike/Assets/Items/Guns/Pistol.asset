@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   itemName: Pistol
-  damage: 10
+  damage: 25
   shotSpeed: 0.3
   magCapacity: 12
   aimingSpeed: 0.2

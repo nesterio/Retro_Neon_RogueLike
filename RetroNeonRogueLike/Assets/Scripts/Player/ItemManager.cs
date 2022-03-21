@@ -12,6 +12,7 @@ public class ItemManager : MonoBehaviourPunCallbacks
 
     [SerializeField] InputManager IM;
     [SerializeField] CameraRecoil CR;
+    [SerializeField] PlayerStats PS;
     [SerializeField] Transform CameraParentTrans;
     [SerializeField] Transform itemHolder;
     [Space(10)]
@@ -206,7 +207,7 @@ public class ItemManager : MonoBehaviourPunCallbacks
             {
                 Item item = hitObj.GetComponent<Item>();
 
-                if (item.pickable && !item.pickedUp && IM.interacting && !pickingUp)
+                if (item.pickable && !item.pickedUp && IM.interacting && !pickingUp && items.Count < PS.maxItems)
                     PickUpItem(hitObj);
             }
 
