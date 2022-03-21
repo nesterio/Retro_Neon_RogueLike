@@ -22,6 +22,11 @@ public class InputManager : MonoBehaviour
 
     [Space(10)]
 
+    public bool interacting;
+    public bool droppingItem;
+
+    [Space(10)]
+
     public float mouseX;
     public float mouseY;
 
@@ -49,6 +54,10 @@ public class InputManager : MonoBehaviour
         aiming = Input.GetKey(KeyCode.Mouse1);
 
         reloading = Input.GetKey(KeyCode.R);
+
+        droppingItem = Input.GetKey(KeyCode.G);
+
+        interacting = Input.GetKey(KeyCode.E);
 
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");

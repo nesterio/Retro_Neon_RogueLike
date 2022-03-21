@@ -10,10 +10,10 @@ public class PlayerStats : MonoBehaviour
     [Header("Health")]
     private float maxHealth;
     public int defaultHealth;
-    public static float currentHealth;
+    public float currentHealth;
 
     public delegate void maxHealthChange(int newMax);
-    public static event maxHealthChange maxHpChangeEvent;
+    public event maxHealthChange maxHpChangeEvent;
 
     [SerializeField] private float healthRegen;
 
@@ -22,10 +22,10 @@ public class PlayerStats : MonoBehaviour
     [Header("Stamina")]
     private float maxStamina;
     public float defaultStamina;
-    public static float currentStamina;
+    public float currentStamina;
 
     public delegate void maxStaminaChange(float newMax);
-    public static event maxStaminaChange maxStamChangeEvent;
+    public event maxStaminaChange maxStamChangeEvent;
 
     [SerializeField] private float staminaRegen;
 

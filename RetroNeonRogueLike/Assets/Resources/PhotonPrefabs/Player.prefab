@@ -1688,12 +1688,14 @@ GameObject:
   - component: {fileID: 6663709860008015703}
   - component: {fileID: 4698471609325309396}
   - component: {fileID: 1524549590170886913}
+  - component: {fileID: 9030703609525432114}
+  - component: {fileID: 1973544621486167191}
   - component: {fileID: 7234409469298503668}
   - component: {fileID: 9021040550527662437}
   - component: {fileID: 6020693841933423770}
   m_Layer: 0
   m_Name: SVD
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1743,17 +1745,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: 8455a6dff55190b4bb15f3ec62529c7f, type: 2}
   itemGameObject: {fileID: 5624419216643051462}
+  relaxedPos: {x: 0.2, y: -0.05, z: -0.08}
+  pickable: 1
+  pickedUp: 0
   camTrans: {fileID: 8937362320280412649}
+  CR: {fileID: 6633486697282168615}
   shootPoint: {fileID: 4331191474785485739}
   containerTrans: {fileID: 879792652481119827}
   shootingParticles: {fileID: 0}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
-  relaxedGunPos: {x: 0.2, y: -0.05, z: -0.08}
   aimedGunPos: {x: 0, y: 0, z: -0.16}
   anim: {fileID: 9021040550527662437}
   GS: {fileID: 1524549590170886913}
-  CR: {fileID: 6633486697282168615}
   WSAB: {fileID: 8501298492239343400}
   bulletsInMag: 0
   hasCustomShutter: 1
@@ -1789,6 +1793,35 @@ MonoBehaviour:
   openPos: 0.001159
   shutterSpeed: 0.2
   xShutterMove: 0
+--- !u!54 &9030703609525432114
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831465992091138947}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!65 &1973544621486167191
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831465992091138947}
+  m_Material: {fileID: 13400000, guid: c1f0b3deea6904947ae80b165db8de56, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.02648449, y: 0.24321795, z: 1.2479564}
+  m_Center: {x: 0.20054555, y: -0.12587976, z: 0.5016728}
 --- !u!114 &7234409469298503668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,9 +1883,6 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Reload
-  - Type: 9
-    SynchronizeType: 0
-    Name: StopReload
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -1932,11 +1962,13 @@ GameObject:
   - component: {fileID: 835726893515618273}
   - component: {fileID: 5877916496321575181}
   - component: {fileID: 8585089016949660489}
+  - component: {fileID: 7001600650816007642}
+  - component: {fileID: 2551493335778489661}
   - component: {fileID: 527575939982790555}
   - component: {fileID: 8908627079492890382}
   m_Layer: 0
   m_Name: AK
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1986,17 +2018,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: 3c061dfa9d2a05349890eb27ee2b6678, type: 2}
   itemGameObject: {fileID: 4688967901226009012}
+  relaxedPos: {x: 0.15, y: -0.02, z: 0.05}
+  pickable: 1
+  pickedUp: 0
   camTrans: {fileID: 8937362320280412649}
+  CR: {fileID: 6633486697282168615}
   shootPoint: {fileID: 2731164178751193877}
   containerTrans: {fileID: 6181168028193582174}
   shootingParticles: {fileID: 0}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
-  relaxedGunPos: {x: 0.15, y: -0.02, z: 0.05}
   aimedGunPos: {x: 0, y: 0, z: 0}
   anim: {fileID: 527575939982790555}
   GS: {fileID: 5877916496321575181}
-  CR: {fileID: 6633486697282168615}
   WSAB: {fileID: 8501298492239343400}
   bulletsInMag: 0
   hasCustomShutter: 0
@@ -2056,6 +2090,35 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!54 &7001600650816007642
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850409682585866546}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!65 &2551493335778489661
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850409682585866546}
+  m_Material: {fileID: 13400000, guid: c1f0b3deea6904947ae80b165db8de56, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.02648449, y: 0.25621924, z: 0.8780811}
+  m_Center: {x: 0.15, y: -0.14290635, z: 0.31608307}
 --- !u!95 &527575939982790555
 Animator:
   serializedVersion: 3
@@ -2093,11 +2156,8 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Reload
-  - Type: 9
-    SynchronizeType: 0
-    Name: StopReload
   m_SynchronizeLayers:
-  - SynchronizeType: 2
+  - SynchronizeType: 1
     LayerIndex: 0
 --- !u!1 &4201037244450009112
 GameObject:
@@ -2902,7 +2962,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5624419216643051462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: -0.05, z: 0}
+  m_LocalPosition: {x: 0.2, y: -0.05, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7147924497856237482}
@@ -3690,9 +3750,11 @@ GameObject:
   - component: {fileID: 219085693114143291}
   - component: {fileID: 6649475654965966086}
   - component: {fileID: 8931402765381491160}
+  - component: {fileID: 3497088128293036997}
+  - component: {fileID: 8447743633235574596}
   m_Layer: 0
   m_Name: Pistol
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3742,17 +3804,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemInfo: {fileID: 11400000, guid: e7a3c59ffa8cff44d9cf900f54f3d786, type: 2}
   itemGameObject: {fileID: 6110478995785111500}
+  relaxedPos: {x: 0.2, y: -0.08, z: 0}
+  pickable: 1
+  pickedUp: 0
   camTrans: {fileID: 8937362320280412649}
+  CR: {fileID: 6633486697282168615}
   shootPoint: {fileID: 8407379802605443503}
   containerTrans: {fileID: 2082050990210176037}
   shootingParticles: {fileID: 0}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   bulletImpactPrefab: {fileID: 5159959549202789578, guid: 829b9a90ea7fcba4d898b49ef8957334, type: 3}
-  relaxedGunPos: {x: 0.2, y: -0.08, z: 0.1}
   aimedGunPos: {x: 0, y: 0, z: 0}
   anim: {fileID: 6649475654965966086}
   GS: {fileID: 2325467211770705010}
-  CR: {fileID: 6633486697282168615}
   WSAB: {fileID: 8501298492239343400}
   bulletsInMag: 0
   hasCustomShutter: 1
@@ -3849,12 +3913,38 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 0
     Name: Reload
-  - Type: 9
-    SynchronizeType: 0
-    Name: StopReload
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
+--- !u!65 &3497088128293036997
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743449146377781325}
+  m_Material: {fileID: 13400000, guid: c1f0b3deea6904947ae80b165db8de56, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.02648449, y: 0.13687849, z: 0.19209306}
+  m_Center: {x: 0.20054555, y: -0.14949696, z: 0.29953623}
+--- !u!54 &8447743633235574596
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743449146377781325}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!1 &8937362319928043996
 GameObject:
   m_ObjectHideFlags: 0
@@ -4108,17 +4198,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultHealth: 100
+  currentHealth: 0
   healthRegen: 0
   defaultStamina: 100
+  currentStamina: 0
   staminaRegen: 0.25
   staminaDrains:
   - name: Jump
     staminaCost: 30
   - name: Sprint
     staminaCost: 0.6
-  defaultMoveSpeed: 400
+  defaultMoveSpeed: 450
   moveSpeed: 0
-  sprintSpeedMultiplier: 1.7
+  sprintSpeedMultiplier: 1.8
   defaultJumpForce: 250
   jumpForce: 0
   crouchJumpForceMultiplier: 0.8
@@ -4176,6 +4268,8 @@ MonoBehaviour:
   shooting: 0
   aiming: 0
   reloading: 0
+  interacting: 0
+  droppingItem: 0
   mouseX: 0
   mouseY: 0
 --- !u!114 &8937362321070618969
@@ -4193,7 +4287,7 @@ MonoBehaviour:
   rb: {fileID: 8937362321070618971}
   PlayerModel: {fileID: 8937362321551972313}
   orientation: {fileID: 8937362321732745006}
-  PStats: {fileID: 8937362321070618948}
+  PS: {fileID: 8937362321070618948}
   IM: {fileID: 8937362321070618950}
   WSAB: {fileID: 8501298492239343400}
   counterMovement: 0.8
@@ -4201,7 +4295,7 @@ MonoBehaviour:
   extraGravity: 0
   maxSlopeAngle: 40
   slideForce: 150
-  slideCounterMovement: 0.8
+  slideCounterMovement: 0.7
   floorDetectionRange: 1.5
   whatIsGround:
     serializedVersion: 2
@@ -4219,7 +4313,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IM: {fileID: 8937362321070618950}
-  items:
+  CR: {fileID: 6633486697282168615}
+  CameraParentTrans: {fileID: 8937362320280412649}
+  itemHolder: {fileID: 6559482490752147078}
+  itemDroppingForceUpward: 5
+  itemDroppingForceForward: 5
+  itemDropSpd: 0.5
+  itemPickupSpd: 0.5
+  itemPickupRange: 3
+  startItems:
   - {fileID: 3663331776917568720}
   - {fileID: 6663709860008015703}
   - {fileID: 9051040948734111844}

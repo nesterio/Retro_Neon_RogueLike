@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class Gun : Item
 {
 
-    [SerializeField] internal Transform camTrans;
+    public Transform camTrans;
+    public CameraRecoil CR;
     [SerializeField] internal Transform shootPoint;
     [SerializeField] internal Transform containerTrans;
     [Space(5)]
@@ -17,8 +18,6 @@ public abstract class Gun : Item
     [Space(5)]
 
     [Header("Weapon positions")]
-    [SerializeField] internal Vector3 relaxedGunPos;
-    [Space]
     [SerializeField] internal Vector3 aimedGunPos = new Vector3(0, 0, 0);
 
     internal bool isAiming = true;

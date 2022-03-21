@@ -13,20 +13,20 @@ public class IngameUI : MonoBehaviour
 
     void OnEnable() 
     {
-        PlayerStats.maxStamChangeEvent += ChangeMaxStamina;
-        PlayerStats.maxHpChangeEvent += ChangeMaxHealth;
+        playerStats.maxStamChangeEvent += ChangeMaxStamina;
+        playerStats.maxHpChangeEvent += ChangeMaxHealth;
     }
 
     void OnDisable()
     {
-        PlayerStats.maxStamChangeEvent -= ChangeMaxStamina;
-        PlayerStats.maxHpChangeEvent -= ChangeMaxHealth;
+        playerStats.maxStamChangeEvent -= ChangeMaxStamina;
+        playerStats.maxHpChangeEvent -= ChangeMaxHealth;
     }
 
     void LateUpdate() 
     {
-        staminaSlider.value = PlayerStats.currentStamina;
-        healthSlider.value = PlayerStats.currentHealth;
+        staminaSlider.value = playerStats.currentStamina;
+        healthSlider.value = playerStats.currentHealth;
     }
 
     void ChangeMaxStamina(float newMax)

@@ -11,8 +11,7 @@ public class Semi_Automatic_Gun : Gun
 
     [SerializeField] GunShutter GS;
     GunRecoil GR;
-    GunAiming GA;
-    [SerializeField] CameraRecoil CR;
+    
     [SerializeField] WeaponSwayAndBob WSAB;
 
 
@@ -33,17 +32,13 @@ public class Semi_Automatic_Gun : Gun
         PV = GetComponent<PhotonView>();
 
         GR = GetComponent<GunRecoil>();
-        GA = GetComponent<GunAiming>();
 
         if (GS != null && !hasCustomShutter)
             GS.shutterSpeed = shotSpeed;
 
         bulletsInMag = magCapacity;
 
-        timeToShoot = shotSpeed;
-
-       
-        
+        timeToShoot = shotSpeed; 
     }
 
     void Update() 
@@ -88,7 +83,7 @@ public class Semi_Automatic_Gun : Gun
 
         if (!shouldAim && isAiming || isRealoading) 
         {
-            containerTrans.DOLocalMove(relaxedGunPos, ((GunInfo)itemInfo).aimingSpeed, false);
+            containerTrans.DOLocalMove(relaxedPos, ((GunInfo)itemInfo).aimingSpeed, false);
             isAiming = false;
             WSAB.isAiming = false;
         }

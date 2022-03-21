@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject PlayerModel;
     [SerializeField] Transform orientation;
-    [SerializeField] PlayerStats PStats;
+    [SerializeField] PlayerStats PS;
     [SerializeField] InputManager IM;
     [SerializeField] WeaponSwayAndBob WSAB;
 
@@ -89,8 +89,6 @@ public class PlayerMovement : MonoBehaviour
         WSAB.currentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
 
         ExtraGravity();
-
-        Debug.Log(OnSlope());
     }
 
     void ExtraGravity() 
@@ -140,15 +138,15 @@ public class PlayerMovement : MonoBehaviour
         if (IM.x != 0 && IM.y != 0)
             diagonalMultiplier = 0.707f;
 
-        if (IM.sprinting == true && PlayerStats.currentStamina > PStats.GetStaminaPrice("Sprint"))
+        if (IM.sprinting == true && PS.currentStamina > PS.GetStaminaPrice("Sprint"))
         {
-            speed = PStats.moveSpeed * PStats.sprintSpeedMultiplier;
-            PStats.Sprint(true);
+            speed = PS.moveSpeed * PS.sprintSpeedMultiplier;
+            PS.Sprint(true);
         }
         else 
         {
-            speed = PStats.moveSpeed;
-            PStats.Sprint(false);
+            speed = PS.moveSpeed;
+            PS.Sprint(false);
         }
 
         if (OnSlope() && !exitingSlope)
@@ -160,20 +158,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (grounded && readyToJump && PlayerStats.currentStamina > PStats.GetStaminaPrice("Jump"))
+        if (grounded && readyToJump && PS.currentStamina > PS.GetStaminaPrice("Jump"))
         {
             readyToJump = false;
 
             //Add jump forces
             if (IM.crouching) 
             {
-                rb.AddForce(Vector2.up * PStats.jumpForce * PStats.crouchJumpForceMultiplier * 1.5f);
-                rb.AddForce(normalVector * PStats.jumpForce * PStats.crouchJumpForceMultiplier * 0.5f);
+                rb.AddForce(Vector2.up * PS.jumpForce * PS.crouchJumpForceMultiplier * 1.5f);
+                rb.AddForce(normalVector * PS.jumpForce * PS.crouchJumpForceMultiplier * 0.5f);
             }
             else 
             {
-                rb.AddForce(Vector2.up * PStats.jumpForce * 1.5f);
-                rb.AddForce(normalVector * PStats.jumpForce * 0.5f);
+                rb.AddForce(Vector2.up * PS.jumpForce * 1.5f);
+                rb.AddForce(normalVector * PS.jumpForce * 0.5f);
             }
 
             //If jumping while falling, reset y velocity.
@@ -185,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
 
-            PStats.DrainStamina("Jump");
+            PS.DrainStamina("Jump");
 
             exitingSlope = true;
         }
@@ -228,26 +226,26 @@ public class PlayerMovement : MonoBehaviour
         //Slow down sliding
         if (IM.crouching)
         {
-            rb.AddForce(PStats.moveSpeed * Time.deltaTime * -rb.velocity.normalized * slideCounterMovement);
+            rb.AddForce(PS.moveSpeed * Time.deltaTime * -rb.velocity.normalized * slideCounterMovement);
             return;
         }
 
         //Counter movement
         if (Math.Abs(mag.x) > threshold && Math.Abs(IM.x) < 0.05f || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0))
         {
-            rb.AddForce(PStats.moveSpeed * orientation.right * Time.deltaTime * -mag.x * counterMovement);
+            rb.AddForce(PS.moveSpeed * orientation.right * Time.deltaTime * -mag.x * counterMovement);
         }
         if (Math.Abs(mag.y) > threshold && Math.Abs(IM.y) < 0.05f || (mag.y < -threshold && y > 0) || (mag.y > threshold && y < 0))
         {
-            rb.AddForce(PStats.moveSpeed * orientation.forward * Time.deltaTime * -mag.y * counterMovement);
+            rb.AddForce(PS.moveSpeed * orientation.forward * Time.deltaTime * -mag.y * counterMovement);
         }
 
 
         //Limit diagonal running. This will also cause a full stop if sliding fast and un-crouching, so not optimal.
-        if (Mathf.Sqrt((Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2))) > PStats.maxSpeed)
+        if (Mathf.Sqrt((Mathf.Pow(rb.velocity.x, 2) + Mathf.Pow(rb.velocity.z, 2))) > PS.maxSpeed)
         {
             float fallspeed = rb.velocity.y;
-            Vector3 n = rb.velocity.normalized * PStats.maxSpeed;
+            Vector3 n = rb.velocity.normalized * PS.maxSpeed;
             rb.velocity = new Vector3(n.x, fallspeed, n.z);
         }
 

@@ -130,7 +130,7 @@ public class PlayerMovement_Old : MonoBehaviour
 
 
         //Apply forces to move player
-        if (IM.sprinting == true && PlayerStats.currentStamina > PStats.GetStaminaPrice("Sprint"))
+        if (IM.sprinting == true && PStats.currentStamina > PStats.GetStaminaPrice("Sprint"))
         {
             rb.AddForce(orientation.forward * IM.y * PStats.moveSpeed * PStats.sprintSpeedMultiplier * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier);
             rb.AddForce(orientation.right * IM.x * PStats.moveSpeed * PStats.sprintSpeedMultiplier * Time.deltaTime * multiplier * diagonalMultiplier);
@@ -147,7 +147,7 @@ public class PlayerMovement_Old : MonoBehaviour
 
     private void Jump()
     {
-        if (grounded && readyToJump && PlayerStats.currentStamina > PStats.GetStaminaPrice("Jump"))
+        if (grounded && readyToJump && PStats.currentStamina > PStats.GetStaminaPrice("Jump"))
         {
             readyToJump = false;
 
