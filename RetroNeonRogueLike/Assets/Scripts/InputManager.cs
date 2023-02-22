@@ -1,65 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class InputManager : MonoBehaviour
+public static class InputManager
 {
-    public float x;
-    public float y;
+    public static float x;
+    public static float y;
 
     [Space(10)]
 
-    public bool jumping;
-    public bool sprinting;
-    public bool crouching;
+    public static bool Jumping;
+    public static bool Sprinting;
+    public static bool Crouching;
 
     [Space(10)]
 
-    public bool shooting;
-    public bool aiming;
-    public bool reloading;
+    public static bool Shooting;
+    public static bool Aiming;
+    public static bool Reloading;
 
     [Space(10)]
 
-    public bool interacting;
-    public bool droppingItem;
+    public static bool Interacting;
+    public static bool DroppingItem;
 
     [Space(10)]
 
-    public float mouseX;
-    public float mouseY;
+    public static float MouseX;
+    public static float MouseY;
+}
 
+class InputManagerObject : MonoBehaviour
+{
     PhotonView PV;
-
-    void Awake() 
-    {
+    void Awake() =>
         PV = GetComponent<PhotonView>();
-    }
 
     void Update()
     {
         if (!PV.IsMine)
             return;
 
-        x = Input.GetAxisRaw("Horizontal");
-        y = Input.GetAxisRaw("Vertical");
+        InputManager.x = Input.GetAxisRaw("Horizontal");
+        InputManager.y = Input.GetAxisRaw("Vertical");
 
-        jumping = Input.GetButton("Jump");
+        InputManager.Jumping = Input.GetButton("Jump");
 
-        crouching = Input.GetKey(KeyCode.LeftControl);
-        sprinting = Input.GetKey(KeyCode.LeftShift);
+        InputManager.Crouching = Input.GetKey(KeyCode.LeftControl);
+        InputManager.Sprinting = Input.GetKey(KeyCode.LeftShift);
 
-        shooting = Input.GetKey(KeyCode.Mouse0);
-        aiming = Input.GetKey(KeyCode.Mouse1);
+        InputManager.Shooting = Input.GetKey(KeyCode.Mouse0);
+        InputManager.Aiming = Input.GetKey(KeyCode.Mouse1);
 
-        reloading = Input.GetKey(KeyCode.R);
+        InputManager.Reloading = Input.GetKey(KeyCode.R);
 
-        droppingItem = Input.GetKey(KeyCode.G);
+        InputManager.DroppingItem = Input.GetKey(KeyCode.G);
 
-        interacting = Input.GetKey(KeyCode.E);
+        InputManager.Interacting = Input.GetKey(KeyCode.E);
 
-        mouseX = Input.GetAxis("Mouse X");
-        mouseY = Input.GetAxis("Mouse Y");
+        InputManager.MouseX = Input.GetAxis("Mouse X");
+        InputManager.MouseY = Input.GetAxis("Mouse Y");
     }
 }
+
+

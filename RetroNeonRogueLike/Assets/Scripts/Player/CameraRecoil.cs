@@ -1,27 +1,27 @@
 using UnityEngine;
 
-public class CameraRecoil : MonoBehaviour
+namespace Player
 {
-
-    //Rotations
-    Vector3 currentRotation;
-    Vector3 targetRotation;
-
-    [Header("Settings")]
-    [SerializeField] float snappiness;
-    [SerializeField] float returnSpeed;
-
-
-    void FixedUpdate()
+    public class CameraRecoil : MonoBehaviour
     {
-        targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
-        currentRotation = Vector3.Slerp(currentRotation, targetRotation, snappiness * Time.fixedDeltaTime);
+        //Rotations
+        Vector3 _currentRotation;
+        Vector3 _targetRotation;
 
-        transform.localRotation = Quaternion.Euler(currentRotation);
-    }
+        [Header("Settings")]
+        [SerializeField] float snappiness;
+        [SerializeField] float returnSpeed;
 
-    public void RecoilFire(float recoilX, float recoilY, float recoilZ) 
-    {
-            targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
+
+        void FixedUpdate()
+        {
+            _targetRotation = Vector3.Lerp(_targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
+            _currentRotation = Vector3.Slerp(_currentRotation, _targetRotation, snappiness * Time.fixedDeltaTime);
+
+            transform.localRotation = Quaternion.Euler(_currentRotation);
+        }
+
+        public void RecoilFire(float recoilX, float recoilY, float recoilZ)=>
+            _targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
     }
 }

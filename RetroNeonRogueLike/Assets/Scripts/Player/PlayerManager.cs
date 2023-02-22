@@ -1,67 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
+using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private GameObject CameraParent;
-    [SerializeField] private Transform PlayerViewPoint;
-
-    [SerializeField] private GameObject PlayerModel;
-
-    [SerializeField] private Transform PlayerOrientation;
-
-    [SerializeField] PlayerStats PS;
-    ItemManager IM;
-
-    [SerializeField] GameObject UIObject;
-
-    PhotonPlayerManager photonPM;
-    PhotonView PV;
-
-    void Awake()
+    public class PlayerManager : MonoBehaviour
     {
-        PV = GetComponent<PhotonView>();
-        IM = GetComponent<ItemManager>();
-    }
+        [SerializeField] private GameObject playerModel;
 
-    void OnEnable() => PS.deathEvent += playerDeath;
-    void OnDisable() => PS.deathEvent -= playerDeath;
+        [SerializeField] private Transform playerOrientation;
 
-    void Start() 
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        [SerializeField] PlayerStats playerStats;
+        ItemManager _itemManager;
 
-        if (!PV.IsMine) 
+        [SerializeField] GameObject uiObject;
+
+        PhotonPlayerManager _photonPlayerManager;
+        PhotonView PV;
+
+        void Awake()
         {
-            Destroy(GetComponentInChildren<Camera>().gameObject);
-            Destroy(GetComponentInChildren<Rigidbody>());
-            Destroy(UIObject);
+            PV = GetComponent<PhotonView>();
+            _itemManager = GetComponent<ItemManager>();
         }
 
-        photonPM = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PhotonPlayerManager>();
+        void OnEnable() => playerStats.deathEvent += PlayerDeath;
+        void OnDisable() => playerStats.deathEvent -= PlayerDeath;
 
-    }
-
-    void Update()
-    {
-        if (!PV.IsMine)
-            return;
-
-        //CameraParent.transform.position = PlayerViewPoint.position;
-        //CameraParent.transform.localRotation = PlayerViewPoint.rotation;
-
-        PlayerModel.transform.localRotation = PlayerOrientation.transform.localRotation;
-    }
-
-    void playerDeath() 
-    {
-        while(IM.items.Count != 0)
+        void Start() 
         {
-            IM.DropItem(IM.items[0].gameObject, Random.Range(-6, 6), Random.Range(1, 6), Random.Range(-6, 6));
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            if (!PV.IsMine) 
+            {
+                Destroy(GetComponentInChildren<Camera>().gameObject);
+                Destroy(GetComponentInChildren<Rigidbody>());
+                Destroy(uiObject);
+            }
+
+            _photonPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PhotonPlayerManager>();
+
         }
-        photonPM.DestroyPlayer();
+
+        void Update()
+        {
+            if (!PV.IsMine)
+                return;
+
+            //CameraParent.transform.position = PlayerViewPoint.position;
+            //CameraParent.transform.localRotation = PlayerViewPoint.rotation;
+
+            playerModel.transform.localRotation = playerOrientation.transform.localRotation;
+        }
+
+        void PlayerDeath() 
+        {
+            while(_itemManager.items.Count != 0)
+            {
+                _itemManager.DropItem(_itemManager.items[0].gameObject, Random.Range(-6, 6), Random.Range(1, 6), Random.Range(-6, 6));
+            }
+            _photonPlayerManager.DestroyPlayer();
+        }
     }
 }
