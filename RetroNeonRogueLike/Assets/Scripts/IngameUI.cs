@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Player;
+using PlayerScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,14 +14,14 @@ public class IngameUI : MonoBehaviour
 
     void OnEnable() 
     {
-        playerStats.maxStamChangeEvent += ChangeMaxStamina;
-        playerStats.maxHpChangeEvent += ChangeMaxHealth;
+        playerStats.MaxStamChangeEvent += ChangeMaxStamina;
+        playerStats.MaxHpChangeEvent += ChangeMaxHealth;
     }
 
     void OnDisable()
     {
-        playerStats.maxStamChangeEvent -= ChangeMaxStamina;
-        playerStats.maxHpChangeEvent -= ChangeMaxHealth;
+        playerStats.MaxStamChangeEvent -= ChangeMaxStamina;
+        playerStats.MaxHpChangeEvent -= ChangeMaxHealth;
     }
 
     void LateUpdate() 

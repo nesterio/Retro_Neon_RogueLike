@@ -1,7 +1,6 @@
 using UnityEngine;
-using Photon.Pun;
 
-public static class InputManager
+public struct InputManagerData
 {
     public static float x;
     public static float y;
@@ -29,37 +28,28 @@ public static class InputManager
     public static float MouseY;
 }
 
-class InputManagerObject : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
-    PhotonView PV;
-    void Awake() =>
-        PV = GetComponent<PhotonView>();
-
     void Update()
     {
-        if (!PV.IsMine)
-            return;
+        InputManagerData.x = Input.GetAxisRaw("Horizontal");
+        InputManagerData.y = Input.GetAxisRaw("Vertical");
 
-        InputManager.x = Input.GetAxisRaw("Horizontal");
-        InputManager.y = Input.GetAxisRaw("Vertical");
+        InputManagerData.Jumping = Input.GetButton("Jump");
 
-        InputManager.Jumping = Input.GetButton("Jump");
+        InputManagerData.Crouching = Input.GetKey(KeyCode.LeftControl);
+        InputManagerData.Sprinting = Input.GetKey(KeyCode.LeftShift);
 
-        InputManager.Crouching = Input.GetKey(KeyCode.LeftControl);
-        InputManager.Sprinting = Input.GetKey(KeyCode.LeftShift);
+        InputManagerData.Shooting = Input.GetKey(KeyCode.Mouse0);
+        InputManagerData.Aiming = Input.GetKey(KeyCode.Mouse1);
 
-        InputManager.Shooting = Input.GetKey(KeyCode.Mouse0);
-        InputManager.Aiming = Input.GetKey(KeyCode.Mouse1);
+        InputManagerData.Reloading = Input.GetKey(KeyCode.R);
 
-        InputManager.Reloading = Input.GetKey(KeyCode.R);
+        InputManagerData.DroppingItem = Input.GetKey(KeyCode.G);
 
-        InputManager.DroppingItem = Input.GetKey(KeyCode.G);
+        InputManagerData.Interacting = Input.GetKey(KeyCode.E);
 
-        InputManager.Interacting = Input.GetKey(KeyCode.E);
-
-        InputManager.MouseX = Input.GetAxis("Mouse X");
-        InputManager.MouseY = Input.GetAxis("Mouse Y");
+        InputManagerData.MouseX = Input.GetAxis("Mouse X");
+        InputManagerData.MouseY = Input.GetAxis("Mouse Y");
     }
 }
-
-

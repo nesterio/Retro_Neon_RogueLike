@@ -1,55 +1,53 @@
 using DG.Tweening;
-using Photon.Pun;
 using UnityEngine;
 
 namespace Items.Weapons
 {
     public class Semi_Automatic_Gun : Gun
     {
-        PhotonView PV;
         [SerializeField] Animator anim;
 
         [SerializeField] GunShutter GS;
         GunRecoil GR;
 
-        float shotSpeed { get { return ((GunInfo)itemInfo).shotSpeed; } }
-        float timeToShoot;
+        float ShotSpeed => ((GunInfo)itemInfo).shotSpeed;
+        float _timeToShoot;
 
-        int magCapacity { get { return ((GunInfo)itemInfo).magCapacity; } }
+        int MagCapacity => ((GunInfo)itemInfo).magCapacity;
         public int bulletsInMag;
 
-        bool isRealoading { get { return anim.GetCurrentAnimatorStateInfo(0).IsName("Reload");} }
+        bool IsRealoading => anim.GetCurrentAnimatorStateInfo(0).IsName("Reload");
 
         [Space]
 
         [SerializeField] bool hasCustomShutter;
 
+        private static readonly int Reload1 = Animator.StringToHash("Reload");
+
         void Awake() 
         {
-            PV = GetComponent<PhotonView>();
-
             GR = GetComponent<GunRecoil>();
 
             if (GS != null && !hasCustomShutter)
-                GS.shutterSpeed = shotSpeed;
+                GS.shutterSpeed = ShotSpeed;
 
-            bulletsInMag = magCapacity;
+            bulletsInMag = MagCapacity;
 
-            timeToShoot = shotSpeed; 
+            _timeToShoot = ShotSpeed; 
         }
 
         void Update() 
         {
-            if (timeToShoot > 0)
-                timeToShoot -= Time.deltaTime;
+            if (_timeToShoot > 0)
+                _timeToShoot -= Time.deltaTime;
         }
 
 
         public override void Use() 
         {
-            if (bulletsInMag > 0 && !isRealoading)
+            if (bulletsInMag > 0 && !IsRealoading)
             {
-                if (timeToShoot <= 0)
+                if (_timeToShoot <= 0)
                 {
                     Shoot();
                 }
@@ -59,18 +57,18 @@ namespace Items.Weapons
 
         public override void Reload() 
         {
-            if (!isRealoading)
-                anim.SetBool("Reload", true);
+            if (!IsRealoading)
+                anim.SetBool(Reload1, true);
         }
         public override void StopReload() 
         {
-            if (isRealoading)
-                anim.SetBool("Reload", false);
+            if (IsRealoading)
+                anim.SetBool(Reload1, false);
         }
 
         public override void Aim(bool shouldAim) 
         {
-            if (shouldAim && !isAiming && !isRealoading) 
+            if (shouldAim && !isAiming && !IsRealoading) 
             {
                 containerTrans.DOLocalMove(aimedGunPos, ((GunInfo)itemInfo).aimingSpeed, false);
                 isAiming = true;
@@ -78,7 +76,7 @@ namespace Items.Weapons
 
             }
 
-            if (!shouldAim && isAiming || isRealoading) 
+            if (!shouldAim && isAiming || IsRealoading) 
             {
                 containerTrans.DOLocalMove(relaxedPos, ((GunInfo)itemInfo).aimingSpeed, false);
                 isAiming = false;
@@ -88,13 +86,12 @@ namespace Items.Weapons
 
         public void FinishReload() 
         {
-            bulletsInMag = magCapacity;
-            anim.SetBool("Reload", false);
+            bulletsInMag = MagCapacity;
+            anim.SetBool(Reload1, false);
         }
 
         void Shoot() 
         {
-
             if(isAiming)
                 CR.RecoilFire(((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ);
             else
@@ -108,13 +105,14 @@ namespace Items.Weapons
                 shootingParticles.Play();
 
             bulletsInMag--;
-            timeToShoot = shotSpeed;
+            _timeToShoot = ShotSpeed;
 
             RaycastHit hit;
 
             if (Physics.Raycast(camTrans.position, camTrans.forward, out hit, Mathf.Infinity)) 
             {
-                PV.RPC("RPC_Shoot", RpcTarget.All, hit.point, hit.normal);
+                GameObject tempBullet = Instantiate(bulletPrefab, shootPoint.position, camTrans.rotation);
+                tempBullet.GetComponent<BulletScript>().Initialize(hit.point, hit.normal, ((GunInfo)itemInfo).damage);
             }
 
             //Vector3 direction = GetDirection();
@@ -148,13 +146,6 @@ namespace Items.Weapons
             //    PV.RPC("RPC_Shoot", RpcTarget.All, hit.point, hit.normal);
             //
             //}
-        }
-
-        [PunRPC]
-        void RPC_Shoot(Vector3 hitPoint, Vector3 hitNormal) 
-        {
-            GameObject tempBullet = Instantiate(bulletPrefab, shootPoint.position, camTrans.rotation);
-            tempBullet.GetComponent<BulletScript>().Initialize(hitPoint, hitNormal, ((GunInfo)itemInfo).damage);
         }
 
     }

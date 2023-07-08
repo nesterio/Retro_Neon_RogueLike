@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class RoomManager : MonoBehaviourPunCallbacks
+public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance;
 
     [SerializeField] int Lvl1ID;
+    
+    [SerializeField]GameObject playerPrefab;
+
+    [SerializeField] Vector3[] SpawnPoints;
 
     void Awake() 
     {
@@ -22,15 +22,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Instance = this;
     }
 
-    public override void OnEnable() 
+    public void OnEnable() 
     {
-        base.OnEnable();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public override void OnDisable() 
+    public void OnDisable() 
     {
-        base.OnDisable();
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -38,7 +36,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == Lvl1ID) 
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayerManager"), Vector3.zero, Quaternion.identity);
+            CreatePlayer();
         }
+    }
+    
+    void CreatePlayer() 
+    {
+        int temp = Random.Range(0, SpawnPoints.Length);
+        Instantiate(playerPrefab, SpawnPoints[temp], Quaternion.identity);
     }
 }

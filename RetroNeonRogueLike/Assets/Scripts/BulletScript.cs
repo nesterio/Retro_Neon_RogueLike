@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Player;
+using PlayerScripts;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
