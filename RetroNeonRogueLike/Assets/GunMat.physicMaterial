@@ -9,6 +9,6 @@ PhysicMaterial:
   m_Name: GunMat
   dynamicFriction: 0.8
   staticFriction: 0.8
-  bounciness: 0
+  bounciness: 0.33
   frictionCombine: 3
-  bounceCombine: 0
+  bounceCombine: 2

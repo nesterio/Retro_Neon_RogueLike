@@ -13,8 +13,8 @@ namespace PlayerScripts
         [SerializeField] Transform cameraParentTrans;
         [SerializeField] Transform itemHolder;
         [Space(10)]
-        [SerializeField] float itemDroppingForceUpward = 2f;
-        [SerializeField] float itemDroppingForceForward = 2f;
+        [SerializeField] float itemDroppingForceUpward = 2.5f;
+        [SerializeField] float itemDroppingForceForward = 3.5f;
         [Space(3)]
         [SerializeField] float itemDropSpd = 1f;
         [SerializeField] float itemPickupSpd = 0.5f;
@@ -36,12 +36,8 @@ namespace PlayerScripts
         void Awake()
         {
             if(startItems != null)
-                foreach (Item item in startItems) 
-                {
-                    items.Add(item);
-                    item.pickable = false;
-                    item.pickedUp = true;
-                }
+                foreach (Item item in startItems)
+                    PickUpItem(item.gameObject);
 
             if (items.Count > 0)
                 EquipItem(0);
@@ -57,6 +53,7 @@ namespace PlayerScripts
 
             //Debug.Log(itemIndex);
 
+            ////// TODO: MOVE THIS TO INPUT MANAGER !!! //////
 
             if (items.Count > 1)
                 for(int i = 0; i < items.Count; i++)
@@ -72,6 +69,8 @@ namespace PlayerScripts
                 EquipItem(_itemIndex + 1);
             else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f && items.Count > 1)
                 EquipItem(_itemIndex - 1);
+            
+            ////// ---------------------------------- //////
 
 
             if (IM.Shooting)
@@ -96,11 +95,9 @@ namespace PlayerScripts
 
         void EquipItem(int index) 
         {
-
             if (items.Count == 0)
                 return;
-
-
+            
             if (items.Count == 1)
                 index = 0;
 
@@ -110,11 +107,10 @@ namespace PlayerScripts
             if (index < 0 && items.Count > 1)
                 index = items.Count - 1;
 
-
             if (index == _itemIndex && items.Count != 1)
                 return;
-
-
+            
+            
             if (items.Count > 0) 
             {
                 UnequipHeldItem();

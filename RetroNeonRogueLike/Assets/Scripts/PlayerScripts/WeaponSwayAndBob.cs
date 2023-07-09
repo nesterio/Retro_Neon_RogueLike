@@ -21,7 +21,7 @@ namespace PlayerScripts
         [SerializeField] BobOverride[] bobOverrides;
 
 
-        [HideInInspector]
+        //[HideInInspector]
         public float currentSpeed;
 
         [HideInInspector]
@@ -40,26 +40,6 @@ namespace PlayerScripts
 
         void Update() 
         {
-            foreach (BobOverride bob in bobOverrides) 
-            {
-                if (currentSpeed >= bob.minSpeed && currentSpeed <= bob.maxSpeed) 
-                {
-                    var bobMultiplier = (currentSpeed == 0) ? 1 : currentSpeed;
-
-                    if (isAiming)
-                        bobMultiplier = aimedBobMultiplier;
-
-                    if (isCrouching)
-                        bobMultiplier = 1;
-
-                    _currentTimeX += bob.speedX / 10 * Time.deltaTime * bobMultiplier;
-                    _currentTimeY += bob.speedY / 10 * Time.deltaTime * bobMultiplier;
-
-                    _xPos = bob.bobX.Evaluate(_currentTimeX) * bob.intensityX;
-                    _yPos = bob.bobY.Evaluate(_currentTimeY) * bob.intensityY;
-                }
-            }
-
             float xSway = -IM.MouseX * swayIntensityX;
             float ySway = -IM.MouseY * swayIntensityY;
 
@@ -74,11 +54,32 @@ namespace PlayerScripts
 
             _xPos = xSway;
             _yPos = ySway;
+            
+            foreach (BobOverride bob in bobOverrides) 
+            {
+                if (currentSpeed >= bob.minSpeed && currentSpeed < bob.maxSpeed) 
+                {
+                    var bobMultiplier = (currentSpeed == 0) ? 1f : currentSpeed;
+
+                    if (isAiming)
+                        bobMultiplier = aimedBobMultiplier;
+
+                    if (isCrouching)
+                        bobMultiplier = 1f;
+
+                    _currentTimeX += bob.speedX * Time.deltaTime;
+                    _currentTimeY += bob.speedY * Time.deltaTime;
+
+                    _xPos += bob.bobX.Evaluate(_currentTimeX) * bob.intensityX * bobMultiplier;
+                    _yPos += bob.bobY.Evaluate(_currentTimeY) * bob.intensityY * bobMultiplier;
+                    
+                    break;
+                }
+            }
         }
 
         void FixedUpdate()
         {
-
             Vector3 target = new Vector3(_xPos, _yPos, 0);
             var localPosition = transform.localPosition;
             
