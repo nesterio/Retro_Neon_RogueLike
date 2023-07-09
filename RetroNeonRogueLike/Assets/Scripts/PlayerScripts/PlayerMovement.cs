@@ -55,6 +55,8 @@ namespace PlayerScripts
         [SerializeField] float floorDetectionRange;
         [SerializeField] private LayerMask whatIsGround;
 
+        public static float CurrentSpeed { get; private set; }
+
         void Awake()
         {
             _playerScale = playerModel.transform.localScale;
@@ -73,7 +75,7 @@ namespace PlayerScripts
             if (Input.GetKeyUp(KeyCode.LeftControl))
                 StopCrouch();
 
-            WSAB.currentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
+            CurrentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
         }
 
         void Move()

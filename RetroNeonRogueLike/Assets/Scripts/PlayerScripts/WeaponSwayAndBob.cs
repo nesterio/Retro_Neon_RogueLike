@@ -20,10 +20,6 @@ namespace PlayerScripts
 
         [SerializeField] BobOverride[] bobOverrides;
 
-
-        //[HideInInspector]
-        public float currentSpeed;
-
         [HideInInspector]
         public bool isAiming;
 
@@ -57,9 +53,9 @@ namespace PlayerScripts
             
             foreach (BobOverride bob in bobOverrides) 
             {
-                if (currentSpeed >= bob.minSpeed && currentSpeed < bob.maxSpeed) 
+                if (PlayerMovement.CurrentSpeed >= bob.minSpeed && PlayerMovement.CurrentSpeed < bob.maxSpeed) 
                 {
-                    var bobMultiplier = (currentSpeed == 0) ? 1f : currentSpeed;
+                    var bobMultiplier = (PlayerMovement.CurrentSpeed == 0) ? 1f : PlayerMovement.CurrentSpeed;
 
                     if (isAiming)
                         bobMultiplier = aimedBobMultiplier;

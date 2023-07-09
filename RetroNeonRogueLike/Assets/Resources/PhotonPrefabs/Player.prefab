@@ -1129,7 +1129,7 @@ MonoBehaviour:
       m_RotationOrder: 0
   - minSpeed: 4
     maxSpeed: 6
-    speedX: 1
+    speedX: 0.9
     intensityX: 0.025
     bobX:
       serializedVersion: 2
@@ -1165,7 +1165,7 @@ MonoBehaviour:
       m_PostInfinity: 1
       m_RotationOrder: 0
     speedY: 0.75
-    intensityY: 0.02
+    intensityY: 0.015
     bobY:
       serializedVersion: 2
       m_Curve:
