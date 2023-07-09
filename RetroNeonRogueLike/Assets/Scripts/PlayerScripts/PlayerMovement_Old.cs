@@ -69,8 +69,6 @@ namespace PlayerScripts
                 StartCrouch();
             if (Input.GetKeyUp(KeyCode.LeftControl))
                 StopCrouch();
-
-            WSAB.currentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
         }
 
         void Move()

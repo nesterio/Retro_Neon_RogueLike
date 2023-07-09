@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: 5048712023849406147}
   m_Layer: 7
   m_Name: AK
-  m_TagString: Item
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -676,10 +676,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsable: 1
+  interactionMessage: Use
   itemInfo: {fileID: 11400000, guid: 3c061dfa9d2a05349890eb27ee2b6678, type: 2}
   itemGameObject: {fileID: 22654496756138220}
   relaxedPos: {x: 0.15, y: -0.02, z: 0.05}
-  pickable: 1
   pickedUp: 0
   camTrans: {fileID: 0}
   CR: {fileID: 0}

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Interactable.Items;
 using Items.Weapons;
 using UnityEngine;
 using IM = InputManagerData;
@@ -9,17 +10,15 @@ namespace PlayerScripts
     public class ItemManager : MonoBehaviour
     {
         [SerializeField] CameraRecoil cameraRecoil;
-        [SerializeField] PlayerStats _playerStats;
         [SerializeField] Transform cameraParentTrans;
         [SerializeField] Transform itemHolder;
+        [SerializeField] private PlayerStats playerStats;
         [Space(10)]
         [SerializeField] float itemDroppingForceUpward = 2.5f;
         [SerializeField] float itemDroppingForceForward = 3.5f;
         [Space(3)]
         [SerializeField] float itemDropSpd = 1f;
         [SerializeField] float itemPickupSpd = 0.5f;
-        [Space(3)]
-        [SerializeField] float itemPickupRange = 3f;
         [Space(10)]
         [SerializeField] Item[] startItems;
         public List<Item> items = new List<Item>();
@@ -28,10 +27,12 @@ namespace PlayerScripts
 
         int _itemIndex = 0;
 
-        bool _droppingItem;
-        bool _pickingUp;
+        public bool CanPickupItem => items.Count < playerStats.maxItems;
 
-        delegate void pickedUpActions();
+        bool _droppingItem;
+        public bool PickingUpItem { get; private set; }
+
+        delegate void PickedUpActions();
 
         void Awake()
         {
@@ -45,9 +46,6 @@ namespace PlayerScripts
 
         void Update() 
         {
-            ItemDetection();
-
-
             if (items.Count == 0)
                 return;
 
@@ -125,7 +123,7 @@ namespace PlayerScripts
             items[_itemIndex].itemGameObject.SetActive(true);
         }
 
-        void UnequipHeldItem()
+        public void UnequipHeldItem()
         {
             if (items.Count > 0)
                 items[_itemIndex].itemGameObject.SetActive(false);
@@ -161,37 +159,20 @@ namespace PlayerScripts
 
             item.transform.parent = null;
 
-            itemScript.pickable = true;
+            itemScript.isUsable = true;
 
             item.GetComponent<Rigidbody>().AddForce(cameraParentTrans.up * dropForceY + cameraParentTrans.forward * dropForceZ + cameraParentTrans.right * dropForceX, ForceMode.Impulse);
         }
-
-        void ItemDetection() 
-        {
-            if (Physics.Raycast(cameraParentTrans.position, cameraParentTrans.forward, out var hit, itemPickupRange))
-            {
-                GameObject hitObj = hit.collider.gameObject;
-
-                if (hitObj.CompareTag("Item"))
-                {
-                    Item item = hitObj.GetComponent<Item>();
-
-                    if (item.pickable && !item.pickedUp && IM.Interacting && !_pickingUp && items.Count < _playerStats.maxItems)
-                        PickUpItem(hitObj);
-                }
-
-            }
-        }
-
-        void PickUpItem(GameObject item) 
+        
+        public void PickUpItem(GameObject item) 
         { 
-            _pickingUp = true;
+            PickingUpItem = true;
 
             UnequipHeldItem();
 
             Item itemScrpt = item.GetComponent<Item>();
 
-            itemScrpt.pickable = false;
+            itemScrpt.isUsable = false;
 
             item.GetComponent<Rigidbody>().isKinematic = true;
             item.GetComponent<Collider>().enabled = false;
@@ -206,9 +187,9 @@ namespace PlayerScripts
 
             item.transform.SetParent(itemHolder);
 
-            pickedUpActions actions;
+            PickedUpActions actions;
             actions = () => itemScrpt.pickedUp = true;
-            actions += () => _pickingUp = false;
+            actions += () => PickingUpItem = false;
             actions += () => items.Add(itemScrpt);
             actions += () => EquipItem(items.Count - 1);
 

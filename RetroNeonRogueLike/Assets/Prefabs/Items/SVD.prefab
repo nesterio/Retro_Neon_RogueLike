@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 1232910615232461767}
   m_Layer: 7
   m_Name: SVD
-  m_TagString: Item
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -660,10 +660,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsable: 1
+  interactionMessage: Use
   itemInfo: {fileID: 11400000, guid: 8455a6dff55190b4bb15f3ec62529c7f, type: 2}
   itemGameObject: {fileID: 2459231769103600996}
   relaxedPos: {x: 0.2, y: -0.05, z: -0.08}
-  pickable: 1
   pickedUp: 0
   camTrans: {fileID: 0}
   CR: {fileID: 0}

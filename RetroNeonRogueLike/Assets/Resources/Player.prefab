@@ -1199,7 +1199,6 @@ MonoBehaviour:
       m_PreInfinity: 0
       m_PostInfinity: 1
       m_RotationOrder: 0
-  currentSpeed: 0
   isAiming: 0
   isCrouching: 0
 --- !u!1 &8937362319928043996
@@ -1412,6 +1411,7 @@ GameObject:
   - component: {fileID: 8937362321070618968}
   - component: {fileID: 8937362321070618969}
   - component: {fileID: 6049009413897762817}
+  - component: {fileID: 8655138605077433008}
   - component: {fileID: 8937362321070618970}
   - component: {fileID: 8937362321070618971}
   m_Layer: 0
@@ -1539,17 +1539,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraRecoil: {fileID: 6633486697282168615}
-  _playerStats: {fileID: 8937362321070618948}
   cameraParentTrans: {fileID: 8937362320280412649}
   itemHolder: {fileID: 6559482490752147078}
+  playerStats: {fileID: 8937362321070618948}
   itemDroppingForceUpward: 2.5
   itemDroppingForceForward: 3.5
   itemDropSpd: 1
   itemPickupSpd: 0.65
-  itemPickupRange: 3
   startItems:
   - {fileID: 5591675839777937709}
   items: []
+--- !u!114 &8655138605077433008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937362321070618972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03b9bd1c8c35dbd4f95b3a544015cbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraParentTrans: {fileID: 8937362320280412649}
+  itemManager: {fileID: 6049009413897762817}
+  itemPickupRange: 3
 --- !u!136 &8937362321070618970
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1764,6 +1778,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
+--- !u!4 &439562723806750129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6129868159311546669, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
+  m_PrefabInstance: {fileID: 5983042459637066908}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5591675839777937709 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2202707607408752049, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
@@ -1775,8 +1794,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &439562723806750129 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6129868159311546669, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
-  m_PrefabInstance: {fileID: 5983042459637066908}
-  m_PrefabAsset: {fileID: 0}
