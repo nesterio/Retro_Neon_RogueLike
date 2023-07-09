@@ -1520,8 +1520,8 @@ MonoBehaviour:
   counterMovement: 0.8
   jumpCooldown: 1
   maxSlopeAngle: 35
-  slideForce: 400
-  slideCounterMovement: 0.2
+  slideForce: 150
+  slideCounterMovement: 0.65
   floorDetectionRange: 1.1
   whatIsGround:
     serializedVersion: 2
@@ -1545,7 +1545,7 @@ MonoBehaviour:
   itemDroppingForceUpward: 2.5
   itemDroppingForceForward: 3.5
   itemDropSpd: 1
-  itemPickupSpd: 0.5
+  itemPickupSpd: 0.65
   itemPickupRange: 3
   startItems:
   - {fileID: 5591675839777937709}
