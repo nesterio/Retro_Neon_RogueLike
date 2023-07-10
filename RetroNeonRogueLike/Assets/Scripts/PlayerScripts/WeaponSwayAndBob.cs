@@ -36,8 +36,8 @@ namespace PlayerScripts
 
         void Update() 
         {
-            float xSway = -IM.MouseX * swayIntensityX;
-            float ySway = -IM.MouseY * swayIntensityY;
+            float xSway = (PlayerManager.CanLook ? -IM.MouseX : 0) * swayIntensityX;
+            float ySway = (PlayerManager.CanLook ? -IM.MouseY : 0) * swayIntensityY;
 
             if (isAiming) 
             {

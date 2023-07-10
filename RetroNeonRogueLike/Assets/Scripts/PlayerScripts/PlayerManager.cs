@@ -1,4 +1,5 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PlayerScripts
 {
@@ -11,9 +12,29 @@ namespace PlayerScripts
         [SerializeField] PlayerStats playerStats;
         ItemManager _itemManager;
 
+        public static bool CanMove = true;
+        public static bool CanLook = true;
+        public static bool CanUse = true;
+        public static bool CanSwitchWeapons = true;
+
         void Awake()
         {
             _itemManager = GetComponent<ItemManager>();
+        }
+
+        public static void FreezePlayer()
+        {
+            CanMove = false;
+            CanLook = false;
+            CanUse = false;
+            CanSwitchWeapons = false;
+        }
+        public static void UnFreezePlayer()
+        {
+            CanMove = true;
+            CanLook = true;
+            CanUse = true;
+            CanSwitchWeapons = true;
         }
 
         void OnEnable() => playerStats.DeathEvent += PlayerDeath;

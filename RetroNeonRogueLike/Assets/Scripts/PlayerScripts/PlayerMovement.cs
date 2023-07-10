@@ -70,12 +70,15 @@ namespace PlayerScripts
 
         void Update() 
         {
+            CurrentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
+            
+            if(!PlayerManager.CanMove)
+                return;
+            
             if (Input.GetKeyDown(KeyCode.LeftControl))
                 StartCrouch();
             if (Input.GetKeyUp(KeyCode.LeftControl))
                 StopCrouch();
-
-            CurrentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
         }
 
         void Move()
@@ -90,10 +93,6 @@ namespace PlayerScripts
 
             //Counteract sliding and sloppy movement
             CounterMovement(inputManager.x, inputManager.y, mag);
-
-            //If holding jump && ready to jump, then jump
-            if (_readyToJump && inputManager.Jumping)
-                Jump();
 
             //If sliding down a ramp, add force down so player stays grounded and also builds speed
             if (inputManager.Crouching && _grounded && OnSlope())
@@ -117,7 +116,24 @@ namespace PlayerScripts
 
             if (inputManager.x != 0 && inputManager.y != 0)
                 diagonalMultiplier = 0.707f;
+            
+            if (OnSlope() && !_exitingSlope)
+                rb.AddForce(GetSlopeMoveDirection() * (_speed * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier));
+            else
+                rb.AddForce(_moveDirection.normalized * (_speed * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier));
 
+            if (!PlayerManager.CanMove)
+            {
+                _speed = 0;
+                StopCrouch();
+                return;
+            }
+
+            //If holding jump && ready to jump, then jump
+            if (_readyToJump && inputManager.Jumping)
+                Jump();
+
+            // Run or walk
             if (inputManager.Sprinting && playerStat.currentStamina > playerStat.GetStaminaPrice("Sprint"))
             {
                 _speed = playerStat.moveSpeed * playerStat.sprintSpeedMultiplier;
@@ -128,11 +144,6 @@ namespace PlayerScripts
                 _speed = playerStat.moveSpeed;
                 playerStat.Sprint(false);
             }
-
-            if (OnSlope() && !_exitingSlope)
-                rb.AddForce(GetSlopeMoveDirection() * (_speed * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier));
-            else
-                rb.AddForce(_moveDirection.normalized * (_speed * Time.deltaTime * multiplier * multiplierV * diagonalMultiplier));
         }
 
         private void Jump()
@@ -195,7 +206,6 @@ namespace PlayerScripts
             playerModel.transform.localScale = _playerScale;
 
             WSAB.isCrouching = false;
-
         }
     
         private void CounterMovement(float x, float y, Vector2 mag)

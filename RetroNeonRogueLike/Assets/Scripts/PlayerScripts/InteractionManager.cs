@@ -58,31 +58,26 @@ namespace PlayerScripts
                     if(shouldUse) ProcessItem(item);
                     break;
                 
-                case TextFieldInteraction textFieldInteraction :
-                    if(shouldUse) ProcessTextField(textFieldInteraction);
+                case BasicPopupInteraction basicPopupInteraction :
+                    if(shouldUse) ProcessPopup(basicPopupInteraction);
                     break;
             }
         }
 
         void ProcessItem(Item item)
         {
-            if(item.isUsable && !item.pickedUp 
+            if(item.isUsable && !item.isPickable 
                              && !itemManager.PickingUpItem && itemManager.CanPickupItem)
                 itemManager.PickUpItem(item.gameObject);
         }
 
-        void ProcessTextField(TextFieldInteraction textFieldInteraction)
+        void ProcessPopup(BasicPopupInteraction basicPopupInteraction)
         {
-            if(textFieldInteraction.isUsable)
-                if(!textFieldInteraction.awaitInput)
-                    textFieldInteraction.Use();
+            if(basicPopupInteraction.isUsable)
+                if(!basicPopupInteraction.awaitInput)
+                    basicPopupInteraction.Use();
                 else if(IM.Interacting)
-                    textFieldInteraction.Use();
-        }
-
-        void ProcessButton()
-        {
-            
+                    basicPopupInteraction.Use();
         }
 
     }

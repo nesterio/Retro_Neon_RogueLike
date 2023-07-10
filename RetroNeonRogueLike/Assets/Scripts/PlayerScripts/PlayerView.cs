@@ -4,7 +4,7 @@ namespace PlayerScripts
 {
     public class PlayerView : MonoBehaviour
     {
-        [SerializeField] private float MouseSensitivity = 5;
+        [SerializeField] private float MouseSensitivity = 25;
         private float xRotation;
         private float desiredX;
 
@@ -13,6 +13,9 @@ namespace PlayerScripts
 
         void Update()
         {
+            if(!PlayerManager.CanLook)
+                return;
+            
             Look();
         }
 

@@ -53,33 +53,38 @@ namespace PlayerScripts
 
             ////// TODO: MOVE THIS TO INPUT MANAGER !!! //////
 
-            if (items.Count > 1)
-                for(int i = 0; i < items.Count; i++)
-                {
-                    if (Input.GetKeyDown((i + 1).ToString())) 
+            if (PlayerManager.CanSwitchWeapons)
+            {
+                if (items.Count > 1)
+                    for(int i = 0; i < items.Count; i++)
                     {
-                        EquipItem(i);
-                        break;
+                        if (Input.GetKeyDown((i + 1).ToString())) 
+                        {
+                            EquipItem(i);
+                            break;
+                        }
                     }
-                }
 
-            if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f && items.Count > 1)
-                EquipItem(_itemIndex + 1);
-            else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f && items.Count > 1)
-                EquipItem(_itemIndex - 1);
-            
+                if (Input.GetAxisRaw("Mouse ScrollWheel") > 0f && items.Count > 1)
+                    EquipItem(_itemIndex + 1);
+                else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0f && items.Count > 1)
+                    EquipItem(_itemIndex - 1);
+            }
+
             ////// ---------------------------------- //////
 
 
-            if (IM.Shooting)
-                items[_itemIndex].Use();
+            var item = items[_itemIndex];
+            if (IM.Shooting && PlayerManager.CanUse && item.isUsable || item.isUsable && !item.awaitInput)
+                item.Use();
 
-            if (IM.Reloading && items[_itemIndex] is Gun)
-                ((Gun)items[_itemIndex]).Reload();
-
-            if (items[_itemIndex] is Gun)
-                ((Gun)items[_itemIndex]).Aim(IM.Aiming);
-
+            if (item is Gun gun)
+            {
+                if(IM.Reloading)
+                    gun.Reload();
+                
+                gun.Aim(IM.Aiming);
+            }
 
             if (_droppingItem && _dropTimer > 0)
                 _dropTimer -= Time.deltaTime;
@@ -87,7 +92,7 @@ namespace PlayerScripts
                 _droppingItem = false;
 
             if (!_droppingItem && IM.DroppingItem)
-                DropItem(items[_itemIndex].gameObject, itemDroppingForceUpward, itemDroppingForceForward, 0);
+                DropItem(item.gameObject, itemDroppingForceUpward, itemDroppingForceForward, 0);
 
         }
 
@@ -152,14 +157,14 @@ namespace PlayerScripts
             
             Item itemScript = item.GetComponent<Item>();
 
-            itemScript.pickedUp = false;
+            itemScript.isPickable = false;
 
             item.GetComponent<Rigidbody>().isKinematic = false;
             item.GetComponent<Collider>().enabled = true;
 
             item.transform.parent = null;
 
-            itemScript.isUsable = true;
+            itemScript.isUsable = false;
 
             item.GetComponent<Rigidbody>().AddForce(cameraParentTrans.up * dropForceY + cameraParentTrans.forward * dropForceZ + cameraParentTrans.right * dropForceX, ForceMode.Impulse);
         }
@@ -171,8 +176,6 @@ namespace PlayerScripts
             UnequipHeldItem();
 
             Item itemScrpt = item.GetComponent<Item>();
-
-            itemScrpt.isUsable = false;
 
             item.GetComponent<Rigidbody>().isKinematic = true;
             item.GetComponent<Collider>().enabled = false;
@@ -188,10 +191,11 @@ namespace PlayerScripts
             item.transform.SetParent(itemHolder);
 
             PickedUpActions actions;
-            actions = () => itemScrpt.pickedUp = true;
+            actions = () => itemScrpt.isPickable = true;
             actions += () => PickingUpItem = false;
             actions += () => items.Add(itemScrpt);
             actions += () => EquipItem(items.Count - 1);
+            actions += () => itemScrpt.isUsable = true;
 
             item.transform.DOLocalRotate(Vector3.zero, itemPickupSpd);
             item.transform.DOLocalMove(Vector3.zero, itemPickupSpd, false).OnComplete(() => actions());

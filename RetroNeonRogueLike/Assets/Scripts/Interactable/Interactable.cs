@@ -7,7 +7,7 @@ namespace Interactable
     {
         public bool isUsable = true;
         public bool awaitInput = true;
-        [TextArea] public string interactionMessage = "Use";
+        [TextArea] public string viewHint = "Use";
 
         public abstract void Use();
 
@@ -19,7 +19,7 @@ namespace Interactable
             if(OnScreenMessage.IsShowingMessage)
                 OnScreenMessage.Instance.HideMessage();
             
-            OnScreenMessage.Instance.ShowMessage(interactionMessage);
+            OnScreenMessage.Instance.ShowMessage(viewHint);
         }
 
         public virtual void HideInteractionHint()

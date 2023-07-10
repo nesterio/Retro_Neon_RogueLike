@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Interactable.Items
 {
@@ -11,8 +12,8 @@ namespace Interactable.Items
 
         [SerializeField] internal Vector3 relaxedPos;
 
-        [Space]
+        [FormerlySerializedAs("pickedUp")] [Space]
     
-        public bool pickedUp = false;
+        public bool isPickable = true;
     }
 }

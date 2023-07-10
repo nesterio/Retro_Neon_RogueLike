@@ -1,4 +1,5 @@
 using DG.Tweening;
+using PlayerScripts;
 using UnityEngine;
 
 namespace Items.Weapons
@@ -42,9 +43,11 @@ namespace Items.Weapons
                 _timeToShoot -= Time.deltaTime;
         }
 
-
         public override void Use() 
         {
+            if(!PlayerManager.CanUse)
+                return;
+            
             if (bulletsInMag > 0 && !IsRealoading)
             {
                 if (_timeToShoot <= 0)
@@ -52,12 +55,11 @@ namespace Items.Weapons
                     Shoot();
                 }
             }
-            
         }
 
         public override void Reload() 
         {
-            if (!IsRealoading)
+            if (!IsRealoading && PlayerManager.CanUse)
                 anim.SetBool(Reload1, true);
         }
         public override void StopReload() 
