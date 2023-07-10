@@ -1,4 +1,4 @@
-using TMPro;
+using Interface;
 using UnityEngine;
 
 namespace Interactable
@@ -7,6 +7,8 @@ namespace Interactable
     {
         [SerializeField] [TextArea] private string displayedText;
         
+        private readonly OnScreenMessage _message = OnScreenMessage.Instance;
+
         public override void Use()
         {
             if(!isUsable)
@@ -17,16 +19,10 @@ namespace Interactable
 
         public void ShowText()
         {
-            var obj = ObjectPool.Instance.SpawnFromPoolUI("TextField");
-            var text = obj.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-
-            if (text == null)
-            {
-                Debug.Log("No text component on object");
-                return;
-            }
-
-            text.text = displayedText;
+            if(OnScreenMessage.IsShowingMessage)
+                _message.HideMessage();
+            
+            _message.ShowMessage(displayedText);
         }
     }
 }

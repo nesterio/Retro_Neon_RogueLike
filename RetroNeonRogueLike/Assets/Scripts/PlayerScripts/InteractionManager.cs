@@ -1,5 +1,7 @@
 using Interactable;
 using Interactable.Items;
+using Interface;
+using SL.Wait;
 using TMPro;
 using UnityEngine;
 using IM = InputManagerData;
@@ -24,8 +26,14 @@ namespace PlayerScripts
         {
             if (Physics.Raycast(cameraParentTrans.position, cameraParentTrans.forward, out var hit, itemPickupRange))
             {
-                selectedObj = hit.collider.gameObject;
+                if (selectedObj != hit.collider.gameObject)
+                {
+                    if (selectedObj != null && selectedObj.CompareTag("Interactable"))
+                        selectedObj.GetComponent<Interactable.Interactable>().HideInteractionHint();
 
+                    selectedObj = hit.collider.gameObject;
+                }
+                
                 if (selectedObj.CompareTag("Interactable"))
                     AwaitInteraction();
             }
@@ -39,7 +47,8 @@ namespace PlayerScripts
             if(!interactable.isUsable)
                 return;
             
-            ShowInteractionHint(interactable);
+            if(interactable.awaitInput)
+                interactable.ShowInteractionHint();
 
             bool shouldUse = !interactable.awaitInput ||
                              interactable.awaitInput && IM.Interacting;
@@ -53,18 +62,6 @@ namespace PlayerScripts
                     if(shouldUse) ProcessTextField(textFieldInteraction);
                     break;
             }
-
-            
-        }
-
-        void ShowInteractionHint(Interactable.Interactable interactable)
-        {
-            if(string.IsNullOrEmpty(interactable.interactionMessage))
-                return;
-
-            var textObj = ObjectPool.Instance.SpawnFromPoolUI("TextDisplay");
-            var text = textObj.GetComponent<TextMeshProUGUI>();
-            text.text = interactable.interactionMessage;
         }
 
         void ProcessItem(Item item)
