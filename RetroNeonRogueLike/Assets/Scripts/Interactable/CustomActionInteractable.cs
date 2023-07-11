@@ -12,8 +12,9 @@ namespace Interactable
         {
             if (interactableObject == null)
                 return null;
-
-            var interactable = interactableObject.AddComponent<CustomActionInteractable>();
+            
+            var interactable = interactableObject.GetComponent<CustomActionInteractable>();
+            interactable = interactable == null ? interactableObject.AddComponent<CustomActionInteractable>() : new CustomActionInteractable();
 
             interactable.isUsable = usable;
             interactable.awaitInput = awaitUse;

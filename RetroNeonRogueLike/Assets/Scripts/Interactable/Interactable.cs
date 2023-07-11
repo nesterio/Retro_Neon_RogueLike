@@ -7,13 +7,14 @@ namespace Interactable
     {
         public bool isUsable = true;
         public bool awaitInput = true;
+        public bool showViewHint = true;
         [TextArea] public string viewHint = "Use";
 
         public abstract void Use();
 
         public virtual void ShowInteractionHint()
         {
-            if(OnScreenMessage.Instance == null)
+            if(OnScreenMessage.Instance == null || !showViewHint)
                 return;
             
             if(OnScreenMessage.IsShowingMessage)

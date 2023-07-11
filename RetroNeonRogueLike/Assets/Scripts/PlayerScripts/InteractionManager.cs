@@ -1,8 +1,6 @@
 using Interactable;
 using Interactable.Items;
-using Interface;
 using SL.Wait;
-using TMPro;
 using UnityEngine;
 using IM = InputManagerData;
 

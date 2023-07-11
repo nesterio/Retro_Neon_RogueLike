@@ -1,10 +1,11 @@
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace PlayerScripts
 {
     public class PlayerManager : MonoBehaviour
     {
+        public static PlayerManager Instance;
+        
         [SerializeField] private GameObject playerModel;
 
         [SerializeField] private Transform playerOrientation;
@@ -19,6 +20,10 @@ namespace PlayerScripts
 
         void Awake()
         {
+            if(Instance != null)
+                Destroy(this);
+            Instance = this;
+            
             _itemManager = GetComponent<ItemManager>();
         }
 
@@ -56,10 +61,9 @@ namespace PlayerScripts
 
         void PlayerDeath() 
         {
-            while(_itemManager.items.Count != 0)
-            {
-                _itemManager.DropItem(_itemManager.items[0].gameObject, Random.Range(-6, 6), Random.Range(1, 6), Random.Range(-6, 6));
-            }
+            RoomManager.Instance.SpawnPlayer(true);
         }
+
+        public void DrainHealth(int amount) => playerStats.DrainHealth(amount);
     }
 }

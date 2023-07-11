@@ -8,6 +8,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] int Lvl1ID;
     
     [SerializeField]GameObject playerPrefab;
+    private GameObject playerObj;
 
     [SerializeField] Vector3[] SpawnPoints;
 
@@ -36,13 +37,21 @@ public class RoomManager : MonoBehaviour
     {
         if (scene.buildIndex == Lvl1ID) 
         {
-            CreatePlayer();
+            SpawnPlayer(false);
         }
     }
     
-    void CreatePlayer() 
+    public void SpawnPlayer(bool respawn) 
     {
+        if (playerObj != null)
+        {
+            if(respawn)
+                Destroy(playerObj);
+            else
+                return;
+        }
+
         int temp = Random.Range(0, SpawnPoints.Length);
-        Instantiate(playerPrefab, SpawnPoints[temp], Quaternion.identity);
+        playerObj = Instantiate(playerPrefab, SpawnPoints[temp], Quaternion.identity);
     }
 }

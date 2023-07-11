@@ -98,14 +98,16 @@ namespace PlayerScripts
                 currentHealth += healthRegen;
         }
 
-        ///////////// Health /////////////
+        private void Die() => DeathEvent?.Invoke();
+
+            ///////////// Health /////////////
         public void DrainHealth(int amount)
         {
             currentHealth -= amount;
             //Debug.Log(gameObject + " just took " + amount + " damage");
 
             if (currentHealth <= 0)
-                DeathEvent();
+                Die();
         }
 
         public void ChangeMaxHealth(int newMax)
