@@ -1,3 +1,4 @@
+using System;
 using Lean.Gui;
 using PlayerScripts;
 using SL.Wait;
@@ -10,6 +11,7 @@ namespace Interactable
         [SerializeField] private GameObject MainCanvas;
         [SerializeField] private GameObject PopupPrefab;
         [SerializeField] [TextArea] private string displayedText;
+        public Action OnCloseAction;
 
         public override void Use()
         {
@@ -29,8 +31,6 @@ namespace Interactable
             leanWindow.OnOn.AddListener(() =>
             {
                 isUsable = false;
-                
-                PlayerManager.FreezePlayer();
 
                 var wait = Wait.Seconds(1f, 
                     () => Wait.For(() => InputManagerData.Shooting, leanWindow.TurnOff).Start());
@@ -42,8 +42,8 @@ namespace Interactable
                 var wait = Wait.Seconds(1f, ()=> isUsable = true);
                 wait.Start();
                 
-                PlayerManager.UnFreezePlayer();
-                
+                OnCloseAction?.Invoke();
+
                 leanWindow.OnOn.RemoveAllListeners();
                 leanWindow.OnOff.RemoveAllListeners();
             });

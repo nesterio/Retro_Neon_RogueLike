@@ -73,11 +73,24 @@ namespace PlayerScripts
 
         void ProcessPopup(BasicPopupInteraction basicPopupInteraction)
         {
+            bool canUse = false;
+            
             if(basicPopupInteraction.isUsable)
-                if(!basicPopupInteraction.awaitInput)
-                    basicPopupInteraction.Use();
+                if (!basicPopupInteraction.awaitInput)
+                    canUse = true;
                 else if(IM.Interacting)
-                    basicPopupInteraction.Use();
+                    canUse = true;
+
+            if (canUse)
+            {
+                basicPopupInteraction.OnCloseAction = () =>
+                {
+                    var wait = Wait.Seconds(0.5f, PlayerManager.UnFreezePlayer);
+                    wait.Start();
+                };
+                basicPopupInteraction.Use();
+                PlayerManager.FreezePlayer();
+            }
         }
 
     }
