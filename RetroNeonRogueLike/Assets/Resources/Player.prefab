@@ -1290,8 +1290,6 @@ GameObject:
   - component: {fileID: 8937362320670234727}
   - component: {fileID: 8937362320670234725}
   - component: {fileID: 8937362320670234726}
-  - component: {fileID: 8937362320670234724}
-  - component: {fileID: 8937362320670234723}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: Untagged
@@ -1364,39 +1362,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8937362320670234744}
   m_Enabled: 1
---- !u!114 &8937362320670234724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937362320670234744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d64654daa372f41809ee812ef6924b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SCShader: {fileID: 4800000, guid: 1550e6acd0713c24fb984d4e24ccd7ea, type: 3}
-  _Pixelisation: 0.6
-  _SizeX: 1
-  _SizeY: 1
---- !u!114 &8937362320670234723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937362320670234744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 433faa8b758afed4f9295b193c697276, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorDepth: {x: 32, y: 32, z: 32}
-  ditherDepth: {x: 16, y: 16, z: 16}
-  ditheringMatrixSize: 1
-  framerateLimit: 120
-  _Shader: {fileID: 4800000, guid: 364a79f75940cde409d6c07092dacd71, type: 3}
 --- !u!1 &8937362321070618972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,11 +1427,11 @@ MonoBehaviour:
     staminaCost: 0.45
   - name: Jump
     staminaCost: 25
-  defaultMoveSpeed: 250
-  moveSpeed: 250
-  sprintSpeedMultiplier: 1.75
-  defaultJumpForce: 350
-  jumpForce: 350
+  defaultMoveSpeed: 350
+  moveSpeed: 350
+  sprintSpeedMultiplier: 1.6
+  defaultJumpForce: 450
+  jumpForce: 450
   crouchJumpForceMultiplier: 0.75
   numberOfJumps: 1
   maxItems: 2
@@ -1778,11 +1743,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
---- !u!4 &439562723806750129 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6129868159311546669, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
-  m_PrefabInstance: {fileID: 5983042459637066908}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5591675839777937709 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2202707607408752049, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
@@ -1794,3 +1754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &439562723806750129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6129868159311546669, guid: 2a06b5c68bdf4f346964ee9576d4b260, type: 3}
+  m_PrefabInstance: {fileID: 5983042459637066908}
+  m_PrefabAsset: {fileID: 0}

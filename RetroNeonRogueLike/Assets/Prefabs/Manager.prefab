@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7390231575829091897}
-  - component: {fileID: 7390231575829091894}
+  - component: {fileID: 1112147993}
+  - component: {fileID: 1112147994}
+  - component: {fileID: 1112147995}
+  - component: {fileID: 1112147996}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -31,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7390231575829091894
+--- !u!114 &1112147993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,9 +43,56 @@ MonoBehaviour:
   m_GameObject: {fileID: 7390231575829091895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1a4c69f7a9d3ea43907b5765229dc85, type: 3}
+  m_Script: {fileID: 11500000, guid: 613d45aaec346704da3619f255eb5efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _VertexGridResolution: 220
-  _EnableTriangleSortingEmulation: 0
-  _DepthDebugView: 0
+  Lvl1ID: 1
+  playerPrefab: {fileID: 8937362321070618972, guid: 9fe7cdefd5820fe478aac4fc2e07a0e6, type: 3}
+  SpawnPoints:
+  - {x: -7.5, y: 13, z: -2.75}
+  - {x: -13, y: 15, z: 22}
+  - {x: 4, y: 13, z: 15}
+--- !u!114 &1112147994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390231575829091895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9a2c567b6085d4b9915f5c57082136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1112147995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390231575829091895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464d96f187dfb9f42b9024fa104adce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanvasObject: {fileID: 0}
+  objectPools:
+  - prefab: {fileID: 1224264976322219588, guid: 741886e7bcc89cf499414f112484f86a, type: 3}
+    soundName: TextDisplay
+    prefabsCount: 1
+  - prefab: {fileID: 4028950075507228400, guid: e9db27a9623edcd45b8b086447dcebff, type: 3}
+    soundName: TextField
+    prefabsCount: 1
+--- !u!114 &1112147996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390231575829091895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c003d73bd69fa408312aae8cb6c255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
