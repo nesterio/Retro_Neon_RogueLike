@@ -72,14 +72,16 @@ namespace PlayerScripts
                     break;
                 }
             }
-        }
-
-        void FixedUpdate()
-        {
+            
             Vector3 target = new Vector3(_xPos, _yPos, 0);
             var localPosition = transform.localPosition;
             
             transform.localPosition = Vector3.SmoothDamp(localPosition, target, ref _smoothV, swayMoveSpeed);
+        }
+
+        void FixedUpdate()
+        {
+            
         }
 
         [System.Serializable]

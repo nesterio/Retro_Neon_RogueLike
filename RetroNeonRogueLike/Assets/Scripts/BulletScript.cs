@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Lean.Pool;
 using PlayerScripts;
+using SL.Wait;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
@@ -10,6 +10,7 @@ public class BulletScript : MonoBehaviour
     public Vector3 hitPoint;
     public Vector3 hitNormal;
 
+    [SerializeField] private float disableTimer = 10f;
     public GameObject impactObj;
 
     public int speed;
@@ -31,11 +32,13 @@ public class BulletScript : MonoBehaviour
         rb.AddForce((hitPoint - this.transform.position).normalized * speed);
     }
 
-    void OnCollisionEnter(Collision col) 
+    void OnCollisionEnter(Collision col)
     {
-        GameObject bulletImpactObj = Instantiate(impactObj, transform.position, Quaternion.LookRotation(hitNormal, Vector3.up) * impactObj.transform.rotation);
-
-        Destroy(bulletImpactObj, 10);
+        var rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * impactObj.transform.rotation;
+        
+        GameObject bulletImpactObj = LeanPool.Spawn(impactObj, transform.position, rotation);
+        Wait.Seconds(disableTimer, () => bulletImpactObj.SetActive(false));
+        
         bulletImpactObj.transform.SetParent(col.transform);
 
         if (col.gameObject.CompareTag("Player"))
