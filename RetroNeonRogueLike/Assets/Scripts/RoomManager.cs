@@ -35,7 +35,7 @@ public class RoomManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) 
     {
-        if (scene.buildIndex == Lvl1ID) 
+        if (scene.buildIndex > 0) 
         {
             SpawnPlayer(false);
         }
