@@ -134,7 +134,7 @@ namespace PlayerScripts
                 Jump();
 
             // Run or walk
-            if (inputManager.Sprinting && playerStat.currentStamina > playerStat.GetStaminaPrice("Sprint"))
+            if (inputManager.Sprinting && playerStat.currentStamina > playerStat.GetStaminaPrice("Sprint") && !inputManager.Crouching)
             {
                 _speed = playerStat.moveSpeed * playerStat.sprintSpeedMultiplier;
                 playerStat.Sprint(true);
