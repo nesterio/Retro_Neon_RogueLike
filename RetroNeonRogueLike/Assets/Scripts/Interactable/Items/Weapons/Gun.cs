@@ -1,24 +1,20 @@
-using System;
 using Interactable.Items;
 using PlayerScripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Items.Weapons
 {
     public abstract class Gun : Item
     {
 
-        public Transform camTrans;
-        public CameraRecoil CR;
-        public WeaponSwayAndBob WSAB;
-        [SerializeField] internal Transform shootPoint;
-        [SerializeField] internal Transform containerTrans;
+        [HideInInspector]public Transform camTrans;
+        [SerializeField] protected Transform shootPoint;
+        [SerializeField] protected Transform containerTrans;
         [Space(5)]
-        [SerializeField] internal ParticleSystem shootingParticles;
+        [SerializeField] protected ParticleSystem shootingParticles;
         [Space]
-        [SerializeField] internal GameObject bulletPrefab;
-        [Space(5)]
-        [SerializeField] internal GameObject bulletImpactPrefab;
+        [SerializeField] protected GameObject bulletPrefab;
         [Space(5)]
 
         [Header("Weapon positions")]

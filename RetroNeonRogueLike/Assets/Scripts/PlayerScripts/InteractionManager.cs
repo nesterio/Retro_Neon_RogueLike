@@ -9,7 +9,6 @@ namespace PlayerScripts
     public class InteractionManager : MonoBehaviour
     {
         [SerializeField] private Transform cameraParentTrans;
-        [SerializeField] private ItemManager itemManager;
         [Space]
         [SerializeField] private float itemPickupRange = 3f;
 
@@ -65,8 +64,8 @@ namespace PlayerScripts
         void ProcessItem(Item item)
         {
             if(item.isUsable && !item.isPickable 
-                             && !itemManager.PickingUpItem && itemManager.CanPickupItem)
-                itemManager.PickUpItem(item.gameObject);
+                             && !PlayerManager.ItemsManager.PickingUpItem && PlayerManager.ItemsManager.CanPickupItem)
+                PlayerManager.ItemsManager.PickUpItem(item.gameObject);
         }
 
         void ProcessPopup(BasicPopupInteraction basicPopupInteraction)

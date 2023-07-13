@@ -3,28 +3,28 @@ using UnityEngine;
 
 namespace PlayerScripts
 {
-    public class PlayerStats : MonoBehaviour
+    public class PlayerStatistics : MonoBehaviour
     {
         [Header("Health")]
         private float _maxHealth;
-        public int defaultHealth;
-        public float currentHealth;
+        public int defaultHealth = 100;
+        public float currentHealth = 100;
 
         public delegate void MaxHealthChange(int newMax);
         public event MaxHealthChange MaxHpChangeEvent;
 
-        [SerializeField] private float healthRegen;
+        [SerializeField] private float healthRegen = 0.05f;
         [Space(10)]
 
         [Header("Stamina")]
         private float _maxStamina;
-        public float defaultStamina;
-        public float currentStamina;
+        public float defaultStamina = 100f;
+        public float currentStamina = 100f;
 
         public delegate void MaxStaminaChange(float newMax);
         public event MaxStaminaChange MaxStamChangeEvent;
 
-        [SerializeField] private float staminaRegen;
+        [SerializeField] private float staminaRegen = 1f;
 
         bool _sprinting;
         [Space]
@@ -34,8 +34,8 @@ namespace PlayerScripts
         [Space(10)]
 
         [Header("Movement")]
-        public float defaultMoveSpeed;
-        public float moveSpeed;
+        public float defaultMoveSpeed = 500;
+        public float moveSpeed = 500;
 
         public float MaxSpeed
         {
@@ -53,9 +53,9 @@ namespace PlayerScripts
         [Space(10)]
 
         [Header("Jumping")]
-        public float defaultJumpForce;
-        public float jumpForce;
-        public float crouchJumpForceMultiplier;
+        public float defaultJumpForce = 450f;
+        public float jumpForce = 450f;
+        public float crouchJumpForceMultiplier = 0.75f;
         [Space]
         public int numberOfJumps = 1;
         [Space(10)]
@@ -70,23 +70,19 @@ namespace PlayerScripts
 
         void Start() 
         {
+            // Locomotion
             moveSpeed = defaultMoveSpeed;
             jumpForce = defaultJumpForce;
 
+            // Health
             currentHealth = defaultHealth;
-
             ChangeMaxHealth(defaultHealth);
 
-
+            // Stamina
             currentStamina = defaultStamina;
-
             ChangeMaxStamina(defaultStamina);
-
-            foreach (StaminaDrain action in staminaDrains) 
-            {
+            foreach (StaminaDrain action in staminaDrains)
                 _drainsDictionary.Add(action.name, action);
-            }
-
         }
 
         void FixedUpdate() 

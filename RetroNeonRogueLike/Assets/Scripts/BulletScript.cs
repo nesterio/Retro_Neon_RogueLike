@@ -44,7 +44,7 @@ public class BulletScript : MonoBehaviour
 
         if (col.gameObject.CompareTag("Player"))
         {
-            col.gameObject.GetComponent<PlayerStats>().DrainHealth(damage);
+            PlayerManager.PlayerStats.DrainHealth(damage);
         }
 
         Destroy(gameObject);

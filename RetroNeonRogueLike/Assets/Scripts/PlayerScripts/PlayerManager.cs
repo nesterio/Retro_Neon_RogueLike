@@ -4,28 +4,20 @@ namespace PlayerScripts
 {
     public class PlayerManager : MonoBehaviour
     {
-        public static PlayerManager Instance;
-        
+        public static PlayerStatistics PlayerStats { get; private set; }
+        public static ItemManager ItemsManager { get; private set; }
+        public static CameraRecoil CamRecoil { get; private set; }
+        public static WeaponSwayAndBob WSAB { get; private set; }
+
         [SerializeField] private GameObject playerModel;
-
         [SerializeField] private Transform playerOrientation;
-
-        [SerializeField] PlayerStats playerStats;
-        ItemManager _itemManager;
+        [SerializeField] private Transform cameraParent;
+        [SerializeField] private Transform itemHolder;
 
         public static bool CanMove = true;
         public static bool CanLook = true;
         public static bool CanUse = true;
         public static bool CanSwitchWeapons = true;
-
-        void Awake()
-        {
-            if(Instance != null)
-                Destroy(this);
-            Instance = this;
-            
-            _itemManager = GetComponent<ItemManager>();
-        }
 
         public static void FreezePlayer()
         {
@@ -42,13 +34,21 @@ namespace PlayerScripts
             CanSwitchWeapons = true;
         }
 
-        void OnEnable() => playerStats.DeathEvent += PlayerDeath;
-        void OnDisable() => playerStats.DeathEvent -= PlayerDeath;
+        void OnEnable() => PlayerStats.DeathEvent += PlayerDeath;
+        void OnDisable() => PlayerStats.DeathEvent -= PlayerDeath;
 
         void Start() 
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+        }
+        
+        void Awake()
+        {
+            PlayerStats = GetComponent<PlayerStatistics>();
+            ItemsManager = GetComponent<ItemManager>();
+            CamRecoil = cameraParent.GetComponent<CameraRecoil>();
+            WSAB = itemHolder.GetComponent<WeaponSwayAndBob>();
         }
 
         void Update()
@@ -63,7 +63,5 @@ namespace PlayerScripts
         {
             RoomManager.Instance.SpawnPlayer(true);
         }
-
-        public void DrainHealth(int amount) => playerStats.DrainHealth(amount);
     }
 }

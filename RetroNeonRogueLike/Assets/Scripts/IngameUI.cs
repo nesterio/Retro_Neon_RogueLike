@@ -1,33 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using PlayerScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class IngameUI : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats;
-
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider staminaSlider;
     
 
     void OnEnable() 
     {
-        playerStats.MaxStamChangeEvent += ChangeMaxStamina;
-        playerStats.MaxHpChangeEvent += ChangeMaxHealth;
+        PlayerManager.PlayerStats.MaxStamChangeEvent += ChangeMaxStamina;
+        PlayerManager.PlayerStats.MaxHpChangeEvent += ChangeMaxHealth;
     }
 
     void OnDisable()
     {
-        playerStats.MaxStamChangeEvent -= ChangeMaxStamina;
-        playerStats.MaxHpChangeEvent -= ChangeMaxHealth;
+        PlayerManager.PlayerStats.MaxStamChangeEvent -= ChangeMaxStamina;
+        PlayerManager.PlayerStats.MaxHpChangeEvent -= ChangeMaxHealth;
     }
 
     void LateUpdate() 
     {
-        staminaSlider.value = playerStats.currentStamina;
-        healthSlider.value = playerStats.currentHealth;
+        staminaSlider.value = PlayerManager.PlayerStats.currentStamina;
+        healthSlider.value = PlayerManager.PlayerStats.currentHealth;
     }
 
     void ChangeMaxStamina(float newMax)

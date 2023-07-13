@@ -11,8 +11,7 @@ namespace PlayerScripts
         [Header("Settings")]
         [SerializeField] float snappiness;
         [SerializeField] float returnSpeed;
-
-
+        
         void FixedUpdate()
         {
             _targetRotation = Vector3.Lerp(_targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);

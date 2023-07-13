@@ -1,15 +1,15 @@
 using DG.Tweening;
+using Items.Weapons;
 using PlayerScripts;
 using UnityEngine;
 
-namespace Items.Weapons
+namespace Interactable.Items.Weapons
 {
     public class Semi_Automatic_Gun : Gun
     {
         [SerializeField] Animator anim;
-
         [SerializeField] GunShutter GS;
-        GunRecoil GR;
+        [SerializeField] GunRecoil GR;
 
         float ShotSpeed => ((GunInfo)itemInfo).shotSpeed;
         float _timeToShoot;
@@ -27,8 +27,6 @@ namespace Items.Weapons
 
         void Awake() 
         {
-            GR = GetComponent<GunRecoil>();
-
             if (GS != null && !hasCustomShutter)
                 GS.shutterSpeed = ShotSpeed;
 
@@ -74,7 +72,7 @@ namespace Items.Weapons
             {
                 containerTrans.DOLocalMove(aimedGunPos, ((GunInfo)itemInfo).aimingSpeed, false);
                 isAiming = true;
-                WSAB.isAiming = true;
+                PlayerManager.WSAB.isAiming = true;
 
             }
 
@@ -82,7 +80,7 @@ namespace Items.Weapons
             {
                 containerTrans.DOLocalMove(relaxedPos, ((GunInfo)itemInfo).aimingSpeed, false);
                 isAiming = false;
-                WSAB.isAiming = false;
+                PlayerManager.WSAB.isAiming = false;
             }
         }
 
@@ -95,16 +93,21 @@ namespace Items.Weapons
         void Shoot() 
         {
             if(isAiming)
-                CR.RecoilFire(((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ);
+                PlayerManager.CamRecoil.RecoilFire(((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ);
             else
-                CR.RecoilFire( ((GunInfo)itemInfo).recoilX , ((GunInfo)itemInfo).recoilY , ((GunInfo)itemInfo).recoilZ);
+                PlayerManager.CamRecoil.RecoilFire( ((GunInfo)itemInfo).recoilX , ((GunInfo)itemInfo).recoilY , ((GunInfo)itemInfo).recoilZ);
 
             GR.RecoilFire(isAiming);
 
             GS.PlayShutter();
 
             if (shootingParticles != null)
+            {
+                if(shootingParticles.isPlaying)
+                    shootingParticles.Stop();
+                
                 shootingParticles.Play();
+            }
 
             bulletsInMag--;
             _timeToShoot = ShotSpeed;

@@ -17,7 +17,7 @@ namespace Interactable
             if(changeAmount == 0)
                 return;
             
-            PlayerManager.Instance.DrainHealth(changeAmount);
+            PlayerManager.PlayerStats.DrainHealth(changeAmount);
         }
     }
 }

@@ -1,18 +1,18 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Interactable.Items;
 using Items.Weapons;
 using UnityEngine;
-using IM = InputManagerData;
+using inputManagerInfo = InputManagerData;
 
 namespace PlayerScripts
 {
     public class ItemManager : MonoBehaviour
     {
-        [SerializeField] CameraRecoil cameraRecoil;
+        [Header("Object references")]
         [SerializeField] Transform cameraParentTrans;
         [SerializeField] Transform itemHolder;
-        [SerializeField] private PlayerStats playerStats;
         [Space(10)]
         [SerializeField] float itemDroppingForceUpward = 2.5f;
         [SerializeField] float itemDroppingForceForward = 3.5f;
@@ -22,12 +22,13 @@ namespace PlayerScripts
         [Space(10)]
         [SerializeField] Item[] startItems;
         public List<Item> items = new List<Item>();
-
+        
         float _dropTimer;
-
         int _itemIndex = 0;
+        
+        private PlayerStatistics _playerStats = PlayerManager.PlayerStats;
 
-        public bool CanPickupItem => items.Count < playerStats.maxItems;
+        public bool CanPickupItem => items.Count < _playerStats.maxItems;
 
         bool _droppingItem;
         public bool PickingUpItem { get; private set; }
@@ -75,15 +76,15 @@ namespace PlayerScripts
 
 
             var item = items[_itemIndex];
-            if (IM.Shooting && PlayerManager.CanUse && item.isUsable || item.isUsable && !item.awaitInput)
+            if (inputManagerInfo.Shooting && PlayerManager.CanUse && item.isUsable || item.isUsable && !item.awaitInput)
                 item.Use();
 
             if (item is Gun gun)
             {
-                if(IM.Reloading)
+                if(inputManagerInfo.Reloading)
                     gun.Reload();
                 
-                gun.Aim(IM.Aiming);
+                gun.Aim(inputManagerInfo.Aiming);
             }
 
             if (_droppingItem && _dropTimer > 0)
@@ -91,7 +92,7 @@ namespace PlayerScripts
             else if (_droppingItem && _dropTimer <= 0)
                 _droppingItem = false;
 
-            if (!_droppingItem && IM.DroppingItem)
+            if (!_droppingItem && inputManagerInfo.DroppingItem)
                 DropItem(item.gameObject, itemDroppingForceUpward, itemDroppingForceForward, 0);
 
         }
@@ -134,7 +135,7 @@ namespace PlayerScripts
                 items[_itemIndex].itemGameObject.SetActive(false);
         }
 
-        public void DropItem(GameObject item, float dropForceY, float dropForceZ, float dropForceX) 
+        public void DropItem(GameObject itemObj, float dropForceY, float dropForceZ, float dropForceX) 
         {
             _dropTimer = itemDropSpd;
             _droppingItem = true;
@@ -144,61 +145,46 @@ namespace PlayerScripts
             else if (items.Count == 1)
                 EquipItem(0);
 
-            items.Remove(item.GetComponent<Item>());
-            item.GetComponent<Item>().itemGameObject.SetActive(true);
-
-
+            var item = itemObj.GetComponent<Item>();
+            items.Remove(item);
+            item.itemGameObject.SetActive(true); // Is "item.itemGameObject" instead of item.gameObject required?
+            
             if (items.Count == 0)
                 _itemIndex = 0;
             else if (_itemIndex > 0)
                 _itemIndex--;
             else
                 _itemIndex = items.Count - 1;
-            
-            Item itemScript = item.GetComponent<Item>();
 
-            itemScript.isPickable = false;
+            item.OnDrop();
+            item.isUsable = false;
 
-            item.GetComponent<Rigidbody>().isKinematic = false;
-            item.GetComponent<Collider>().enabled = true;
-
-            item.transform.parent = null;
-
-            itemScript.isUsable = false;
-
-            item.GetComponent<Rigidbody>().AddForce(cameraParentTrans.up * dropForceY + cameraParentTrans.forward * dropForceZ + cameraParentTrans.right * dropForceX, ForceMode.Impulse);
+            itemObj.GetComponent<Rigidbody>().AddForce(cameraParentTrans.up * dropForceY + cameraParentTrans.forward * dropForceZ + cameraParentTrans.right * dropForceX, ForceMode.Impulse);
         }
         
-        public void PickUpItem(GameObject item) 
+        public void PickUpItem(GameObject itemObj) 
         { 
             PickingUpItem = true;
 
             UnequipHeldItem();
 
-            Item itemScrpt = item.GetComponent<Item>();
+            Item item = itemObj.GetComponent<Item>();
 
-            item.GetComponent<Rigidbody>().isKinematic = true;
-            item.GetComponent<Collider>().enabled = false;
+            if (item is Gun gun)
+                gun.camTrans = cameraParentTrans;
+            
+            item.OnPickUp(itemHolder);
 
-            if (itemScrpt is Gun)
+            Action action = () =>
             {
-                var wsab = itemHolder.GetComponent<WeaponSwayAndBob>();
-                item.GetComponent<Gun>().camTrans = cameraParentTrans;
-                item.GetComponent<Gun>().CR = cameraRecoil;
-                item.GetComponent<Gun>().WSAB = wsab;
-            }
+                PickingUpItem = false;
+                items.Add(item);
+                EquipItem(items.Count - 1);
+                item.isUsable = true;
+            };
 
-            item.transform.SetParent(itemHolder);
-
-            PickedUpActions actions;
-            actions = () => itemScrpt.isPickable = true;
-            actions += () => PickingUpItem = false;
-            actions += () => items.Add(itemScrpt);
-            actions += () => EquipItem(items.Count - 1);
-            actions += () => itemScrpt.isUsable = true;
-
-            item.transform.DOLocalRotate(Vector3.zero, itemPickupSpd);
-            item.transform.DOLocalMove(Vector3.zero, itemPickupSpd, false).OnComplete(() => actions());
+            itemObj.transform.DOLocalRotate(Vector3.zero, itemPickupSpd);
+            itemObj.transform.DOLocalMove(Vector3.zero, itemPickupSpd, false).OnComplete(()=>action.Invoke());
         }
     }
 }
