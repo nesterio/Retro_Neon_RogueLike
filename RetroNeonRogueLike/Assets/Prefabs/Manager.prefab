@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7390231575829091897}
   - component: {fileID: 1112147993}
   - component: {fileID: 1112147994}
-  - component: {fileID: 1112147995}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -63,23 +62,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9a2c567b6085d4b9915f5c57082136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1112147995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7390231575829091895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 464d96f187dfb9f42b9024fa104adce2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanvasObject: {fileID: 0}
-  objectPools:
-  - prefab: {fileID: 1224264976322219588, guid: 741886e7bcc89cf499414f112484f86a, type: 3}
-    soundName: TextDisplay
-    prefabsCount: 1
-  - prefab: {fileID: 4028950075507228400, guid: e9db27a9623edcd45b8b086447dcebff, type: 3}
-    soundName: TextField
-    prefabsCount: 1
