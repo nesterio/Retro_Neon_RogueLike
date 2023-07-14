@@ -686,7 +686,7 @@ MonoBehaviour:
   _collider: {fileID: 7073548594449773669}
   _rigidbody: {fileID: 2335219630684384386}
   relaxedPos: {x: 0.15, y: -0.02, z: 0.05}
-  isPickable: 0
+  isPickable: 1
   camTrans: {fileID: 0}
   shootPoint: {fileID: 7252475497416917581}
   containerTrans: {fileID: 1478615269953039622}

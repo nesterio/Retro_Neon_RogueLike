@@ -1,3 +1,4 @@
+using Interactable.Items.Weapons;
 using UnityEngine;
 
 namespace Items.Weapons

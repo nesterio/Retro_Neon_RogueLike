@@ -13,6 +13,7 @@ namespace PlayerScripts
         [SerializeField] private float itemPickupRange = 3f;
 
         private GameObject selectedObj;
+        private Interactable.Interactable selectedInteractable;
 
         private void Update()
         {
@@ -25,10 +26,13 @@ namespace PlayerScripts
             {
                 if (selectedObj != hit.collider.gameObject)
                 {
-                    if (selectedObj != null && selectedObj.CompareTag("Interactable"))
-                        selectedObj.GetComponent<Interactable.Interactable>().HideInteractionHint();
+                    if (selectedInteractable != null)
+                        selectedInteractable.HideInteractionHint();
 
                     selectedObj = hit.collider.gameObject;
+                    
+                    if(hit.collider.gameObject.CompareTag("Interactable"))
+                        selectedInteractable = selectedObj.GetComponent<Interactable.Interactable>();
                 }
                 
                 if (selectedObj.CompareTag("Interactable"))
@@ -38,56 +42,55 @@ namespace PlayerScripts
 
         void AwaitInteraction()
         {
-            var interactable = selectedObj.GetComponent<Interactable.Interactable>();
-            if(interactable == null) return;
-            
-            if(!interactable.isUsable)
+            if(selectedInteractable == null)
                 return;
             
-            if(interactable.awaitInput)
-                interactable.ShowInteractionHint();
+            if(selectedInteractable.awaitInput)
+                selectedInteractable.ShowInteractionHint();
 
-            bool shouldUse = !interactable.awaitInput ||
-                             interactable.awaitInput && IM.Interacting;
-            switch (interactable)
-            {
-                case Item item :
-                    if(shouldUse) ProcessItem(item);
-                    break;
+            bool shouldUse = !selectedInteractable.awaitInput ||
+                             selectedInteractable.awaitInput && IM.Interacting;
+            if(shouldUse)
+                switch (selectedInteractable)
+                {
+                    case Item item :
+                        ProcessItem(item);
+                        break;
                 
-                case BasicPopupInteraction basicPopupInteraction :
-                    if(shouldUse) ProcessPopup(basicPopupInteraction);
-                    break;
-            }
+                    case BasicPopupInteraction basicPopupInteraction :
+                        ProcessPopup(basicPopupInteraction);
+                        break;
+                    
+                    default:
+                        ProcessInteractable(selectedInteractable);
+                        break;
+                }
         }
 
         void ProcessItem(Item item)
         {
-            if(item.isUsable && !item.isPickable 
-                             && !PlayerManager.ItemsManager.PickingUpItem && PlayerManager.ItemsManager.CanPickupItem)
+            if(item.isPickable && !PlayerManager.ItemsManager.PickingUpItem && PlayerManager.ItemsManager.CanPickupItem)
                 PlayerManager.ItemsManager.PickUpItem(item.gameObject);
         }
 
         void ProcessPopup(BasicPopupInteraction basicPopupInteraction)
         {
-            bool canUse = false;
-            
-            if(basicPopupInteraction.isUsable)
-                if (!basicPopupInteraction.awaitInput)
-                    canUse = true;
-                else if(IM.Interacting)
-                    canUse = true;
+            if(!basicPopupInteraction.isUsable)
+                return;
 
-            if (canUse)
+            basicPopupInteraction.OnCloseAction = () =>
             {
-                basicPopupInteraction.OnCloseAction = () =>
-                {
-                    var wait = Wait.Seconds(0.5f, PlayerManager.UnFreezePlayer);
-                    wait.Start();
-                };
-                basicPopupInteraction.Use();
-                PlayerManager.FreezePlayer();
-            }
+                var wait = Wait.Seconds(0.5f, PlayerManager.UnFreezePlayer);
+                wait.Start();
+            };
+            basicPopupInteraction.Use();
+            PlayerManager.FreezePlayer();
+        }
+
+        void ProcessInteractable(Interactable.Interactable interactable)
+        {
+            if(interactable.isUsable)
+                interactable.Use();
         }
 
     }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Interactable.Items;
-using Items.Weapons;
+using Interactable.Items.Weapons;
 using UnityEngine;
 using inputManagerInfo = InputManagerData;
 
@@ -26,17 +26,19 @@ namespace PlayerScripts
         float _dropTimer;
         int _itemIndex = 0;
         
-        private PlayerStatistics _playerStats = PlayerManager.PlayerStats;
+        private PlayerStatistics _playerStats;
 
-        public bool CanPickupItem => items.Count < _playerStats.maxItems;
+        public bool CanPickupItem => _playerStats != null && items.Count < _playerStats.maxItems;
 
         bool _droppingItem;
         public bool PickingUpItem { get; private set; }
 
         delegate void PickedUpActions();
 
-        void Awake()
+        void Start()
         {
+            _playerStats = PlayerManager.PlayerStats;
+            
             if(startItems != null)
                 foreach (Item item in startItems)
                     PickUpItem(item.gameObject);
@@ -49,8 +51,6 @@ namespace PlayerScripts
         {
             if (items.Count == 0)
                 return;
-
-            //Debug.Log(itemIndex);
 
             ////// TODO: MOVE THIS TO INPUT MANAGER !!! //////
 
@@ -147,7 +147,7 @@ namespace PlayerScripts
 
             var item = itemObj.GetComponent<Item>();
             items.Remove(item);
-            item.itemGameObject.SetActive(true); // Is "item.itemGameObject" instead of item.gameObject required?
+            item.itemGameObject.SetActive(true); // Is "item.itemGameObject" instead of item.gameObject required? // IS THIS REQUIRED AT ALL???
             
             if (items.Count == 0)
                 _itemIndex = 0;

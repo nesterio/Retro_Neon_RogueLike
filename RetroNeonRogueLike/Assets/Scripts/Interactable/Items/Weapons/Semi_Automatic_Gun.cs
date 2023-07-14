@@ -68,18 +68,18 @@ namespace Interactable.Items.Weapons
 
         public override void Aim(bool shouldAim) 
         {
-            if (shouldAim && !isAiming && !IsRealoading) 
+            if (shouldAim && !IsAiming && !IsRealoading) 
             {
                 containerTrans.DOLocalMove(aimedGunPos, ((GunInfo)itemInfo).aimingSpeed, false);
-                isAiming = true;
+                IsAiming = true;
                 PlayerManager.WSAB.isAiming = true;
 
             }
 
-            if (!shouldAim && isAiming || IsRealoading) 
+            if (!shouldAim && IsAiming || IsRealoading) 
             {
                 containerTrans.DOLocalMove(relaxedPos, ((GunInfo)itemInfo).aimingSpeed, false);
-                isAiming = false;
+                IsAiming = false;
                 PlayerManager.WSAB.isAiming = false;
             }
         }
@@ -92,12 +92,12 @@ namespace Interactable.Items.Weapons
 
         void Shoot() 
         {
-            if(isAiming)
+            if(IsAiming)
                 PlayerManager.CamRecoil.RecoilFire(((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ);
             else
                 PlayerManager.CamRecoil.RecoilFire( ((GunInfo)itemInfo).recoilX , ((GunInfo)itemInfo).recoilY , ((GunInfo)itemInfo).recoilZ);
 
-            GR.RecoilFire(isAiming);
+            GR.RecoilFire(IsAiming);
 
             GS.PlayShutter();
 
