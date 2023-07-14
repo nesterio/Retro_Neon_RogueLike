@@ -10,8 +10,8 @@ namespace Interactable.Items
         [SerializeField] private Rigidbody _rigidbody;
         [Space]
         [SerializeField] internal Vector3 relaxedPos;
-        [Space]
-        public bool isPickable = true;
+
+        public bool isPickable { get; private set; } = true;
 
         public virtual void OnPickUp(Transform parent)
         {
