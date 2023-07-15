@@ -1,7 +1,6 @@
-using Interactable.Items.Weapons;
 using UnityEngine;
 
-namespace Items.Weapons
+namespace Interactable.Items.Weapons
 {
     public class GunRecoil : MonoBehaviour
     {
@@ -24,7 +23,7 @@ namespace Items.Weapons
 
         void Awake() 
         {
-            gunInfo = ((GunInfo)GetComponent<Gun>().itemInfo);
+            gunInfo = (GunInfo)GetComponent<Gun>().itemInfo;
         }
 
         void FixedUpdate() 

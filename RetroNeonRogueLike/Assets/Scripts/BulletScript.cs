@@ -29,7 +29,7 @@ public class BulletScript : MonoBehaviour
         hitNormal = _hitNormal;
         damage = _damage;
 
-        rb.AddForce((hitPoint - this.transform.position).normalized * speed);
+        rb.AddForce((hitPoint - transform.position).normalized * speed);
     }
 
     void OnCollisionEnter(Collision col)
@@ -43,9 +43,7 @@ public class BulletScript : MonoBehaviour
         bulletImpactObj.transform.SetParent(col.transform);
 
         if (col.gameObject.CompareTag("Player"))
-        {
             PlayerManager.PlayerStats.DrainHealth(damage);
-        }
 
         Destroy(gameObject);
     }

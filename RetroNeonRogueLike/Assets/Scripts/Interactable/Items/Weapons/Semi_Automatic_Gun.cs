@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Items.Weapons;
 using PlayerScripts;
 using UnityEngine;
 
@@ -46,13 +45,8 @@ namespace Interactable.Items.Weapons
             if(!PlayerManager.CanUse)
                 return;
             
-            if (bulletsInMag > 0 && !IsRealoading)
-            {
-                if (_timeToShoot <= 0)
-                {
-                    Shoot();
-                }
-            }
+            if (bulletsInMag > 0 && !IsRealoading && _timeToShoot <= 0)
+                Shoot();
         }
 
         public override void Reload() 
@@ -82,12 +76,6 @@ namespace Interactable.Items.Weapons
                 IsAiming = false;
                 PlayerManager.WSAB.isAiming = false;
             }
-        }
-
-        public void FinishReload() 
-        {
-            bulletsInMag = MagCapacity;
-            anim.SetBool(Reload1, false);
         }
 
         void Shoot() 
