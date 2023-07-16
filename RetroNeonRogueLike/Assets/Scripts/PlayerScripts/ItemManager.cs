@@ -28,7 +28,7 @@ namespace PlayerScripts
         
         private PlayerStatistics _playerStats;
 
-        public bool CanPickupItem => _playerStats != null && items.Count < _playerStats.maxItems;
+        public bool CanPickupItem => _playerStats != null && items.Count < _playerStats.MaxItems;
 
         bool _droppingItem;
         public bool PickingUpItem { get; private set; }

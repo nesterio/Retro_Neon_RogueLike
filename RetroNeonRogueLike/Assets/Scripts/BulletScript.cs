@@ -43,7 +43,7 @@ public class BulletScript : MonoBehaviour
         bulletImpactObj.transform.SetParent(col.transform);
 
         if (col.gameObject.CompareTag("Player"))
-            PlayerManager.PlayerStats.DrainHealth(damage);
+            PlayerManager.PlayerStats.ChangeHealth(damage);
 
         Destroy(gameObject);
     }

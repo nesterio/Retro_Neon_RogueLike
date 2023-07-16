@@ -1479,25 +1479,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5f256605580014793c1bb4b887ea63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultHealth: 100
-  currentHealth: 100
-  healthRegen: 0.05
-  defaultStamina: 100
-  currentStamina: 100
-  staminaRegen: 1
   staminaDrains:
   - name: Sprint
     staminaCost: 0.45
   - name: Jump
     staminaCost: 25
-  defaultMoveSpeed: 350
-  moveSpeed: 350
-  sprintSpeedMultiplier: 1.6
-  defaultJumpForce: 450
-  jumpForce: 450
-  crouchJumpForceMultiplier: 0.75
-  numberOfJumps: 1
-  maxItems: 2
 --- !u!114 &8937362321070618969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1511,14 +1497,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8937362321070618971}
+  collider: {fileID: 8937362321070618970}
   playerModel: {fileID: 8937362321551972313}
   orientation: {fileID: 8937362321732745006}
   counterMovement: 0.8
   jumpCooldown: 1
-  maxSlopeAngle: 35
-  slideForce: 150
+  maxSlopeAngle: 45
+  minSpeedForSlideMultiplier: 0.75
   slideCounterMovement: 0.65
-  floorDetectionRange: 1.1
+  floorDetectionRange: 1.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64

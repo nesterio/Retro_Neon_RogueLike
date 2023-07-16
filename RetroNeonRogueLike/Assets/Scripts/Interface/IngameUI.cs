@@ -24,8 +24,8 @@ namespace Interface
 
         void LateUpdate() 
         {
-            staminaSlider.value = PlayerManager.PlayerStats.currentStamina;
-            healthSlider.value = PlayerManager.PlayerStats.currentHealth;
+            staminaSlider.value = PlayerManager.PlayerStats.CurrentStamina;
+            healthSlider.value = PlayerManager.PlayerStats.CurrentHealth;
         }
 
         void ChangeMaxStamina(float newMax)
@@ -33,7 +33,7 @@ namespace Interface
             staminaSlider.maxValue = newMax;
         }
 
-        void ChangeMaxHealth(int newMax) 
+        void ChangeMaxHealth(float newMax) 
         {
             healthSlider.maxValue = newMax;
         }

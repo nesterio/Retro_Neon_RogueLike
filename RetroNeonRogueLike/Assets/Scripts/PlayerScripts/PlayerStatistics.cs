@@ -5,65 +5,60 @@ namespace PlayerScripts
 {
     public class PlayerStatistics : MonoBehaviour
     {
-        [Header("Health")]
+        ////-------- Health --------////
         private float _maxHealth;
-        public int defaultHealth = 100;
-        public float currentHealth = 100;
 
-        public delegate void MaxHealthChange(int newMax);
+        public float DefaultHealth { get; private set; } = 100;
+        public float CurrentHealth { get; private set; } = 100;
+        public float HealthRegen { get; private set; } = 0.05f;
+
+        public delegate void MaxHealthChange(float newMax);
         public event MaxHealthChange MaxHpChangeEvent;
-
-        [SerializeField] private float healthRegen = 0.05f;
         [Space(10)]
 
-        [Header("Stamina")]
+        ////-------- Stamina --------////
         private float _maxStamina;
-        public float defaultStamina = 100f;
-        public float currentStamina = 100f;
+        public float DefaultStamina { get; private set; } = 100f;
+        public float CurrentStamina { get; private set; } = 100f;
+        public float staminaRegen { get; private set; } = 1f;
 
         public delegate void MaxStaminaChange(float newMax);
         public event MaxStaminaChange MaxStamChangeEvent;
-
-        [SerializeField] private float staminaRegen = 1f;
-
-        bool _sprinting;
         [Space]
 
         [SerializeField] private StaminaDrain[] staminaDrains;
         private readonly Dictionary<string, StaminaDrain> _drainsDictionary = new Dictionary<string, StaminaDrain>();
         [Space(10)]
 
-        [Header("Movement")]
-        public float defaultMoveSpeed = 500;
-        public float moveSpeed = 500;
+        ////-------- Movement --------////
+        bool _sprinting;
+        public float DefaultMoveSpeed { get; private set; } = 500;
+        public float MoveSpeed { get; private set; } = 500;
 
         public float MaxSpeed
         {
             get 
             { 
                 if(_sprinting)
-                    return moveSpeed * sprintSpeedMultiplier / 100; 
+                    return MoveSpeed * SprintSpeedMultiplier / 100; /// ???WTF???
                 else
-                    return moveSpeed / 100;
+                    return MoveSpeed / 100;
             }
         }
+        
+        public float SprintSpeedMultiplier { get; private set; } = 1.5f;
+        public float SlideForce { get; private set; } = 350;
 
-        [Space]
-        public float sprintSpeedMultiplier;
-        [Space(10)]
-
-        [Header("Jumping")]
-        public float defaultJumpForce = 450f;
-        public float jumpForce = 450f;
-        public float crouchJumpForceMultiplier = 0.75f;
-        [Space]
-        public int numberOfJumps = 1;
-        [Space(10)]
-
-        [Header("Weaponry")]
-        public int maxItems = 2;
+        ////-------- Jumping --------////
+        public float DefaultJumpForce { get; private set; } = 700f;
+        public float JumpForce { get; private set; } = 700f;
+        public float CrouchJumpForceMultiplier { get; private set; } = 0.75f;
+        
+        public int NumberOfJumps { get; private set; } = 1;
 
 
+        ////-------- Weaponry --------////
+        public int MaxItems { get; private set; } = 2;
         public delegate void DeathDelegate();
         public event DeathDelegate DeathEvent;
 
@@ -71,42 +66,46 @@ namespace PlayerScripts
         void Start() 
         {
             // Locomotion
-            moveSpeed = defaultMoveSpeed;
-            jumpForce = defaultJumpForce;
+            MoveSpeed = DefaultMoveSpeed;
+            JumpForce = DefaultJumpForce;
 
             // Health
-            currentHealth = defaultHealth;
-            ChangeMaxHealth(defaultHealth);
+            CurrentHealth = DefaultHealth;
+            ChangeMaxHealth(DefaultHealth);
 
             // Stamina
-            currentStamina = defaultStamina;
-            ChangeMaxStamina(defaultStamina);
+            CurrentStamina = DefaultStamina;
+            ChangeMaxStamina(DefaultStamina);
             foreach (StaminaDrain action in staminaDrains)
                 _drainsDictionary.Add(action.name, action);
         }
 
         void FixedUpdate() 
         {
-            if(currentStamina < _maxStamina && _sprinting == false)
-                currentStamina += staminaRegen;
+            if(CurrentStamina < _maxStamina && _sprinting == false)
+                CurrentStamina += staminaRegen;
 
-            if (currentHealth < _maxHealth)
-                currentHealth += healthRegen;
+            ChangeHealth(HealthRegen);
         }
 
         private void Die() => DeathEvent?.Invoke();
 
             ///////////// Health /////////////
-        public void DrainHealth(int amount)
+        public void ChangeHealth(float amount)
         {
-            currentHealth -= amount;
-            //Debug.Log(gameObject + " just took " + amount + " damage");
+            if (amount > 0)
+            {
+                if(CurrentHealth < _maxHealth)
+                    CurrentHealth += HealthRegen;
+            }
+            else 
+                CurrentHealth += amount;
 
-            if (currentHealth <= 0)
+            if (CurrentHealth <= 0)
                 Die();
         }
 
-        public void ChangeMaxHealth(int newMax)
+        public void ChangeMaxHealth(float newMax)
         {
             _maxHealth = newMax;
 
@@ -114,11 +113,10 @@ namespace PlayerScripts
                 MaxHpChangeEvent(newMax);
         }
 
-
         ///////////// Stamina /////////////
         public void DrainStamina(string _name)
         {
-            currentStamina -= _drainsDictionary[_name].staminaCost;
+            CurrentStamina -= _drainsDictionary[_name].staminaCost;
         }
 
         public float GetStaminaPrice(string _name) 
@@ -141,7 +139,6 @@ namespace PlayerScripts
             if(_sprinting)
                 DrainStamina("Sprint");
         }
-
     }
 
     [System.Serializable]
