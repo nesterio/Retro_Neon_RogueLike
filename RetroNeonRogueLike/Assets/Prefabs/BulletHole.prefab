@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2647481143165079118}
   - component: {fileID: 448736323247776999}
   - component: {fileID: 3601710663820534923}
+  - component: {fileID: 4241053161434131744}
   m_Layer: 0
   m_Name: BulletHole
   m_TagString: Untagged
@@ -82,6 +83,102 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!82 &4241053161434131744
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159959549202789578}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &4324589762402812598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,6 +186,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2647481143165079118}
     m_Modifications:
+    - target: {fileID: 2816690878832498002, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.g
+      value: 6.6e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 2816690878832498002, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.r
+      value: -4.4597774e+23
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451566987979382721, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMax.a
+      value: 4.75e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451566987979382721, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMax.b
+      value: -2.7130514e+38
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451566987979382721, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.g
+      value: 6.6e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451566987979382721, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.r
+      value: -4.4598697e+23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155464521927247259, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.g
+      value: 6.6e-44
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155464521927247259, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.r
+      value: -4.4597774e+23
+      objectReference: {fileID: 0}
     - target: {fileID: 7868669661710785844, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -111,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7868669661710785846, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7868669661710785846, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
       propertyPath: m_LocalRotation.w
@@ -140,6 +269,18 @@ PrefabInstance:
     - target: {fileID: 7868669661710785846, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911548817364421575, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911548817364421575, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.g
+      value: 1.9260242
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911548817364421575, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}
+      propertyPath: startColor.m_ColorMin.r
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f423490a362d52a468c6a86aa2beaa47, type: 3}

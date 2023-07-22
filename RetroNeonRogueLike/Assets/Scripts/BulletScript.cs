@@ -37,6 +37,7 @@ public class BulletScript : MonoBehaviour
         var rotation = Quaternion.LookRotation(hitNormal, Vector3.up) * impactObj.transform.rotation;
         
         GameObject bulletImpactObj = LeanPool.Spawn(impactObj, transform.position, rotation);
+        SimpleAudioManager.PlaySound("HitSound", bulletImpactObj.GetComponent<AudioSource>());
         var wait = Wait.Seconds(disableTimer, () => bulletImpactObj.SetActive(false));
         wait.Start();
 

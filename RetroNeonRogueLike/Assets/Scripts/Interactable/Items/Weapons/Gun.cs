@@ -7,6 +7,7 @@ namespace Interactable.Items.Weapons
         [HideInInspector]public Transform camTrans;
         [SerializeField] protected Transform shootPoint;
         [SerializeField] protected Transform containerTrans;
+        [SerializeField] protected AudioSource audioSource;
         [Space(5)]
         [SerializeField] protected ParticleSystem shootingParticles;
         [Space]

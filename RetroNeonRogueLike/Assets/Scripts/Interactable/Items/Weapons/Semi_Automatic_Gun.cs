@@ -22,7 +22,7 @@ namespace Interactable.Items.Weapons
 
         [SerializeField] bool hasCustomShutter;
 
-        private static readonly int Reload1 = Animator.StringToHash("Reload");
+        private static readonly int ReloadAnimID = Animator.StringToHash("Reload");
 
         void Awake() 
         {
@@ -42,22 +42,32 @@ namespace Interactable.Items.Weapons
 
         public override void Use() 
         {
-            if(!PlayerManager.CanUse)
+            if(!PlayerManager.CanUse || IsRealoading)
                 return;
-            
-            if (bulletsInMag > 0 && !IsRealoading && _timeToShoot <= 0)
-                Shoot();
+
+            if (_timeToShoot <= 0)
+            {
+                if (bulletsInMag > 0) 
+                    Shoot();
+                else
+                    SimpleAudioManager.PlaySound("EmptyShot", audioSource);
+                
+                _timeToShoot = ShotSpeed;
+            }
+
         }
 
         public override void Reload() 
         {
             if (!IsRealoading && PlayerManager.CanUse)
-                anim.SetBool(Reload1, true);
+                anim.SetBool(ReloadAnimID, true);
         }
         public override void StopReload() 
         {
-            if (IsRealoading)
-                anim.SetBool(Reload1, false);
+            if (anim.GetBool(ReloadAnimID))
+                anim.SetBool(ReloadAnimID, false);
+
+            bulletsInMag = MagCapacity;
         }
 
         public override void Aim(bool shouldAim) 
@@ -80,15 +90,18 @@ namespace Interactable.Items.Weapons
 
         void Shoot() 
         {
-            if(IsAiming)
-                PlayerManager.CamRecoil.RecoilFire(((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ);
-            else
-                PlayerManager.CamRecoil.RecoilFire( ((GunInfo)itemInfo).recoilX , ((GunInfo)itemInfo).recoilY , ((GunInfo)itemInfo).recoilZ);
+            // Camera recoil
+            (float,float,float) recoils = IsAiming ? (((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ)
+                : (((GunInfo)itemInfo).recoilX, ((GunInfo)itemInfo).recoilY, ((GunInfo)itemInfo).recoilZ);
+            PlayerManager.CamRecoil.RecoilFire(recoils.Item1, recoils.Item2, recoils.Item3);
 
+            // Gun recoil
             GR.RecoilFire(IsAiming);
 
+            // Gun shutter
             GS.PlayShutter();
 
+            // Particles
             if (shootingParticles != null)
             {
                 if(shootingParticles.isPlaying)
@@ -96,9 +109,11 @@ namespace Interactable.Items.Weapons
                 
                 shootingParticles.Play();
             }
+            
+            // Sound
+            SimpleAudioManager.PlaySound("RifleShot", audioSource);
 
             bulletsInMag--;
-            _timeToShoot = ShotSpeed;
 
             RaycastHit hit;
 

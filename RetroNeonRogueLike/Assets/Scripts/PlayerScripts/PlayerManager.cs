@@ -13,6 +13,7 @@ namespace PlayerScripts
         [SerializeField] private Transform playerOrientation;
         [SerializeField] private Transform cameraParent;
         [SerializeField] private Transform itemHolder;
+        [SerializeField] private AudioSource headphones;
 
         public static bool CanMove = true;
         public static bool CanLook = true;
@@ -41,6 +42,10 @@ namespace PlayerScripts
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
+            SimpleAudioManager.PlaySound("Ambience", headphones);
+            SimpleAudioManager.FadeInAudio(headphones, 2f, 0.25f);
+            headphones.loop = true;
         }
         
         void Awake()

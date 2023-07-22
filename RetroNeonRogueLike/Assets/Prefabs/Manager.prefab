@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7390231575829091897}
   - component: {fileID: 1112147993}
   - component: {fileID: 1112147994}
+  - component: {fileID: 5568234413057066154}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -62,3 +63,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9a2c567b6085d4b9915f5c57082136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5568234413057066154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390231575829091895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f2bf2706f6e274aab84f7228723e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: RifleShot
+    clip: {fileID: 8300000, guid: 5c160853fb0bdc44d83ef8c6421605da, type: 3}
+  - name: EmptyShot
+    clip: {fileID: 8300000, guid: acb857dc806d6dd49bd63fc983c9249a, type: 3}
+  - name: HitSound
+    clip: {fileID: 8300000, guid: a6d5ce5c302401f4ba860c1b9ca3efcd, type: 3}
+  - name: Ambience
+    clip: {fileID: 8300000, guid: 1278ad0a6c0865d41995dfdc31c97587, type: 3}
