@@ -32,8 +32,8 @@ namespace PlayerScripts
 
         ////-------- Movement --------////
         bool _sprinting;
-        public float DefaultMoveSpeed { get; private set; } = 500;
-        public float MoveSpeed { get; private set; } = 500;
+        public float DefaultMoveSpeed { get; private set; } = 400;
+        public float MoveSpeed { get; private set; } = 400;
 
         public float MaxSpeed
         {
@@ -46,7 +46,7 @@ namespace PlayerScripts
             }
         }
         
-        public float SprintSpeedMultiplier { get; private set; } = 1.5f;
+        public float SprintSpeedMultiplier { get; private set; } = 1.7f;
         public float SlideForce { get; private set; } = 350;
 
         ////-------- Jumping --------////

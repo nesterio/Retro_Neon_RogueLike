@@ -57,21 +57,19 @@ namespace PlayerScripts
             _crouchScale = new Vector3(_playerScale.x, _playerScale.y / 2f, _playerScale.z);
         }
 
-        void FixedUpdate()
-        {
-            
-        }
-
         void Update() 
         {
             CurrentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
             
-            Debug.Log("slope: "+OnSlope() + " - gronded: " + _grounded);
+            Vector2 mag = FindVelRelativeToLook();
+            
+            //Counteract sliding and sloppy movement
+            CounterMovement(inputManager.x, inputManager.y, mag);
             
             if(!PlayerManager.CanMove)
                 return;
             
-            Move();
+            Move(mag);
             
             if (Input.GetKeyDown(KeyCode.LeftControl))
                 StartCrouch();
@@ -79,18 +77,15 @@ namespace PlayerScripts
                 StopCrouch();
         }
 
-        void Move()
+        void Move(Vector2 magnitude)
         {
             _moveDirection = orientation.forward * inputManager.y + orientation.right * inputManager.x;
 
             _grounded = Physics.Raycast(orientation.position, Vector3.down, floorDetectionRange, whatIsGround);
             
             //Find actual velocity relative to where player is looking
-            Vector2 mag = FindVelRelativeToLook();
-            float xMag = mag.x, yMag = mag.y;
-
-            //Counteract sliding and sloppy movement
-            CounterMovement(inputManager.x, inputManager.y, mag);
+            
+            float xMag = magnitude.x, yMag = magnitude.y;
 
             //If sliding down a ramp, add force down so player stays grounded and also builds speed
             if (inputManager.Crouching && _grounded && OnSlope())
