@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PaintingController : MonoBehaviour
 {
-    [SerializeField] private MeshRenderer _renderer;
-    [SerializeField] private TextMeshPro _tmPro;
-    [Space]
-    //[SerializeField] private Material material;
-    
     [Header("Size and scale")]
     [SerializeField] private int originalWidth;
     [SerializeField] private int originalHeight;
@@ -18,11 +13,32 @@ public class PaintingController : MonoBehaviour
     [Header("Text")] 
     [SerializeField] private string paintingName;
     [SerializeField] private string authorName;
+    [SerializeField] private float textBottomPadding = 0.25f;
 
-    void Start() => OnEnable();
+    private Transform paintingTransform;
+    private TextMeshPro tmPro;
+    
+    private bool initialized = false;
+
+    void Start()
+    {
+        paintingTransform = Utils.FindGameObjectByName("PaintingObj", transform).transform;
+        tmPro = Utils.FindGameObjectByName("Text", transform).GetComponent<TextMeshPro>();
+
+        if (paintingTransform == null || tmPro == null)
+        {
+            Debug.LogError("Couldn't initialize a painting: " + paintingName);
+            return;
+        }
+        initialized = true;
+        
+        OnEnable();
+    }
+
     private void OnEnable()
     {
-        //_renderer.material = material;
+        if(!initialized)
+            return;
         
         UpdateSizeScale();
         
@@ -35,11 +51,15 @@ public class PaintingController : MonoBehaviour
         var newWidth = 1 * scaleMultiplier;
         var newHeight = 1 * ratio * scaleMultiplier;
 
-        _renderer.transform.localScale = new Vector3(newWidth, newHeight, zSize);
+        paintingTransform.localScale = new Vector3(newWidth, newHeight, zSize);
     }
 
     void UpdateText()
     {
-        _tmPro.text = $"{paintingName}{Environment.NewLine}{authorName}";
+        tmPro.text = $"{paintingName}{Environment.NewLine}{authorName}";
+
+        var newPos = tmPro.transform.localPosition;
+        newPos = new Vector3(newPos.x, -(paintingTransform.localScale.y / 2 + textBottomPadding),newPos.z);
+        tmPro.transform.localPosition = newPos;
     }
 }

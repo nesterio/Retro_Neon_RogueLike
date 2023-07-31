@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3987282780080563292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21, y: 8.6, z: -0.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3987282781652327019}
@@ -45,15 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1d3aa77f2f54440b091712a676b378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 3987282781652327016}
-  _tmPro: {fileID: 3987282781591047148}
-  material: {fileID: 2100000, guid: a5ea2bdd9363e39439fc63213fd82a55, type: 2}
   originalWidth: 295
   originalHeight: 225
   scaleMultiplier: 4.5
   zSize: 0.05
   paintingName: The pioneer
   authorName: Frederick McCubbin
+  textBottomPadding: 0.25
 --- !u!1 &3987282781591047147
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +64,7 @@ GameObject:
   - component: {fileID: 3987282781591047149}
   - component: {fileID: 3987282781591047148}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +79,7 @@ RectTransform:
   m_GameObject: {fileID: 3987282781591047147}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0.05}
-  m_LocalScale: {x: 0.43600416, y: 0.33136302, z: 0.4360042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3987282780080563294}
   m_RootOrder: 1
@@ -181,8 +179,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4
-  m_fontSizeBase: 4
+  m_fontSize: 2
+  m_fontSizeBase: 2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -239,7 +237,7 @@ GameObject:
   - component: {fileID: 3987282781652327016}
   - component: {fileID: 3987282781652327017}
   m_Layer: 0
-  m_Name: Pioneer
+  m_Name: PaintingObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

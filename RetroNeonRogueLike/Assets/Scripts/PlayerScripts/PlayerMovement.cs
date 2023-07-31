@@ -22,6 +22,8 @@ namespace PlayerScripts
 
         float _speed;
         Vector3 _moveDirection;
+        
+        [SerializeField] float slopeCancelMultiplier = 100;
 
         private float walkSpeed => 
             PlayerManager.PlayerStats.MoveSpeed / 10f;
@@ -211,6 +213,7 @@ namespace PlayerScripts
             {
                 rb.AddForce(orientation.forward * (_slopeHit.normal.y * _slopeHit.normal.z));
                 rb.AddForce(orientation.right * (_slopeHit.normal.y * _slopeHit.normal.x));
+                //rb.AddForce(GetCancelSlopeMovement() * slopeCancelMultiplier );
             }
 
             // Counter movement
@@ -264,6 +267,15 @@ namespace PlayerScripts
         {
             return Vector3.ProjectOnPlane(_moveDirection, _slopeHit.normal).normalized;
         }
+
+        /*Vector3 GetCancelSlopeMovement()
+        {
+            float angle = Vector3.Angle(Vector3.zero, _slopeHit.normal);
+            var f = rb.mass * 30 * (Mathf.Sin(angle) + Mathf.Cos(angle));
+            Debug.Log(f);
+            var slopeMoveDirection = Vector3.ProjectOnPlane(Vector3.right, _slopeHit.normal).normalized * Vector3.right;
+            return new Vector3(slopeMoveDirection.x, slopeMoveDirection.y, slopeMoveDirection.z);
+        }*/
 
         private bool AllowWeaponSway() 
         {
