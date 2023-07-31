@@ -1,0 +1,576 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9110970556121735216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Step
+  m_EditorClassIdentifier: 
+  Path: event:/Step
+  Guid:
+    Data1: 907400063
+    Data2: 1154945880
+    Data3: -687449685
+    Data4: -1064214216
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 400
+--- !u!114 &-9110831501047694448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/SVD/SVD_Cock
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/SVD/SVD_Cock
+  Guid:
+    Data1: 975867938
+    Data2: 1279403660
+    Data3: 1905479815
+    Data4: 780051951
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8984252659518755724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Pick&Drop_Default
+  m_EditorClassIdentifier: 
+  Path: event:/Pick&Drop_Default
+  Guid:
+    Data1: 750667053
+    Data2: 1129928154
+    Data3: -1772696673
+    Data4: 2145177903
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8748965730281878557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638264340561054040
+  FileSizes:
+  - Name: Desktop
+    Value: 1574
+  Exists: 1
+--- !u!114 &-8663092286329877561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/Pick&Drop_Gun
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/Pick&Drop_Gun
+  Guid:
+    Data1: -442067823
+    Data2: 1337910194
+    Data3: 1002115743
+    Data4: 795989428
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8073659001920929487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/MagOut
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/MagOut
+  Guid:
+    Data1: 1487315389
+    Data2: 1295853411
+    Data3: -1212828794
+    Data4: 528668391
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5830728117826346247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638264340578249990
+  FileSizes:
+  - Name: Desktop
+    Value: 1467616
+  Exists: 1
+--- !u!114 &-5730877192747276514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/Pistol/Pistol_Cock
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/Pistol/Pistol_Cock
+  Guid:
+    Data1: 1059220299
+    Data2: 1184652604
+    Data3: -580935250
+    Data4: -399388689
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4834630684364752643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/AK/AK_Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/AK/AK_Shot
+  Guid:
+    Data1: -202529394
+    Data2: 1183385273
+    Data3: -2025649521
+    Data4: -1620329086
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4114365565480629721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/Pistol/Pistol_MagIn
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/Pistol/Pistol_MagIn
+  Guid:
+    Data1: 298230114
+    Data2: 1255827490
+    Data3: -2080727916
+    Data4: 584875406
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2236817772828583809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/Pistol/Pistol_Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/Pistol/Pistol_Shot
+  Guid:
+    Data1: 1138380465
+    Data2: 1196745124
+    Data3: -1206665554
+    Data4: -36972601
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2188519723195378218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Use
+  m_EditorClassIdentifier: 
+  Path: event:/Use
+  Guid:
+    Data1: 952418416
+    Data2: 1125488596
+    Data3: 2102579368
+    Data4: -635602088
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -8748965730281878557}
+  - {fileID: 4474668392794193768}
+  - {fileID: 7789622237025966454}
+  - {fileID: 5144481433459208962}
+  - {fileID: -5830728117826346247}
+  EditorEvents:
+  - {fileID: -9110831501047694448}
+  - {fileID: 4012332047369559790}
+  - {fileID: -8984252659518755724}
+  - {fileID: 2336613820441329342}
+  - {fileID: -5730877192747276514}
+  - {fileID: 5648591331992581562}
+  - {fileID: -4114365565480629721}
+  - {fileID: -2188519723195378218}
+  - {fileID: -9110970556121735216}
+  - {fileID: 7269031555288297783}
+  - {fileID: -4834630684364752643}
+  - {fileID: -8663092286329877561}
+  - {fileID: -2236817772828583809}
+  - {fileID: -8073659001920929487}
+  - {fileID: 910325312208710615}
+  - {fileID: 9154306719662317184}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 7789622237025966454}
+  StringsBanks:
+  - {fileID: -8748965730281878557}
+  cacheTime: 638264340578249990
+  cacheVersion: 131605
+--- !u!114 &910325312208710615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SmileFlashbacks
+  m_EditorClassIdentifier: 
+  Path: event:/SmileFlashbacks
+  Guid:
+    Data1: 400492348
+    Data2: 1082954132
+    Data3: -356395369
+    Data4: -1015266064
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10000
+--- !u!114 &2336613820441329342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/AK/AK_MagIn
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/AK/AK_MagIn
+  Guid:
+    Data1: -891097276
+    Data2: 1260048343
+    Data3: 455568801
+    Data4: -826772594
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4012332047369559790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/SVD/SVD_MagIn
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/SVD/SVD_MagIn
+  Guid:
+    Data1: -681068763
+    Data2: 1129406899
+    Data3: -1361780860
+    Data4: 1697525016
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4474668392794193768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambience.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Ambience.bank
+  Name: Ambience
+  StudioPath: bank:/Ambience
+  lastModified: 638264290904973309
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &5144481433459208962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638264290905013555
+  FileSizes:
+  - Name: Desktop
+    Value: 494
+  Exists: 1
+--- !u!114 &5648591331992581562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/AK/AK_Cock
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/AK/AK_Cock
+  Guid:
+    Data1: 346526560
+    Data2: 1308106231
+    Data3: -733943617
+    Data4: 937232638
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7269031555288297783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/SVD/SVD_Shot
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/SVD/SVD_Shot
+  Guid:
+    Data1: 617402762
+    Data2: 1187880375
+    Data3: 2016626592
+    Data4: 273432823
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7789622237025966454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638264340561028999
+  FileSizes:
+  - Name: Desktop
+    Value: 1036
+  Exists: 1
+--- !u!114 &9154306719662317184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/BulletHitPositive
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/BulletHitPositive
+  Guid:
+    Data1: -484598915
+    Data2: 1129670375
+    Data3: -1859088224
+    Data4: -1787687676
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

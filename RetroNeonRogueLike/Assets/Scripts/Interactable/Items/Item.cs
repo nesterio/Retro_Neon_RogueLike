@@ -12,6 +12,8 @@ namespace Interactable.Items
         [SerializeField] internal Vector3 relaxedPos;
 
         public bool isPickable { get; private set; } = true;
+        
+        public virtual string PickDropSoundName() => "Pick&Drop_Default";
 
         public virtual void OnPickUp(Transform parent)
         {

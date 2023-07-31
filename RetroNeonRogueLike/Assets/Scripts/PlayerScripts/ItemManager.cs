@@ -160,6 +160,8 @@ namespace PlayerScripts
             item.isUsable = false;
 
             itemObj.GetComponent<Rigidbody>().AddForce(cameraParentTrans.up * dropForceY + cameraParentTrans.forward * dropForceZ + cameraParentTrans.right * dropForceX, ForceMode.Impulse);
+            
+            FModAudioManager.PlaySound(item.PickDropSoundName(), itemObj.transform.position);
         }
         
         public void PickUpItem(GameObject itemObj) 
@@ -185,6 +187,8 @@ namespace PlayerScripts
 
             itemObj.transform.DOLocalRotate(Vector3.zero, itemPickupSpd);
             itemObj.transform.DOLocalMove(Vector3.zero, itemPickupSpd, false).OnComplete(()=>action.Invoke());
+            
+            FModAudioManager.PlaySound(item.PickDropSoundName(), itemObj.transform.position);
         }
     }
 }

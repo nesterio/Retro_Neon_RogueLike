@@ -6,6 +6,7 @@ namespace Interactable.Items.Weapons
 {
     public class Semi_Automatic_Gun : Gun
     {
+        [SerializeField] protected Transform shootPoint;
         [SerializeField] Animator anim;
         [SerializeField] GunShutter GS;
         [SerializeField] GunRecoil GR;
@@ -50,7 +51,7 @@ namespace Interactable.Items.Weapons
                 if (bulletsInMag > 0) 
                     Shoot();
                 else
-                    SimpleAudioManager.PlaySound("EmptyShot", audioSource);
+                    FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.EmptyShot, shootPoint.position);
                 
                 _timeToShoot = ShotSpeed;
             }
@@ -111,7 +112,8 @@ namespace Interactable.Items.Weapons
             }
             
             // Sound
-            SimpleAudioManager.PlaySound("RifleShot", audioSource);
+            FModAudioManager.PlayGunSound("Pistol", GunSoundType.Shot, shootPoint.position);
+            //SimpleAudioManager.PlaySound("RifleShot", audioSource);
 
             bulletsInMag--;
 

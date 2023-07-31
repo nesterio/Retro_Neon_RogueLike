@@ -12,11 +12,14 @@ namespace Interactable
         [SerializeField] private GameObject PopupPrefab;
         [SerializeField] [TextArea] private string displayedText;
         public Action OnCloseAction;
+        public virtual string UseSoundName() => "Use";
 
         public override void Use()
         {
             if(!isUsable || !PlayerManager.CanUse)
                 return;
+            
+            FModAudioManager.PlaySound(UseSoundName(), PlayerManager.ItemsManager.transform.position);
             
             ShowText();
         }

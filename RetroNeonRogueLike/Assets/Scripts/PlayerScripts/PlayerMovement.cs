@@ -53,10 +53,17 @@ namespace PlayerScripts
 
         public static float CurrentSpeed { get; private set; }
 
+        private bool _playingWalkSound = false;
+
         void Awake()
         {
             _playerScale = playerModel.transform.localScale;
             _crouchScale = new Vector3(_playerScale.x, _playerScale.y / 2f, _playerScale.z);
+        }
+
+        private void Start()
+        {
+            FModAudioManager.CreateSoundInstance(SoundInstanceType.Walk, "Step", false);
         }
 
         void Update() 
@@ -116,6 +123,22 @@ namespace PlayerScripts
                 rb.AddForce(GetSlopeMoveDirection() * (_speed * Time.deltaTime * multiplierHorizontal * multiplierVertical * diagonalMultiplier));
             else
                 rb.AddForce(_moveDirection.normalized * (_speed * Time.deltaTime * multiplierHorizontal * multiplierVertical * diagonalMultiplier));
+
+            // Add sound
+            // wtf this needs refactor this looks ungodly
+            if (_grounded && !inputManager.Crouching && CurrentSpeed > 0)
+            {
+                if (!_playingWalkSound)
+                {
+                    FModAudioManager.StartSoundInstance(SoundInstanceType.Walk);
+                    _playingWalkSound = true;
+                }
+            }
+            else if(_playingWalkSound)
+            {
+                FModAudioManager.StopSoundInstance(SoundInstanceType.Walk);
+                _playingWalkSound = false;
+            }
 
             if (!PlayerManager.CanMove)
             {

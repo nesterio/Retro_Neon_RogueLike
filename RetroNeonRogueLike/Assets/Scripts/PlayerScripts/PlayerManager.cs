@@ -38,14 +38,10 @@ namespace PlayerScripts
         void OnEnable() => PlayerStats.DeathEvent += PlayerDeath;
         void OnDisable() => PlayerStats.DeathEvent -= PlayerDeath;
 
-        void Start() 
+        void Start() // MOVE THIS SOMEWHERE ELSE??
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            
-            SimpleAudioManager.PlaySound("Ambience", headphones);
-            SimpleAudioManager.FadeInAudio(headphones, 2f, 0.25f);
-            headphones.loop = true;
         }
         
         void Awake()
