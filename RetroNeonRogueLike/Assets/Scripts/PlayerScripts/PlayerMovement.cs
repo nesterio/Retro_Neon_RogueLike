@@ -128,7 +128,6 @@ namespace PlayerScripts
                 rb.AddForce(_moveDirection.normalized * (_speed * Time.deltaTime * multiplierHorizontal * multiplierVertical * diagonalMultiplier));
 
             // Add sound
-            // wtf this needs refactor this looks ungodly
             _walkEventInstance.getPlaybackState(out var walkSoundState);
             if (_grounded && CurrentSpeed > 0 && !inputManager.Crouching)
             {
