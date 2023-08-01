@@ -5,36 +5,30 @@ public class TriggerAction : MonoBehaviour
 {
     public bool reactToPlayer;
     [Space]
-    public UnityEvent OnEnter;
+    public UnityEvent OnEnterAction;
     [Space]
-    public UnityEvent OnStay;
+    public UnityEvent OnStayAction;
     [Space]
-    public UnityEvent OnExit;
+    public UnityEvent OnExitAction;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!reactToPlayer)
-            OnEnter?.Invoke();
-        
-        if(other.gameObject.CompareTag("Player"))
-            OnEnter?.Invoke();
+        if(!reactToPlayer || reactToPlayer && other.gameObject.CompareTag("Player"))
+            OnEnter();
     }
+    protected virtual void OnEnter() => OnEnterAction?.Invoke();
 
     private void OnTriggerStay(Collider other)
     {
-        if(!reactToPlayer)
-            OnStay?.Invoke();
-        
-        if(other.gameObject.CompareTag("Player"))
-            OnStay?.Invoke();
+        if(!reactToPlayer || reactToPlayer && other.gameObject.CompareTag("Player"))
+            OnStay();
     }
-
+    protected virtual void OnStay() => OnStayAction?.Invoke();
+    
     private void OnTriggerExit(Collider other)
     {
-        if(!reactToPlayer)
-            OnExit?.Invoke();
-        
-        if(other.gameObject.CompareTag("Player"))
-            OnExit?.Invoke();
+        if(!reactToPlayer || reactToPlayer && other.gameObject.CompareTag("Player"))
+            OnExit();
     }
+    protected virtual void OnExit() => OnExitAction?.Invoke();
 }

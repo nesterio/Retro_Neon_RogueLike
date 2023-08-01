@@ -12,7 +12,6 @@ namespace PlayerScripts
         [Space]
         [SerializeField] private float itemPickupRange = 3f;
 
-        private GameObject selectedObj;
         private Interactable.Interactable selectedInteractable;
 
         private void Update()
@@ -20,24 +19,31 @@ namespace PlayerScripts
             ItemDetection();
         }
 
-        void ItemDetection() 
+        void ItemDetection()
         {
-            if (Physics.Raycast(cameraParentTrans.position, cameraParentTrans.forward, out var hit, itemPickupRange))
-            {
-                if (selectedObj != hit.collider.gameObject)
-                {
-                    if (selectedInteractable != null)
-                        selectedInteractable.HideInteractionHint();
+            Physics.Raycast(cameraParentTrans.position, cameraParentTrans.forward, out var hit, itemPickupRange);
 
-                    selectedObj = hit.collider.gameObject;
-                    
-                    if(hit.collider.gameObject.CompareTag("Interactable"))
-                        selectedInteractable = selectedObj.GetComponent<Interactable.Interactable>();
+            if (hit.collider == null)
+            {
+                if (selectedInteractable != null)
+                {
+                    selectedInteractable.HideInteractionHint();
+                    selectedInteractable = null;
                 }
-                
-                if (selectedObj.CompareTag("Interactable"))
-                    AwaitInteraction();
+                return;
             }
+
+            if (selectedInteractable == null || selectedInteractable.gameObject != hit.collider.gameObject)
+            {
+                if (selectedInteractable != null)
+                    selectedInteractable.HideInteractionHint();
+
+                if(hit.collider.CompareTag("Interactable"))
+                    selectedInteractable = hit.collider.gameObject.GetComponent<Interactable.Interactable>();
+            }
+                
+            if (selectedInteractable != null && selectedInteractable.CompareTag("Interactable"))
+                AwaitInteraction();
         }
 
         void AwaitInteraction()
@@ -50,7 +56,8 @@ namespace PlayerScripts
 
             bool shouldUse = !selectedInteractable.awaitInput ||
                              selectedInteractable.awaitInput && IM.Interacting;
-            if(shouldUse)
+            if (shouldUse)
+            {
                 switch (selectedInteractable)
                 {
                     case Item item :
@@ -65,6 +72,7 @@ namespace PlayerScripts
                         ProcessInteractable(selectedInteractable);
                         break;
                 }
+            }
         }
 
         void ProcessItem(Item item)
@@ -75,7 +83,7 @@ namespace PlayerScripts
 
         void ProcessPopup(BasicPopupInteraction basicPopupInteraction)
         {
-            if(!basicPopupInteraction.isUsable)
+            if(!basicPopupInteraction.IsUsable)
                 return;
 
             basicPopupInteraction.OnCloseAction = () =>
@@ -89,7 +97,7 @@ namespace PlayerScripts
 
         void ProcessInteractable(Interactable.Interactable interactable)
         {
-            if(interactable.isUsable)
+            if(interactable.IsUsable)
                 interactable.Use();
         }
 

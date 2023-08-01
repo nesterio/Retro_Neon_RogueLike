@@ -76,7 +76,7 @@ namespace PlayerScripts
 
 
             var item = items[_itemIndex];
-            if (inputManagerInfo.Shooting && PlayerManager.CanUse && item.isUsable || item.isUsable && !item.awaitInput)
+            if (inputManagerInfo.Shooting && PlayerManager.CanUse && item.IsUsable || item.IsUsable && !item.awaitInput)
                 item.Use();
 
             if (item is Gun gun)
@@ -126,13 +126,13 @@ namespace PlayerScripts
 
             _itemIndex = index;
 
-            items[_itemIndex].itemGameObject.SetActive(true);
+            items[_itemIndex].gameObject.SetActive(true);
         }
 
         public void UnequipHeldItem()
         {
             if (items.Count > 0)
-                items[_itemIndex].itemGameObject.SetActive(false);
+                items[_itemIndex].gameObject.SetActive(false);
         }
 
         public void DropItem(GameObject itemObj, float dropForceY, float dropForceZ, float dropForceX) 
@@ -147,7 +147,7 @@ namespace PlayerScripts
 
             var item = itemObj.GetComponent<Item>();
             items.Remove(item);
-            item.itemGameObject.SetActive(true); // Is "item.itemGameObject" instead of item.gameObject required? // IS THIS REQUIRED AT ALL???
+            item.gameObject.SetActive(true); // Is "item.itemGameObject" instead of item.gameObject required? // IS THIS REQUIRED AT ALL???
             
             if (items.Count == 0)
                 _itemIndex = 0;
@@ -157,9 +157,11 @@ namespace PlayerScripts
                 _itemIndex = items.Count - 1;
 
             item.OnDrop();
-            item.isUsable = false;
+            item.IsUsable = false;
 
             itemObj.GetComponent<Rigidbody>().AddForce(cameraParentTrans.up * dropForceY + cameraParentTrans.forward * dropForceZ + cameraParentTrans.right * dropForceX, ForceMode.Impulse);
+            
+            FModAudioManager.PlaySound(item.PickDropSoundName, itemObj.transform.position);
         }
         
         public void PickUpItem(GameObject itemObj) 
@@ -180,11 +182,13 @@ namespace PlayerScripts
                 PickingUpItem = false;
                 items.Add(item);
                 EquipItem(items.Count - 1);
-                item.isUsable = true;
+                item.IsUsable = true;
             };
 
             itemObj.transform.DOLocalRotate(Vector3.zero, itemPickupSpd);
             itemObj.transform.DOLocalMove(Vector3.zero, itemPickupSpd, false).OnComplete(()=>action.Invoke());
+            
+            FModAudioManager.PlaySound(item.PickDropSoundName, itemObj.transform.position);
         }
     }
 }

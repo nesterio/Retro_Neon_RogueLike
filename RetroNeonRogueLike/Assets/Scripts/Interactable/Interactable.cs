@@ -5,9 +5,9 @@ namespace Interactable
 {
     public abstract class Interactable : MonoBehaviour
     {
-        public bool isUsable = true;
-        public bool awaitInput = true;
-        public bool showViewHint = true;
+        public bool IsUsable = true;
+        [field:SerializeField]public bool awaitInput { get; protected set; } = true;
+        [field:SerializeField]public bool showViewHint { get; protected set; } = true;
         [TextArea] public string viewHint = "Use";
 
         public abstract void Use();

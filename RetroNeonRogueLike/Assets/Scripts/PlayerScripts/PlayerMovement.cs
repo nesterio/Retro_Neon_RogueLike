@@ -1,4 +1,5 @@
 using System;
+using FMOD.Studio;
 using SL.Wait;
 using UnityEngine;
 using inputManager = InputManagerData;
@@ -53,10 +54,19 @@ namespace PlayerScripts
 
         public static float CurrentSpeed { get; private set; }
 
+        private EventInstance _walkEventInstance;
+
         void Awake()
         {
             _playerScale = playerModel.transform.localScale;
             _crouchScale = new Vector3(_playerScale.x, _playerScale.y / 2f, _playerScale.z);
+        }
+
+        private void Start()
+        {
+            var eventInstance = FModAudioManager.CreateSoundInstance(SoundInstanceType.Walk, "Step", false);
+            if (eventInstance != null)
+                _walkEventInstance = eventInstance.Value;
         }
 
         void Update() 
@@ -116,6 +126,19 @@ namespace PlayerScripts
                 rb.AddForce(GetSlopeMoveDirection() * (_speed * Time.deltaTime * multiplierHorizontal * multiplierVertical * diagonalMultiplier));
             else
                 rb.AddForce(_moveDirection.normalized * (_speed * Time.deltaTime * multiplierHorizontal * multiplierVertical * diagonalMultiplier));
+
+            // Add sound
+            // wtf this needs refactor this looks ungodly
+            _walkEventInstance.getPlaybackState(out var walkSoundState);
+            if (_grounded && CurrentSpeed > 0 && !inputManager.Crouching)
+            {
+                if(walkSoundState == PLAYBACK_STATE.STOPPED)
+                    FModAudioManager.StartSoundInstance(SoundInstanceType.Walk);
+            }
+            else if(walkSoundState == PLAYBACK_STATE.PLAYING)
+            {
+                FModAudioManager.StopSoundInstance(SoundInstanceType.Walk); 
+            }
 
             if (!PlayerManager.CanMove)
             {

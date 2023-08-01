@@ -12,11 +12,14 @@ namespace Interactable
         [SerializeField] private GameObject PopupPrefab;
         [SerializeField] [TextArea] private string displayedText;
         public Action OnCloseAction;
+        public virtual string UseSoundName() => "Use";
 
         public override void Use()
         {
-            if(!isUsable || !PlayerManager.CanUse)
+            if(!IsUsable || !PlayerManager.CanUse)
                 return;
+            
+            FModAudioManager.PlaySound(UseSoundName(), PlayerManager.ItemsManager.transform.position);
             
             ShowText();
         }
@@ -30,7 +33,7 @@ namespace Interactable
             var leanWindow = popup.GetComponent<LeanWindow>();
             leanWindow.OnOn.AddListener(() =>
             {
-                isUsable = false;
+                IsUsable = false;
 
                 var wait = Wait.Seconds(1f, 
                     () => Wait.For(() => InputManagerData.Shooting, leanWindow.TurnOff).Start());
@@ -39,7 +42,7 @@ namespace Interactable
             });
             leanWindow.OnOff.AddListener(() =>
             {
-                var wait = Wait.Seconds(1f, ()=> isUsable = true);
+                var wait = Wait.Seconds(1f, ()=> IsUsable = true);
                 wait.Start();
                 
                 OnCloseAction?.Invoke();
@@ -47,7 +50,7 @@ namespace Interactable
                 leanWindow.OnOn.RemoveAllListeners();
                 leanWindow.OnOff.RemoveAllListeners();
             });
-            isUsable = false;
+            IsUsable = false;
             leanWindow.TurnOn();
         }
     }

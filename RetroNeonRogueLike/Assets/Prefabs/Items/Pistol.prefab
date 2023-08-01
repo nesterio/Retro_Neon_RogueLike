@@ -245,7 +245,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6407022838559215822}
-  - component: {fileID: 5592180498476494551}
   m_Layer: 7
   m_Name: ShootingPoint
   m_TagString: Untagged
@@ -268,102 +267,6 @@ Transform:
   m_Father: {fileID: 5821352807224423690}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &5592180498476494551
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588160073603266937}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &2906901914084332622
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,23 +379,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsable: 1
-  awaitInput: 1
-  showViewHint: 1
+  IsUsable: 1
+  <awaitInput>k__BackingField: 1
+  <showViewHint>k__BackingField: 1
   viewHint: Use
-  itemInfo: {fileID: 11400000, guid: e7a3c59ffa8cff44d9cf900f54f3d786, type: 2}
-  itemGameObject: {fileID: 8686206129681047213}
+  <itemInfo>k__BackingField: {fileID: 11400000, guid: e7a3c59ffa8cff44d9cf900f54f3d786, type: 2}
   _collider: {fileID: 2076006795164265124}
   _rigidbody: {fileID: 6447809010302629413}
   relaxedPos: {x: 0.2, y: -0.08, z: 0}
+  <isPickable>k__BackingField: 1
   camTrans: {fileID: 0}
-  shootPoint: {fileID: 6407022838559215822}
   containerTrans: {fileID: 3504852096892411204}
-  audioSource: {fileID: 5592180498476494551}
+  shootPoint: {fileID: 6407022838559215822}
   shootingParticles: {fileID: 6268448610337961773}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
-  aimedGunPos: {x: 0, y: 0, z: 0}
   anim: {fileID: 8070728507882142823}
+  aimedGunPos: {x: 0, y: 0, z: 0}
+  GunSoundsName: Pistol
   GS: {fileID: 865511545530842387}
   GR: {fileID: 5586987576191084803}
   bulletsInMag: 0

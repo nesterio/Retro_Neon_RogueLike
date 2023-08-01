@@ -4,14 +4,16 @@ namespace Interactable.Items
 {
     public abstract class Item : Interactable
     {
-        public ItemInfo itemInfo;
-        public GameObject itemGameObject;
-        [SerializeField] private Collider _collider;
-        [SerializeField] private Rigidbody _rigidbody;
-        [Space]
-        [SerializeField] internal Vector3 relaxedPos;
+        [field:SerializeField]public ItemInfo itemInfo { get; protected set; }
 
-        public bool isPickable { get; private set; } = true;
+        [field: SerializeField] private Collider _collider;
+        [field: SerializeField] private Rigidbody _rigidbody;
+        [Space]
+        [SerializeField] protected Vector3 relaxedPos;
+
+        [field:SerializeField] public bool isPickable { get; private set; } = true;
+        
+        public virtual string PickDropSoundName => "Pick&Drop_Default";
 
         public virtual void OnPickUp(Transform parent)
         {
