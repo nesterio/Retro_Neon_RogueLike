@@ -16,6 +16,7 @@ public class FModAudioManager : MonoBehaviour
         public string Name;
         public EventReference Shot;
         public EventReference EmptyShot;
+        public EventReference Aim;
         public EventReference MagIn;
         public EventReference MagOut;
         public EventReference Cock; // lol
@@ -86,7 +87,9 @@ public class FModAudioManager : MonoBehaviour
                     return gunSounds.Shot;
                 case GunSoundType.EmptyShot:
                     return gunSounds.EmptyShot;
-                case GunSoundType.MahIn:
+                case GunSoundType.Aim:
+                    return gunSounds.Aim;
+                case GunSoundType.MagIn:
                     return gunSounds.MagIn;
                 case GunSoundType.MagOut:
                     return gunSounds.MagOut;
@@ -98,18 +101,18 @@ public class FModAudioManager : MonoBehaviour
         }
     }
 
-    public static void CreateSoundInstance(SoundInstanceType type, string soundName, bool startInstance = true)
+    public static EventInstance? CreateSoundInstance(SoundInstanceType type, string soundName, bool startInstance = true)
     {
         if (type == SoundInstanceType.Empty)
         {
             Debug.LogError("You can't create an empty type sound instance");
-            return;
+            return null;
         }
 
         if (SoundInstancesDictionary.ContainsKey(type))
         {
             Debug.LogError("This instance is already playing, but you are trying to call it again: " + type);
-            return;
+            return null;
         }
 
         Dictionary<string, EventReference> dictionary;
@@ -128,7 +131,7 @@ public class FModAudioManager : MonoBehaviour
         if (!dictionary.TryGetValue(soundName, out var sound))
         {
             Debug.LogError($"Couldn't find the sound by the name: {soundName} for the sound instance type: {type}");
-            return;
+            return null;
         }
 
         var eventInstance = RuntimeManager.CreateInstance(sound);
@@ -136,6 +139,8 @@ public class FModAudioManager : MonoBehaviour
 
         if(startInstance)
             StartSoundInstance(type);
+
+        return eventInstance;
     }
 
     public static void StartSoundInstance(SoundInstanceType type)
@@ -199,7 +204,8 @@ public enum GunSoundType
 {
     Shot,
     EmptyShot,
-    MahIn,
+    Aim,
+    MagIn,
     MagOut,
     Cock
 }

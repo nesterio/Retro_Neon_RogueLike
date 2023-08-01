@@ -83,7 +83,7 @@ namespace PlayerScripts
 
         void ProcessPopup(BasicPopupInteraction basicPopupInteraction)
         {
-            if(!basicPopupInteraction.isUsable)
+            if(!basicPopupInteraction.IsUsable)
                 return;
 
             basicPopupInteraction.OnCloseAction = () =>
@@ -97,7 +97,7 @@ namespace PlayerScripts
 
         void ProcessInteractable(Interactable.Interactable interactable)
         {
-            if(interactable.isUsable)
+            if(interactable.IsUsable)
                 interactable.Use();
         }
 

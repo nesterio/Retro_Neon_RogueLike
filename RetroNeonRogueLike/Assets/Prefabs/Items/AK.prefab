@@ -677,23 +677,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsable: 1
-  awaitInput: 1
-  showViewHint: 1
+  IsUsable: 1
+  <awaitInput>k__BackingField: 1
+  <showViewHint>k__BackingField: 1
   viewHint: Use
-  itemInfo: {fileID: 11400000, guid: 3c061dfa9d2a05349890eb27ee2b6678, type: 2}
-  itemGameObject: {fileID: 22654496756138220}
+  <itemInfo>k__BackingField: {fileID: 11400000, guid: 3c061dfa9d2a05349890eb27ee2b6678, type: 2}
   _collider: {fileID: 7073548594449773669}
   _rigidbody: {fileID: 2335219630684384386}
   relaxedPos: {x: 0.15, y: -0.02, z: 0.05}
+  <isPickable>k__BackingField: 1
   camTrans: {fileID: 0}
   containerTrans: {fileID: 1478615269953039622}
+  shootPoint: {fileID: 7252475497416917581}
   shootingParticles: {fileID: 5345255262312783714}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
+  anim: {fileID: 5048712023849406147}
   aimedGunPos: {x: 0, y: 0, z: 0}
   GunSoundsName: AK
-  shootPoint: {fileID: 7252475497416917581}
-  anim: {fileID: 5048712023849406147}
   GS: {fileID: 1211607639823874133}
   GR: {fileID: 5394162801386403513}
   bulletsInMag: 0

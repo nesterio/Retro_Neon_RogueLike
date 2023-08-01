@@ -660,23 +660,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsable: 1
-  awaitInput: 1
-  showViewHint: 1
+  IsUsable: 1
+  <awaitInput>k__BackingField: 1
+  <showViewHint>k__BackingField: 1
   viewHint: Use
-  itemInfo: {fileID: 11400000, guid: 8455a6dff55190b4bb15f3ec62529c7f, type: 2}
-  itemGameObject: {fileID: 2459231769103600996}
+  <itemInfo>k__BackingField: {fileID: 11400000, guid: 8455a6dff55190b4bb15f3ec62529c7f, type: 2}
   _collider: {fileID: 8596933367142127157}
   _rigidbody: {fileID: 1260585888815820176}
   relaxedPos: {x: 0.2, y: -0.05, z: -0.08}
+  <isPickable>k__BackingField: 1
   camTrans: {fileID: 0}
   containerTrans: {fileID: 6924469112236639473}
+  shootPoint: {fileID: 5779941909446213897}
   shootingParticles: {fileID: 358205789311634921}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
+  anim: {fileID: 1232910615232461767}
   aimedGunPos: {x: 0, y: 0, z: -0.16}
   GunSoundsName: SVD
-  shootPoint: {fileID: 5779941909446213897}
-  anim: {fileID: 1232910615232461767}
   GS: {fileID: 8720456515921584547}
   GR: {fileID: 3249718977323241334}
   bulletsInMag: 0

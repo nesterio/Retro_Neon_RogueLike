@@ -16,7 +16,7 @@ namespace Interactable
             var interactable = interactableObject.GetComponent<CustomActionInteractable>();
             interactable = interactable == null ? interactableObject.AddComponent<CustomActionInteractable>() : new CustomActionInteractable();
 
-            interactable.isUsable = usable;
+            interactable.IsUsable = usable;
             interactable.awaitInput = awaitUse;
             interactable.viewHint = hint;
             interactable.UseAction = useAction;
@@ -26,13 +26,13 @@ namespace Interactable
 
         public override void Use()
         {
-            if(!isUsable)
+            if(!IsUsable)
                 return;
             
             UseAction?.Invoke();
             
-            isUsable = false;
-            var wait = Wait.Seconds(1f, () => isUsable = true);
+            IsUsable = false;
+            var wait = Wait.Seconds(1f, () => IsUsable = true);
             wait.Start();
         }
 

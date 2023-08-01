@@ -379,24 +379,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsable: 1
-  awaitInput: 1
-  showViewHint: 1
+  IsUsable: 1
+  <awaitInput>k__BackingField: 1
+  <showViewHint>k__BackingField: 1
   viewHint: Use
-  itemInfo: {fileID: 11400000, guid: e7a3c59ffa8cff44d9cf900f54f3d786, type: 2}
-  itemGameObject: {fileID: 8686206129681047213}
+  <itemInfo>k__BackingField: {fileID: 11400000, guid: e7a3c59ffa8cff44d9cf900f54f3d786, type: 2}
   _collider: {fileID: 2076006795164265124}
   _rigidbody: {fileID: 6447809010302629413}
   relaxedPos: {x: 0.2, y: -0.08, z: 0}
+  <isPickable>k__BackingField: 1
   camTrans: {fileID: 0}
   containerTrans: {fileID: 3504852096892411204}
+  shootPoint: {fileID: 6407022838559215822}
   shootingParticles: {fileID: 6268448610337961773}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
-  aimedGunPos: {x: 0, y: 0, z: 0}
-  shotSoundName: Pistol_Shot
-  emptyShotSoundName: EmptyShot
-  shootPoint: {fileID: 6407022838559215822}
   anim: {fileID: 8070728507882142823}
+  aimedGunPos: {x: 0, y: 0, z: 0}
+  GunSoundsName: Pistol
   GS: {fileID: 865511545530842387}
   GR: {fileID: 5586987576191084803}
   bulletsInMag: 0

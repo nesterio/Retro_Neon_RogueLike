@@ -1,4 +1,5 @@
 using System;
+using FMOD.Studio;
 using SL.Wait;
 using UnityEngine;
 using inputManager = InputManagerData;
@@ -53,7 +54,7 @@ namespace PlayerScripts
 
         public static float CurrentSpeed { get; private set; }
 
-        private bool _playingWalkSound = false;
+        private EventInstance _walkEventInstance;
 
         void Awake()
         {
@@ -63,7 +64,9 @@ namespace PlayerScripts
 
         private void Start()
         {
-            FModAudioManager.CreateSoundInstance(SoundInstanceType.Walk, "Step", false);
+            var eventInstance = FModAudioManager.CreateSoundInstance(SoundInstanceType.Walk, "Step", false);
+            if (eventInstance != null)
+                _walkEventInstance = eventInstance.Value;
         }
 
         void Update() 
@@ -126,20 +129,15 @@ namespace PlayerScripts
 
             // Add sound
             // wtf this needs refactor this looks ungodly
-            if (_grounded && !inputManager.Crouching && CurrentSpeed > 0)
+            _walkEventInstance.getPlaybackState(out var walkSoundState);
+            if (_grounded && CurrentSpeed > 0 && !inputManager.Crouching)
             {
-                if (!_playingWalkSound)
-                {
+                if(walkSoundState == PLAYBACK_STATE.STOPPED)
                     FModAudioManager.StartSoundInstance(SoundInstanceType.Walk);
-                    
-                    _playingWalkSound = true;
-                }
             }
-            else if(_playingWalkSound)
+            else if(walkSoundState == PLAYBACK_STATE.PLAYING)
             {
                 FModAudioManager.StopSoundInstance(SoundInstanceType.Walk); 
-                
-                _playingWalkSound = false;
             }
 
             if (!PlayerManager.CanMove)

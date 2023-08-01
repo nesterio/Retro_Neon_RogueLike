@@ -96,10 +96,10 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638265105521299515
+  lastModified: 638265198220239398
   FileSizes:
   - Name: Desktop
-    Value: 1794
+    Value: 1908
   Exists: 1
 --- !u!114 &-8663092286329877561
 MonoBehaviour:
@@ -119,6 +119,33 @@ MonoBehaviour:
     Data2: 1337910194
     Data3: 1002115743
     Data4: 795989428
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8254879299731792011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/Pistol/Pistol_DryShot
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/Pistol/Pistol_DryShot
+  Guid:
+    Data1: -2076949141
+    Data2: 1273892920
+    Data3: -1746922819
+    Data4: -585039799
   Banks:
   - {fileID: -5830728117826346247}
   IsStream: 0
@@ -222,10 +249,10 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638265067429548818
+  lastModified: 638265204537123548
   FileSizes:
   - Name: Desktop
-    Value: 1467616
+    Value: 1534112
   Exists: 1
 --- !u!114 &-5730877192747276514
 MonoBehaviour:
@@ -387,6 +414,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 94208
+--- !u!114 &-2995381649651876711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/SVD/SVD_DryShot
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/SVD/SVD_DryShot
+  Guid:
+    Data1: 903254751
+    Data2: 1251586252
+    Data3: 758852226
+    Data4: -810363625
+  Banks:
+  - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2236817772828583809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,12 +533,15 @@ MonoBehaviour:
   - {fileID: -3594766576460386010}
   - {fileID: -7946744002265572385}
   - {fileID: -5436438180987000735}
+  - {fileID: 3856802257498660015}
+  - {fileID: -8254879299731792011}
+  - {fileID: -2995381649651876711}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7789622237025966454}
   StringsBanks:
   - {fileID: -8748965730281878557}
-  cacheTime: 638265105570844851
+  cacheTime: 638265206721679941
   cacheVersion: 131605
 --- !u!114 &910325312208710615
 MonoBehaviour:
@@ -533,6 +590,34 @@ MonoBehaviour:
     Data4: -826772594
   Banks:
   - {fileID: -5830728117826346247}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3856802257498660015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Guns/AK/AK_DryShot
+  m_EditorClassIdentifier: 
+  Path: event:/Guns/AK/AK_DryShot
+  Guid:
+    Data1: -1922053562
+    Data2: 1155098583
+    Data3: -1641649997
+    Data4: -750393880
+  Banks:
+  - {fileID: -5830728117826346247}
+  - {fileID: 7789622237025966454}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -602,7 +687,7 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638265105570844851
+  lastModified: 638265206721679941
   FileSizes:
   - Name: Desktop
     Value: 11278432
@@ -676,10 +761,10 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638265105521289510
+  lastModified: 638265198220209390
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 7680
   Exists: 1
 --- !u!114 &9154306719662317184
 MonoBehaviour:

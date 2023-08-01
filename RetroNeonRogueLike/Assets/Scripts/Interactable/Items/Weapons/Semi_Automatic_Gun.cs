@@ -1,4 +1,3 @@
-using DG.Tweening;
 using PlayerScripts;
 using UnityEngine;
 
@@ -6,8 +5,6 @@ namespace Interactable.Items.Weapons
 {
     public class Semi_Automatic_Gun : Gun
     {
-        [SerializeField] protected Transform shootPoint;
-        [SerializeField] Animator anim;
         [SerializeField] GunShutter GS;
         [SerializeField] GunRecoil GR;
 
@@ -16,14 +13,10 @@ namespace Interactable.Items.Weapons
 
         int MagCapacity => ((GunInfo)itemInfo).magCapacity;
         public int bulletsInMag;
-
-        bool IsRealoading => anim.GetCurrentAnimatorStateInfo(0).IsName("Reload");
-
+        
         [Space]
 
         [SerializeField] bool hasCustomShutter;
-
-        private static readonly int ReloadAnimID = Animator.StringToHash("Reload");
 
         void Awake() 
         {
@@ -57,39 +50,15 @@ namespace Interactable.Items.Weapons
             }
 
         }
-
-        public override void Reload() 
-        {
-            if (!IsRealoading && PlayerManager.CanUse)
-                anim.SetBool(ReloadAnimID, true);
-        }
+        
         public override void StopReload() 
         {
-            if (anim.GetBool(ReloadAnimID))
-                anim.SetBool(ReloadAnimID, false);
+            base.StopReload();
 
             bulletsInMag = MagCapacity;
         }
 
-        public override void Aim(bool shouldAim) 
-        {
-            if (shouldAim && !IsAiming && !IsRealoading) 
-            {
-                containerTrans.DOLocalMove(aimedGunPos, ((GunInfo)itemInfo).aimingSpeed, false);
-                IsAiming = true;
-                PlayerManager.WSAB.isAiming = true;
-
-            }
-
-            if (!shouldAim && IsAiming || IsRealoading) 
-            {
-                containerTrans.DOLocalMove(relaxedPos, ((GunInfo)itemInfo).aimingSpeed, false);
-                IsAiming = false;
-                PlayerManager.WSAB.isAiming = false;
-            }
-        }
-
-        void Shoot() 
+        protected override void Shoot() 
         {
             // Camera recoil
             (float,float,float) recoils = IsAiming ? (((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ)
@@ -113,7 +82,6 @@ namespace Interactable.Items.Weapons
             
             // Sound
             FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.Shot, shootPoint.position);
-            //SimpleAudioManager.PlaySound("RifleShot", audioSource);
 
             bulletsInMag--;
 
@@ -124,38 +92,6 @@ namespace Interactable.Items.Weapons
                 GameObject tempBullet = Instantiate(bulletPrefab, shootPoint.position, camTrans.rotation);
                 tempBullet.GetComponent<BulletScript>().Initialize(hit.point, hit.normal, ((GunInfo)itemInfo).damage);
             }
-
-            //Vector3 direction = GetDirection();
-
-            //if (Physics.Raycast(bulletSpawnPoint.position, direction, out RaycastHit hit)) 
-            //{
-            //    TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.position, Quaternion.identity);
-            //
-            //    StartCoroutine(SpawnTrail(trail, hit));
-            //
-            //    if (hit.collider.gameObject.CompareTag("Player"))
-            //    {
-            //        hit.collider.gameObject.GetComponent<PlayerStats>().DrainHealth( ( (GunInfo) itemInfo ) .damage ); 
-            //    }
-        
-            //    PV.RPC("RPC_Shoot", RpcTarget.All, hit.point, hit.normal);
-
-            // }
-
-            //Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-
-            //ray.origin = cam.transform.position;
-
-            //if (Physics.Raycast(ray, out RaycastHit hit)) 
-            //{
-            //    if (hit.collider.gameObject.CompareTag("Player")) 
-            //    {
-            //        hit.collider.gameObject.GetComponent<PlayerStats>().DrainHealth( ( (GunInfo) itemInfo ) .damage ); 
-            //    }
-            //
-            //    PV.RPC("RPC_Shoot", RpcTarget.All, hit.point, hit.normal);
-            //
-            //}
         }
 
     }
