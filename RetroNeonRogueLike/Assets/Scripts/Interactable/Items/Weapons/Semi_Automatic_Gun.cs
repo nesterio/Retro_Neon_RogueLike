@@ -112,7 +112,7 @@ namespace Interactable.Items.Weapons
             }
             
             // Sound
-            FModAudioManager.PlayGunSound("Pistol", GunSoundType.Shot, shootPoint.position);
+            FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.Shot, shootPoint.position);
             //SimpleAudioManager.PlaySound("RifleShot", audioSource);
 
             bulletsInMag--;

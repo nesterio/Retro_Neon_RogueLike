@@ -674,8 +674,7 @@ MonoBehaviour:
   shootingParticles: {fileID: 358205789311634921}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   aimedGunPos: {x: 0, y: 0, z: -0.16}
-  shotSoundName: SVD_Shot
-  emptyShotSoundName: EmptyShot
+  GunSoundsName: SVD
   shootPoint: {fileID: 5779941909446213897}
   anim: {fileID: 1232910615232461767}
   GS: {fileID: 8720456515921584547}

@@ -131,12 +131,14 @@ namespace PlayerScripts
                 if (!_playingWalkSound)
                 {
                     FModAudioManager.StartSoundInstance(SoundInstanceType.Walk);
+                    
                     _playingWalkSound = true;
                 }
             }
             else if(_playingWalkSound)
             {
-                FModAudioManager.StopSoundInstance(SoundInstanceType.Walk);
+                FModAudioManager.StopSoundInstance(SoundInstanceType.Walk); 
+                
                 _playingWalkSound = false;
             }
 

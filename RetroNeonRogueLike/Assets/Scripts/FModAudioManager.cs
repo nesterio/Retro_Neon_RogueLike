@@ -7,6 +7,9 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 public class FModAudioManager : MonoBehaviour
 {
+    [SerializeField] private List<Sound> ambienceSounds = new List<Sound>();
+    private static readonly Dictionary<string, EventReference> AmbienceSoundsDictionary = new Dictionary<string, EventReference>();
+    
     [System.Serializable]
     public class GunSounds
     {
@@ -38,6 +41,13 @@ public class FModAudioManager : MonoBehaviour
 
     private void Awake()
     {
+        // Populate the ambience sound dictionary
+        foreach (var sound in ambienceSounds)
+        {
+            if (!AmbienceSoundsDictionary.ContainsKey(sound.name))
+                AmbienceSoundsDictionary.Add(sound.name, sound.clip);
+        }
+        
         // Populate the sound dictionary
         foreach (var sound in sounds)
         {
@@ -90,15 +100,34 @@ public class FModAudioManager : MonoBehaviour
 
     public static void CreateSoundInstance(SoundInstanceType type, string soundName, bool startInstance = true)
     {
+        if (type == SoundInstanceType.Empty)
+        {
+            Debug.LogError("You can't create an empty type sound instance");
+            return;
+        }
+
         if (SoundInstancesDictionary.ContainsKey(type))
         {
             Debug.LogError("This instance is already playing, but you are trying to call it again: " + type);
             return;
         }
 
-        if (!SoundDictionary.TryGetValue(soundName, out var sound))
+        Dictionary<string, EventReference> dictionary;
+        switch (type)
         {
-            Debug.LogError("Couldn't find the sound by the name: " + soundName);
+            case SoundInstanceType.Ambience:
+                dictionary = AmbienceSoundsDictionary;
+                break;
+            
+            case SoundInstanceType.Walk:
+            default:
+                dictionary = SoundDictionary;
+                break;
+        }
+
+        if (!dictionary.TryGetValue(soundName, out var sound))
+        {
+            Debug.LogError($"Couldn't find the sound by the name: {soundName} for the sound instance type: {type}");
             return;
         }
 
@@ -146,11 +175,24 @@ public class FModAudioManager : MonoBehaviour
 
         instance.stop(STOP_MODE.ALLOWFADEOUT);
     }
+
+    public static void SetInstanceParameter(SoundInstanceType type, string parameterName, float value)
+    {
+        if (!_soundInstancesDictionary.TryGetValue(type, out var eventInstance))
+        {
+            Debug.LogError("Couldn't find the sound instance. It is not initialized. Type: " + type);
+            return;
+        }
+
+        eventInstance.setParameterByName(parameterName, value);
+    }
 }
 
 public enum SoundInstanceType
 {
-    Walk
+    Walk,
+    Ambience,
+    Empty
 }
 
 public enum GunSoundType

@@ -96,10 +96,10 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638264340561054040
+  lastModified: 638265105521299515
   FileSizes:
   - Name: Desktop
-    Value: 1574
+    Value: 1794
   Exists: 1
 --- !u!114 &-8663092286329877561
 MonoBehaviour:
@@ -155,6 +155,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7946744002265572385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/DefaultAmbience
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/DefaultAmbience
+  Guid:
+    Data1: -1006776540
+    Data2: 1239416571
+    Data3: -741518417
+    Data4: 1020074517
+  Banks:
+  - {fileID: 4474668392794193768}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7829359548548283564}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 123428
+--- !u!114 &-7829359548548283564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/DefaultAmbience/AmbienceIntensity
+  m_EditorClassIdentifier: 
+  Name: AmbienceIntensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3518973867
+    data2: 2743665694
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-5830728117826346247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +222,7 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638264340578249990
+  lastModified: 638265067429548818
   FileSizes:
   - Name: Desktop
     Value: 1467616
@@ -202,6 +254,57 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5436438180987000735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/GalleryMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Music/GalleryMusic
+  Guid:
+    Data1: -164966444
+    Data2: 1156580649
+    Data3: -146177864
+    Data4: 1412221006
+  Banks:
+  - {fileID: 5144481433459208962}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 269036
+--- !u!114 &-5381764927542113390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BattleAmbience/AmbienceIntensity
+  m_EditorClassIdentifier: 
+  Name: AmbienceIntensity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3518973867
+    data2: 2743665694
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-4834630684364752643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +359,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3594766576460386010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambience/BattleAmbience
+  m_EditorClassIdentifier: 
+  Path: event:/Ambience/BattleAmbience
+  Guid:
+    Data1: 687565382
+    Data2: 1298209793
+    Data3: 686269062
+    Data4: -2067462208
+  Banks:
+  - {fileID: 4474668392794193768}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -5381764927542113390}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 94208
 --- !u!114 &-2236817772828583809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,12 +476,15 @@ MonoBehaviour:
   - {fileID: -8073659001920929487}
   - {fileID: 910325312208710615}
   - {fileID: 9154306719662317184}
+  - {fileID: -3594766576460386010}
+  - {fileID: -7946744002265572385}
+  - {fileID: -5436438180987000735}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7789622237025966454}
   StringsBanks:
   - {fileID: -8748965730281878557}
-  cacheTime: 638264340578249990
+  cacheTime: 638265105570844851
   cacheVersion: 131605
 --- !u!114 &910325312208710615
 MonoBehaviour:
@@ -448,10 +582,10 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Ambience.bank
   Name: Ambience
   StudioPath: bank:/Ambience
-  lastModified: 638264290904973309
+  lastModified: 638265105521229020
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 2480864
   Exists: 1
 --- !u!114 &5144481433459208962
 MonoBehaviour:
@@ -468,10 +602,10 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638264290905013555
+  lastModified: 638265105570844851
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 11278432
   Exists: 1
 --- !u!114 &5648591331992581562
 MonoBehaviour:
@@ -542,7 +676,7 @@ MonoBehaviour:
   Path: ../../../Desktop/FPSGameFModProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638264340561028999
+  lastModified: 638265105521289510
   FileSizes:
   - Name: Desktop
     Value: 1036

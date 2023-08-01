@@ -691,8 +691,7 @@ MonoBehaviour:
   shootingParticles: {fileID: 5345255262312783714}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   aimedGunPos: {x: 0, y: 0, z: 0}
-  shotSoundName: AK_Shot
-  emptyShotSoundName: EmptyShot
+  GunSoundsName: AK
   shootPoint: {fileID: 7252475497416917581}
   anim: {fileID: 5048712023849406147}
   GS: {fileID: 1211607639823874133}

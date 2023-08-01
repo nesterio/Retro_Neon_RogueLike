@@ -13,7 +13,6 @@ namespace PlayerScripts
         [SerializeField] private Transform playerOrientation;
         [SerializeField] private Transform cameraParent;
         [SerializeField] private Transform itemHolder;
-        [SerializeField] private AudioSource headphones;
 
         public static bool CanMove = true;
         public static bool CanLook = true;
