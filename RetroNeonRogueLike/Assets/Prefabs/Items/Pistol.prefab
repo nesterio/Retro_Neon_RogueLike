@@ -391,15 +391,15 @@ MonoBehaviour:
   camTrans: {fileID: 0}
   containerTrans: {fileID: 3504852096892411204}
   shootPoint: {fileID: 6407022838559215822}
+  GR: {fileID: 5586987576191084803}
+  GS: {fileID: 865511545530842387}
   shootingParticles: {fileID: 6268448610337961773}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   anim: {fileID: 8070728507882142823}
   aimedGunPos: {x: 0, y: 0, z: 0}
-  GunSoundsName: Pistol
-  GS: {fileID: 865511545530842387}
-  GR: {fileID: 5586987576191084803}
-  bulletsInMag: 0
   hasCustomShutter: 1
+  GunSoundsName: Pistol
+  bulletsInMag: 0
 --- !u!114 &5586987576191084803
 MonoBehaviour:
   m_ObjectHideFlags: 0
