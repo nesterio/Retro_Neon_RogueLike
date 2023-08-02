@@ -1,4 +1,3 @@
-using System;
 using PlayerScripts;
 
 namespace Interactable.Items.Weapons

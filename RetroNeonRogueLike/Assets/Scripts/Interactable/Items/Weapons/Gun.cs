@@ -22,7 +22,6 @@ namespace Interactable.Items.Weapons
 
         [Header("Weapon positions")]
         [SerializeField] protected Vector3 aimedGunPos = new Vector3(0, 0, 0);
-        [SerializeField] bool hasCustomShutter;
         protected bool IsAiming = true;
 
         [Header("Sounds")] 
