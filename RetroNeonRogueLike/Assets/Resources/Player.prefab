@@ -1308,6 +1308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoStartAmbience: 1
   ambienceToPlay: Default
+  ambienceIntensity: 1
 --- !u!1 &8937362320670234744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,7 +1323,7 @@ GameObject:
   - component: {fileID: 1125548910131806965}
   m_Layer: 0
   m_Name: MainCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1446,6 +1447,7 @@ GameObject:
   - component: {fileID: 8655138605077433008}
   - component: {fileID: 8937362321070618970}
   - component: {fileID: 8937362321070618971}
+  - component: {fileID: 2290723267372491049}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1595,6 +1597,20 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &2290723267372491049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937362321070618972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7705cc059ec2f5240bfe606cf9bf8b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveEffects: []
+  IsDead: 0
 --- !u!1 &8937362321551972313
 GameObject:
   m_ObjectHideFlags: 0

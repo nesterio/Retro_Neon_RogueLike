@@ -43,10 +43,31 @@ public class BulletScript : MonoBehaviour
 
         bulletImpactObj.transform.SetParent(col.transform);
 
-        if (col.gameObject.CompareTag("Player"))
-            PlayerManager.PlayerStats.ChangeHealth(damage);
+        switch (col.gameObject.tag)
+        {
+            case "Player":
+                HitPlayer();
+                break;
+            case "AI":
+                HitEmeraldAI(col.gameObject);
+                break;
+        }
 
         Destroy(gameObject);
+    }
+
+    void HitPlayer() => PlayerManager.PlayerStats.ChangeHealth(damage);
+
+    void HitEmeraldAI(GameObject aiObj)
+    {
+        var emeraldAI = aiObj.GetComponent<EmeraldAI.EmeraldAISystem>();
+        if (emeraldAI == null)
+        {
+            Debug.LogError("An object tagged as an AI does not have a EmeraldAISystem component");
+            return;
+        }
+        
+        emeraldAI.Damage(damage, EmeraldAI.EmeraldAISystem.TargetType.Player, PlayerManager.ItemsManager.transform);
     }
 
 }

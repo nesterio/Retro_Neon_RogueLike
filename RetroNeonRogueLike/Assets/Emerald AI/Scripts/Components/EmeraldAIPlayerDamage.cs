@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EmeraldAI.Example;
+using PlayerScripts;
 
 namespace EmeraldAI
 {
@@ -14,10 +16,17 @@ namespace EmeraldAI
         public List<string> ActiveEffects = new List<string>();
         public bool IsDead = false;
 
+        private void Start()
+        {
+            PlayerManager.PlayerStats.DeathEvent += () => IsDead = true;
+        }
+
         public void SendPlayerDamage(int DamageAmount, Transform Target, EmeraldAISystem EmeraldComponent, bool CriticalHit = false)
         {
+            DamagePlayerCustom(DamageAmount);
+            
             //The standard damage function that sends damage to the Emerald AI demo player
-            DamagePlayerStandard(DamageAmount);
+            //DamagePlayerStandard(DamageAmount);
 
             //Creates damage text on the player's position, if enabled.
             if (GetComponent<EmeraldAI.Utility.TargetPositionModifier>() != null)
@@ -51,16 +60,18 @@ namespace EmeraldAI
                 }
             }
         }
+        
+        void DamagePlayerCustom(int damageAmount) => PlayerManager.PlayerStats.ChangeHealth(-damageAmount);
 
-        /*
-        void DamageRFPS(int DamageAmount, Transform Target)
-        {
-            if (GetComponent<FPSPlayer>() != null)
+            /*
+            void DamageRFPS(int DamageAmount, Transform Target)
             {
-                GetComponent<FPSPlayer>().ApplyDamage((float)DamageAmount, Target, true);
+                if (GetComponent<FPSPlayer>() != null)
+                {
+                    GetComponent<FPSPlayer>().ApplyDamage((float)DamageAmount, Target, true);
+                }
             }
-        }
-        */
+            */
 
         /*
         void DamageInvectorPlayer (int DamageAmount, Transform Target)
