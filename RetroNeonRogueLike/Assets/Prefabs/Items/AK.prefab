@@ -637,7 +637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7738195810090707653}
-  - component: {fileID: 4384591350716281148}
+  - component: {fileID: 5678051973234988201}
   - component: {fileID: 5394162801386403513}
   - component: {fileID: 1211607639823874133}
   - component: {fileID: 2335219630684384386}
@@ -665,7 +665,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4384591350716281148
+--- !u!114 &5678051973234988201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8371510453364281450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 339b378a22ead944c9a495ad276f7722, type: 3}
+  m_Script: {fileID: 11500000, guid: 07f3a016152d8d24fa07132c8ce0d504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsUsable: 1
@@ -689,15 +689,15 @@ MonoBehaviour:
   camTrans: {fileID: 0}
   containerTrans: {fileID: 1478615269953039622}
   shootPoint: {fileID: 7252475497416917581}
+  GR: {fileID: 5394162801386403513}
+  GS: {fileID: 1211607639823874133}
   shootingParticles: {fileID: 5345255262312783714}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   anim: {fileID: 5048712023849406147}
   aimedGunPos: {x: 0, y: 0, z: 0}
-  GunSoundsName: AK
-  GS: {fileID: 1211607639823874133}
-  GR: {fileID: 5394162801386403513}
-  bulletsInMag: 0
   hasCustomShutter: 0
+  GunSoundsName: AK
+  bulletsInMag: 0
 --- !u!114 &5394162801386403513
 MonoBehaviour:
   m_ObjectHideFlags: 0

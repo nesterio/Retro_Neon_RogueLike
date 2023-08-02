@@ -9,6 +9,8 @@ namespace Interactable.Items.Weapons
         [HideInInspector]public Transform camTrans;
         [SerializeField] protected Transform containerTrans;
         [SerializeField] protected Transform shootPoint;
+        [SerializeField] GunRecoil GR;
+        [SerializeField] GunShutter GS;
         [Space(5)]
         [SerializeField] protected ParticleSystem shootingParticles;
         [Space]
@@ -26,14 +28,55 @@ namespace Interactable.Items.Weapons
         [SerializeField] protected string GunSoundsName = "Pistol";
         public override string PickDropSoundName => "Pick&Drop_Gun";
         
-        
+        protected float ShotSpeed => ((GunInfo)itemInfo).shotSpeed;
+        protected float TimeToShoot;
         protected bool IsRealoading => anim.GetCurrentAnimatorStateInfo(0).IsName("Reload");
 
-        private void Update() =>
-            transform.localRotation = camTrans.localRotation;
-        
+
+        private void Start() => Initialize();
+        protected virtual void Initialize() => TimeToShoot = ShotSpeed;
+
+        void Update() 
+        {
+            if (TimeToShoot > 0)
+                TimeToShoot -= Time.deltaTime;
+        }
+
         public abstract override void Use();
-        protected abstract void Shoot();
+
+        protected virtual void Shoot()
+        {
+            // Camera recoil
+            (float,float,float) recoils = IsAiming ? (((GunInfo)itemInfo).recoilAimedX, ((GunInfo)itemInfo).recoilAimedY, ((GunInfo)itemInfo).recoilAimedZ)
+                : (((GunInfo)itemInfo).recoilX, ((GunInfo)itemInfo).recoilY, ((GunInfo)itemInfo).recoilZ);
+            PlayerManager.CamRecoil.RecoilFire(recoils.Item1, recoils.Item2, recoils.Item3);
+
+            // Gun recoil
+            GR.RecoilFire(IsAiming);
+
+            // Gun shutter
+            GS.PlayShutter();
+
+            // Particles
+            if (shootingParticles != null)
+            {
+                if(shootingParticles.isPlaying)
+                    shootingParticles.Stop();
+                
+                shootingParticles.Play();
+            }
+            
+            // Sound
+            FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.Shot, shootPoint.position);
+            
+            RaycastHit hit;
+
+            if (Physics.Raycast(camTrans.position, camTrans.forward, out hit, Mathf.Infinity)) 
+            {
+                GameObject tempBullet = Instantiate(bulletPrefab, shootPoint.position, camTrans.rotation);
+                tempBullet.GetComponent<BulletScript>().Initialize(hit.point, hit.normal, ((GunInfo)itemInfo).damage);
+            }
+        }
 
         public virtual void Reload()
         {
@@ -64,19 +107,6 @@ namespace Interactable.Items.Weapons
                 PlayerManager.WSAB.isAiming = false;
                 FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.Aim, shootPoint.position);
             }
-        }
-
-        public virtual void OnMagIn()
-        {
-            FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.MagIn, shootPoint.position);
-        }
-        public virtual void OnMagOut()
-        {
-            FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.MagOut, shootPoint.position);
-        }
-        public virtual void OnCock() // funny meme share on reddit big upvotes funny fedora people yes
-        {
-            FModAudioManager.PlayGunSound(GunSoundsName, GunSoundType.Cock, shootPoint.position);
         }
     }
 }

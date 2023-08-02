@@ -672,15 +672,15 @@ MonoBehaviour:
   camTrans: {fileID: 0}
   containerTrans: {fileID: 6924469112236639473}
   shootPoint: {fileID: 5779941909446213897}
+  GR: {fileID: 3249718977323241334}
+  GS: {fileID: 8720456515921584547}
   shootingParticles: {fileID: 358205789311634921}
   bulletPrefab: {fileID: 7978906624152502764, guid: 672a343f9d1f7dc4989c1460a1ff1b12, type: 3}
   anim: {fileID: 1232910615232461767}
   aimedGunPos: {x: 0, y: 0, z: -0.16}
-  GunSoundsName: SVD
-  GS: {fileID: 8720456515921584547}
-  GR: {fileID: 3249718977323241334}
-  bulletsInMag: 0
   hasCustomShutter: 1
+  GunSoundsName: SVD
+  bulletsInMag: 0
 --- !u!114 &3249718977323241334
 MonoBehaviour:
   m_ObjectHideFlags: 0
