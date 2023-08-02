@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -19,7 +20,7 @@ MonoBehaviour:
   AICritTextColor: {r: 1, g: 0.43448275, b: 0, a: 1}
   HealingTextColor: {r: 0, g: 1, b: 0, a: 1}
   TextFont: {fileID: 12800000, guid: f67d81aa5e239f04bb57c4d8b401ad25, type: 3}
-  FontSize: 22
+  FontSize: 30
   MaxFontSize: 15
   AnimationType: 2
   CombatTextTargets: 0
