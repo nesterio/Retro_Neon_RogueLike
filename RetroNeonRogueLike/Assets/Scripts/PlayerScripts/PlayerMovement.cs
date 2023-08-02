@@ -2,7 +2,6 @@ using System;
 using FMOD.Studio;
 using SL.Wait;
 using UnityEngine;
-using inputManager = InputManagerData;
 
 namespace PlayerScripts
 {
@@ -23,8 +22,6 @@ namespace PlayerScripts
 
         float _speed;
         Vector3 _moveDirection;
-        
-        [SerializeField] float slopeCancelMultiplier = 100;
 
         private float walkSpeed => 
             PlayerManager.PlayerStats.MoveSpeed / 10f;
@@ -46,7 +43,7 @@ namespace PlayerScripts
 
         //Sliding
         private Vector3 _wallNormalVector;
-        private bool _grounded;
+        public static bool Grounded { get; private set; }
 
         [Space]
         [SerializeField] float floorDetectionRange;
@@ -71,12 +68,12 @@ namespace PlayerScripts
 
         void Update() 
         {
-            CurrentSpeed = AllowWeaponSway() ? rb.velocity.magnitude : 0;
+            CurrentSpeed = rb.velocity.magnitude;
             
             Vector2 mag = FindVelRelativeToLook();
             
             //Counteract sliding and sloppy movement
-            CounterMovement(inputManager.x, inputManager.y, mag);
+            CounterMovement(InputManagerData.x, InputManagerData.y, mag);
             
             if(!PlayerManager.CanMove)
                 return;
@@ -91,16 +88,12 @@ namespace PlayerScripts
 
         void Move(Vector2 magnitude)
         {
-            _moveDirection = orientation.forward * inputManager.y + orientation.right * inputManager.x;
+            _moveDirection = orientation.forward * InputManagerData.y + orientation.right * InputManagerData.x;
 
-            _grounded = Physics.Raycast(orientation.position, Vector3.down, floorDetectionRange, whatIsGround);
-            
-            //Find actual velocity relative to where player is looking
-            
-            float xMag = magnitude.x, yMag = magnitude.y;
+            Grounded = Physics.Raycast(orientation.position, Vector3.down, floorDetectionRange, whatIsGround);
 
             //If sliding down a ramp, add force down so player stays grounded and also builds speed
-            if (inputManager.Crouching && _grounded && OnSlope())
+            if (InputManagerData.Crouching && Grounded && OnSlope())
             {
                 rb.AddForce(Vector3.down * (Time.deltaTime * _speed));
                 return;
@@ -110,18 +103,19 @@ namespace PlayerScripts
             float multiplierHorizontal = 1f, multiplierVertical = 1f, diagonalMultiplier = 1f;
 
             // Movement in air
-            if (!_grounded)
+            if (!Grounded)
             {
                 multiplierHorizontal = 0.5f;
                 multiplierVertical = 0.5f;
             }
 
             // Movement while sliding
-            if (_grounded && inputManager.Crouching) multiplierVertical = 0f;
+            if (Grounded && InputManagerData.Crouching) multiplierVertical = 0f;
 
-            if (inputManager.x != 0 && inputManager.y != 0)
+            if (InputManagerData.x != 0 && InputManagerData.y != 0)
                 diagonalMultiplier = 0.707f;
             
+            // Add movement force
             if (OnSlope() && !_exitingSlope)
                 rb.AddForce(GetSlopeMoveDirection() * (_speed * Time.deltaTime * multiplierHorizontal * multiplierVertical * diagonalMultiplier));
             else
@@ -129,7 +123,7 @@ namespace PlayerScripts
 
             // Add sound
             _walkEventInstance.getPlaybackState(out var walkSoundState);
-            if (_grounded && CurrentSpeed > 0 && !inputManager.Crouching)
+            if (Grounded && CurrentSpeed > 0 && !InputManagerData.Crouching)
             {
                 if(walkSoundState == PLAYBACK_STATE.STOPPED)
                     FModAudioManager.StartSoundInstance(SoundInstanceType.Walk);
@@ -147,11 +141,11 @@ namespace PlayerScripts
             }
 
             //If holding jump && ready to jump, then jump
-            if (_readyToJump && inputManager.Jumping)
+            if (_readyToJump && InputManagerData.Jumping)
                 Jump();
 
             // Run or walk
-            if (inputManager.Sprinting && PlayerManager.PlayerStats.CurrentStamina > PlayerManager.PlayerStats.GetStaminaPrice("Sprint") && !inputManager.Crouching)
+            if (InputManagerData.Sprinting && PlayerManager.PlayerStats.CurrentStamina > PlayerManager.PlayerStats.GetStaminaPrice("Sprint") && !InputManagerData.Crouching)
             {
                 _speed = PlayerManager.PlayerStats.MoveSpeed * PlayerManager.PlayerStats.SprintSpeedMultiplier;
                 PlayerManager.PlayerStats.Sprint(true);
@@ -165,19 +159,19 @@ namespace PlayerScripts
 
         private void Jump()
         {
-            if (_grounded && _readyToJump && PlayerManager.PlayerStats.CurrentStamina > PlayerManager.PlayerStats.GetStaminaPrice("Jump"))
+            if (Grounded && _readyToJump && PlayerManager.PlayerStats.CurrentStamina > PlayerManager.PlayerStats.GetStaminaPrice("Jump"))
             {
                 _readyToJump = false;
 
                 //// Add jump forces ////
                 // Add force to Up
                 rb.AddForce(Vector2.up * (PlayerManager.PlayerStats.JumpForce 
-                                          * (inputManager.Crouching ? PlayerManager.PlayerStats.CrouchJumpForceMultiplier : 1 )));
+                                          * (InputManagerData.Crouching ? PlayerManager.PlayerStats.CrouchJumpForceMultiplier : 1 )));
                 // Add force to movement direction
-                rb.AddForce(Vector3.up
+                rb.AddForce(_moveDirection
                             * (PlayerManager.PlayerStats.JumpForce 
-                               * (inputManager.Crouching ? PlayerManager.PlayerStats.CrouchJumpForceMultiplier : 1 ) 
-                               * 0.33f));
+                               * PlayerManager.PlayerStats.JumpForceForwardMultiplier
+                               * (InputManagerData.Crouching ? PlayerManager.PlayerStats.CrouchJumpForceMultiplier : 1 )));
 
                 //If jumping while falling, reset y velocity.
                 Vector3 vel = rb.velocity;
@@ -200,17 +194,17 @@ namespace PlayerScripts
             }
         }
 
-        private void StartCrouch()
+        //---- this needs refactor ----//
+        private void StartCrouch() 
         {
             collider.height = _crouchScale.y *2f;
             playerModel.transform.localScale = _crouchScale;
         
-            if (rb.velocity.magnitude > walkSpeed * minSpeedForSlideMultiplier && _grounded) //// WTF MAGIC NUMBERS
+            if (rb.velocity.magnitude > walkSpeed * minSpeedForSlideMultiplier && Grounded) //// WTF MAGIC NUMBERS
                 rb.AddForce(orientation.forward * PlayerManager.PlayerStats.SlideForce);
         
             PlayerManager.WSAB.isCrouching = true;
         }
-
         private void StopCrouch()
         {
             collider.height = _playerScale.y*2f;
@@ -218,32 +212,34 @@ namespace PlayerScripts
 
             PlayerManager.WSAB.isCrouching = false;
         }
-    
+        //---------------------------//
+        
         private void CounterMovement(float x, float y, Vector2 mag)
         {
-            if (!_grounded || inputManager.Jumping) return;
+            if (!Grounded || InputManagerData.Jumping) return;
 
             // Slow down sliding
-            if (inputManager.Crouching)
+            if (InputManagerData.Crouching)
             {
                 rb.AddForce(-rb.velocity.normalized * (PlayerManager.PlayerStats.MoveSpeed * Time.deltaTime * slideCounterMovement));
                 return;
             }
             
+            //----------- NOT WORKING :( -----------//
             // Counter unintentional slope sliding
-            if (OnSlope() && !inputManager.Crouching) // NOT WORKING :(
+            if (OnSlope() && !InputManagerData.Crouching) 
             {
-                rb.AddForce(orientation.forward * (_slopeHit.normal.y * _slopeHit.normal.z));
-                rb.AddForce(orientation.right * (_slopeHit.normal.y * _slopeHit.normal.x));
+                rb.AddForce(orientation.forward * (_slopeHit.normal.y * _slopeHit.normal.z * Time.deltaTime * counterMovement));
+                rb.AddForce(orientation.right * (_slopeHit.normal.y * _slopeHit.normal.x * Time.deltaTime * counterMovement));
                 //rb.AddForce(GetCancelSlopeMovement() * slopeCancelMultiplier );
             }
 
             // Counter movement
-            if (Math.Abs(mag.x) > Threshold && Math.Abs(inputManager.x) < 0.05f || (mag.x < -Threshold && x > 0) || (mag.x > Threshold && x < 0))
+            if (Math.Abs(mag.x) > Threshold && Math.Abs(InputManagerData.x) < 0.05f || (mag.x < -Threshold && x > 0) || (mag.x > Threshold && x < 0))
             {
                 rb.AddForce(orientation.right * (PlayerManager.PlayerStats.MoveSpeed * Time.deltaTime * -mag.x * counterMovement));
             }
-            if (Math.Abs(mag.y) > Threshold && Math.Abs(inputManager.y) < 0.05f || (mag.y < -Threshold && y > 0) || (mag.y > Threshold && y < 0))
+            if (Math.Abs(mag.y) > Threshold && Math.Abs(InputManagerData.y) < 0.05f || (mag.y < -Threshold && y > 0) || (mag.y > Threshold && y < 0))
             {
                 rb.AddForce(orientation.forward * (PlayerManager.PlayerStats.MoveSpeed * Time.deltaTime * -mag.y * counterMovement));
             }
@@ -285,10 +281,7 @@ namespace PlayerScripts
             return false;
         }
 
-        Vector3 GetSlopeMoveDirection() 
-        {
-            return Vector3.ProjectOnPlane(_moveDirection, _slopeHit.normal).normalized;
-        }
+        Vector3 GetSlopeMoveDirection() => Vector3.ProjectOnPlane(_moveDirection, _slopeHit.normal);
 
         /*Vector3 GetCancelSlopeMovement()
         {
@@ -298,16 +291,5 @@ namespace PlayerScripts
             var slopeMoveDirection = Vector3.ProjectOnPlane(Vector3.right, _slopeHit.normal).normalized * Vector3.right;
             return new Vector3(slopeMoveDirection.x, slopeMoveDirection.y, slopeMoveDirection.z);
         }*/
-
-        private bool AllowWeaponSway() 
-        {
-            if (inputManager.x != 0 || inputManager.y != 0) // Is this required??
-            {
-                if (_grounded)
-                    return true;
-            }
-        
-            return false;
-        }
     }
 }

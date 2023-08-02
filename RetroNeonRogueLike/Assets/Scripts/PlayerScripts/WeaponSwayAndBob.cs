@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using UnityEngine;
 using IM = InputManagerData;
 
@@ -34,7 +36,28 @@ namespace PlayerScripts
 
         private Vector3 _smoothV;
 
+        private BobOverride? _lastBob;
+
+        private void Start() => _lastBob = bobOverrides.FirstOrDefault();
+
         void Update() 
+        {
+            ProcessSway();
+
+            ProcessBob();
+
+            ChangePosition();
+        }
+
+        void ChangePosition()
+        {
+            Vector3 target = new Vector3(_xPos, _yPos, 0);
+            var localPosition = transform.localPosition;
+            
+            transform.localPosition = Vector3.SmoothDamp(localPosition, target, ref _smoothV, swayMoveSpeed);
+        }
+
+        void ProcessSway()
         {
             float xSway = (PlayerManager.CanLook ? -IM.MouseX : 0) * swayIntensityX;
             float ySway = (PlayerManager.CanLook ? -IM.MouseY : 0) * swayIntensityY;
@@ -50,38 +73,44 @@ namespace PlayerScripts
 
             _xPos = xSway;
             _yPos = ySway;
-            
-            foreach (BobOverride bob in bobOverrides) 
-            {
-                if (PlayerMovement.CurrentSpeed >= bob.minSpeed && PlayerMovement.CurrentSpeed < bob.maxSpeed) 
-                {
-                    var bobMultiplier = (PlayerMovement.CurrentSpeed == 0) ? 1f : PlayerMovement.CurrentSpeed;
-
-                    if (isAiming)
-                        bobMultiplier = aimedBobMultiplier;
-
-                    if (isCrouching)
-                        bobMultiplier = 1f;
-
-                    _currentTimeX += bob.speedX * Time.deltaTime;
-                    _currentTimeY += bob.speedY * Time.deltaTime;
-
-                    _xPos += bob.bobX.Evaluate(_currentTimeX) * bob.intensityX * bobMultiplier;
-                    _yPos += bob.bobY.Evaluate(_currentTimeY) * bob.intensityY * bobMultiplier;
-                    
-                    break;
-                }
-            }
-            
-            Vector3 target = new Vector3(_xPos, _yPos, 0);
-            var localPosition = transform.localPosition;
-            
-            transform.localPosition = Vector3.SmoothDamp(localPosition, target, ref _smoothV, swayMoveSpeed);
         }
 
-        void FixedUpdate()
+        void ProcessBob()
         {
-            
+            if(!PlayerMovement.Grounded)
+                return;
+
+            BobOverride? currentBob = null;
+            foreach (BobOverride bob in bobOverrides)
+                if (PlayerMovement.CurrentSpeed >= bob.minSpeed && PlayerMovement.CurrentSpeed < bob.maxSpeed)
+                {
+                    currentBob = bob;
+                    break;
+                }
+            if (!currentBob.HasValue)
+            {
+                _lastBob = null;
+                return;
+            }
+
+            var bobMultiplier = (PlayerMovement.CurrentSpeed == 0) ? 1f : PlayerMovement.CurrentSpeed;
+
+            if (isAiming)
+                bobMultiplier = aimedBobMultiplier;
+
+            if (isCrouching)
+                bobMultiplier = 1f;
+
+            if (_lastBob.HasValue && !_lastBob.Value.Equals(currentBob.Value))
+                _currentTimeX = _currentTimeY = 0.05f;
+
+            _currentTimeX += currentBob.Value.speedX * Time.deltaTime;
+            _currentTimeY += currentBob.Value.speedY * Time.deltaTime;
+
+            _xPos += currentBob.Value.bobX.Evaluate(_currentTimeX) * currentBob.Value.intensityX * bobMultiplier;
+            _yPos += currentBob.Value.bobY.Evaluate(_currentTimeY) * currentBob.Value.intensityY * bobMultiplier;
+
+            _lastBob = currentBob.Value;
         }
 
         [System.Serializable]
