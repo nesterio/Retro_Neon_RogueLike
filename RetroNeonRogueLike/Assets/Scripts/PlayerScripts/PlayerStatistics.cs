@@ -5,22 +5,21 @@ namespace PlayerScripts
 {
     public class PlayerStatistics : MonoBehaviour
     {
-        ////-------- Health --------////
+        [field: Header("Health")]
+        [field: SerializeField]public float DefaultHealth { get; private set; } = 100;
+        [field: SerializeField]public float CurrentHealth { get; private set; } = 100;
+        [field: SerializeField]public float HealthRegen { get; private set; } = 0.05f;
         private float _maxHealth;
-
-        public float DefaultHealth { get; private set; } = 100;
-        public float CurrentHealth { get; private set; } = 100;
-        public float HealthRegen { get; private set; } = 0.05f;
 
         public delegate void MaxHealthChange(float newMax);
         public event MaxHealthChange MaxHpChangeEvent;
-        [Space(10)]
+        
 
-        ////-------- Stamina --------////
+        [field: Header("Stamina")]
+        [field: SerializeField]public float DefaultStamina { get; private set; } = 100f;
+        [field: SerializeField]public float CurrentStamina { get; private set; } = 100f;
+        [field: SerializeField]public float StaminaRegen { get; private set; } = 1f;
         private float _maxStamina;
-        public float DefaultStamina { get; private set; } = 100f;
-        public float CurrentStamina { get; private set; } = 100f;
-        public float staminaRegen { get; private set; } = 1f;
 
         public delegate void MaxStaminaChange(float newMax);
         public event MaxStaminaChange MaxStamChangeEvent;
@@ -28,37 +27,42 @@ namespace PlayerScripts
 
         [SerializeField] private StaminaDrain[] staminaDrains;
         private readonly Dictionary<string, StaminaDrain> _drainsDictionary = new Dictionary<string, StaminaDrain>();
-        [Space(10)]
 
-        ////-------- Movement --------////
+
+        [field: Header("Movement")]
         bool _sprinting;
-        public float DefaultMoveSpeed { get; private set; } = 400;
-        public float MoveSpeed { get; private set; } = 400;
-
+        [field: SerializeField]public float DefaultMoveSpeed { get; private set; } = 400;
+        [field: SerializeField]public float MoveSpeed { get; private set; } = 400;
+        [field: SerializeField]public float SprintSpeedMultiplier { get; private set; } = 1.7f;
+        [field: SerializeField]public float SlideForce { get; private set; } = 350;
         public float MaxSpeed
         {
             get 
             { 
                 if(_sprinting)
                     return MoveSpeed * SprintSpeedMultiplier / 100; /// ???WTF???
-                else
-                    return MoveSpeed / 100;
+                
+                return MoveSpeed / 100;
             }
         }
         
-        public float SprintSpeedMultiplier { get; private set; } = 1.7f;
-        public float SlideForce { get; private set; } = 350;
-
-        ////-------- Jumping --------////
-        public float DefaultJumpForce { get; private set; } = 700f;
-        public float JumpForce { get; private set; } = 700f;
-        public float CrouchJumpForceMultiplier { get; private set; } = 0.75f;
         
-        public int NumberOfJumps { get; private set; } = 1;
+        [field: Header("Jumping")]
+        [field: SerializeField]public float DefaultJumpForce { get; private set; } = 700f;
+        public float JumpForce { get; private set; }
+        
+        [field: SerializeField]public float DefaultJumpForceForwardMultiplier { get; private set; } = 0.25f;
+        public float JumpForceForwardMultiplier { get; private set; }
+        
+        [field: SerializeField]public float CrouchJumpForceMultiplier { get; private set; } = 0.75f;
+        
+        [field: SerializeField]public int NumberOfJumps { get; private set; } = 1;
 
-
-        ////-------- Weaponry --------////
-        public int MaxItems { get; private set; } = 2;
+        
+        [field: Header("Weaponry")]
+        [field: SerializeField]public int MaxItems { get; private set; } = 2;
+        
+        
         public delegate void DeathDelegate();
         public event DeathDelegate DeathEvent;
 
@@ -68,6 +72,7 @@ namespace PlayerScripts
             // Locomotion
             MoveSpeed = DefaultMoveSpeed;
             JumpForce = DefaultJumpForce;
+            JumpForceForwardMultiplier = DefaultJumpForceForwardMultiplier;
 
             // Health
             CurrentHealth = DefaultHealth;
@@ -83,7 +88,7 @@ namespace PlayerScripts
         void FixedUpdate() 
         {
             if(CurrentStamina < _maxStamina && _sprinting == false)
-                CurrentStamina += staminaRegen;
+                CurrentStamina += StaminaRegen;
 
             ChangeHealth(HealthRegen);
         }

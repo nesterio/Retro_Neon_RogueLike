@@ -20,9 +20,9 @@ MonoBehaviour:
   recoilX: -20
   recoilY: 8
   recoilZ: 0.4
-  recoilAimedX: -1
-  recoilAimedY: 0.5
-  recoilAimedZ: 0.1
+  recoilAimedX: -12
+  recoilAimedY: 6
+  recoilAimedZ: 0.3
   positionRecoilSpeed: 3
   rotationRecoilSpeed: 3
   recoilRotation: {x: 30, y: 15, z: 40}
